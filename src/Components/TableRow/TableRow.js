@@ -5,6 +5,7 @@ import iconFilledStar from "./FilledStar.png"
 import Moment from "react-moment"
 import { Link } from 'react-router-dom'
 import imgDefault from "./default.png"
+import Skeleton from 'react-loading-skeleton';
 function TableRow({data}) {
 
     const [favourite,setFavourite] = useState(data.is_favorite?iconFilledStar:iconStar)
@@ -23,10 +24,11 @@ function TableRow({data}) {
                 <div class="flex items-center">
                   <div class="ml-4">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                      {data.name}
+                      {data.name ||  <Skeleton/>} 
+                     
                     </div>
                     <div class="text-sm leading-5 text-gray-500">
-                      {data.course_code}
+                      {data.course_code ||  <Skeleton/>}
                     </div>
                   </div>
                 </div>
@@ -37,14 +39,14 @@ function TableRow({data}) {
               <td class="px-6 py-4 whitespace-no-wrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                 {/* {data.enrollments[0].type == "ta" ? "Teacher" :"Student" } */}
-                {data.enrollments[0].type }
+                {data.enrollments[0].type ||  <Skeleton/>}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <Moment format="YYYY/MM/DD" date ={data.start_at}/>
+                <Moment format="YYYY/MM/DD" date ={data.start_at ||  <Skeleton/>} />
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                <img src={favourite} height="25px" width="25px" ></img>
+                <img src={favourite } height="25px" width="25px" ></img>
               </td>
             </tr>
         </Fragment>

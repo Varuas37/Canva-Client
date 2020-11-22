@@ -1,18 +1,61 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useState,useEffect } from 'react'
+import TextLoop from "react-text-loop";
 
 export default function Features() {
-    return (
-        <Fragment>
-            {/* <!--
-  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
-  Read the documentation to get started: https://tailwindui.com/documentation
---> */}
+  const [options, setOptions] = useState(["learn"]);
+  const [interval, setInterval] = useState(0);
+
+  useEffect(() => {
+    const optionsTimeout = setTimeout(() => {
+      setOptions([
+      "learn",
+      "teach",
+      "stay on track",
+      "crush your goals",
+      "manage time",
+      "get involved",    
+      ]);
+      console.log("change options");
+    }, 9000);
+
+    return () => {
+      clearTimeout(optionsTimeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    const intervalStartTimeout = setTimeout(() => {
+      console.log("start");
+      setInterval(1000);
+    }, 1000);
+    return () => {
+      clearTimeout(intervalStartTimeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    const intervalStopTimeout = setTimeout(() => {
+      setInterval(0);
+      console.log("stop");
+    }, 15000);
+
+    return () => {
+      clearTimeout(intervalStopTimeout);
+    };
+  }, []);
+
+
+  return (
+  <Fragment>
+         
 <div class="py-12 bg-white">
   <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="lg:text-center">
       <p class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase"></p>
       <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-        A better way to teach
+        A better way to <TextLoop interval={interval} children={options}/>
+       
+       
       </h3>
       <p class="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
        Let us handle repitative task for you while you focus on important ones.
@@ -32,9 +75,9 @@ export default function Features() {
               </div>
             </div>
             <div class="ml-4">
-              <h4 class="text-lg leading-6 font-medium text-gray-900">Grading</h4>
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Teaching Assistant</h4>
               <p class="mt-2 text-base leading-6 text-gray-500">
-                Define custom rules and automate the grading process
+                Seperate your courses from the ones you grade. 
               </p>
             </div>
           </div>
@@ -52,7 +95,7 @@ export default function Features() {
             <div class="ml-4">
               <h4 class="text-lg leading-6 font-medium text-gray-900">Manage Courses</h4>
               <p class="mt-2 text-base leading-6 text-gray-500">
-                Manage multiple courses from a single place.  
+                Manage multiple courses from a single place.
               </p>
             </div>
           </div>
@@ -70,7 +113,7 @@ export default function Features() {
             <div class="ml-4">
               <h4 class="text-lg leading-6 font-medium text-gray-900">Assignments</h4>
               <p class="mt-2 text-base leading-6 text-gray-500">
-                Keep track of student's submission. 
+               Keep track of your assignments so that you never miss one!
               </p>
             </div>
           </div>
@@ -86,9 +129,9 @@ export default function Features() {
               </div>
             </div>
             <div class="ml-4">
-              <h4 class="text-lg leading-6 font-medium text-gray-900">Group Projects</h4>
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Automate Grading</h4>
               <p class="mt-2 text-base leading-6 text-gray-500">
-               Use powerful tools to keep track of multiple assignments. 
+               Automate the grading process with our powerful suite of tools.
               </p>
             </div>
           </div>
@@ -100,4 +143,4 @@ export default function Features() {
 
         </Fragment>
     )
-}
+    }

@@ -4,10 +4,10 @@ import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {connect} from "react-redux"
 import {setAlert} from "../../../Redux/Action/alert"
-import {connectToCanvas} from "../../../Redux/Action/auth";
+import {connectToCanvas} from "../../../Redux/Action/canvasauth";
 import PropTypes from 'prop-types'
 
-const Login = ({setAlert,connectToCanvas,isAuthenticated}) => {
+const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated}) => {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
       const { token, domain  } = data;
@@ -100,7 +100,7 @@ const Login = ({setAlert,connectToCanvas,isAuthenticated}) => {
                   className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                 />
                 <label
-                  for="remember_me"
+                  htmlFor="remember_me"
                   className="ml-2 block text-sm leading-5 text-gray-900"
                 >
                   Remember me
@@ -129,9 +129,9 @@ const Login = ({setAlert,connectToCanvas,isAuthenticated}) => {
                     viewBox="0 0 20 20"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </span>
@@ -144,7 +144,7 @@ const Login = ({setAlert,connectToCanvas,isAuthenticated}) => {
     </Fragment>
   );
 };
-Login.propTypes = {
+CanvasLogin.propTypes = {
     setAlert: PropTypes.func.isRequired,
     connectToCanvas: PropTypes.func.isRequired,
    
@@ -152,4 +152,4 @@ Login.propTypes = {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
-export default connect(mapStateToProps,{setAlert,connectToCanvas})(Login);
+export default connect(mapStateToProps,{setAlert,connectToCanvas})(CanvasLogin);

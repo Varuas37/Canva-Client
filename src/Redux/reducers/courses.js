@@ -13,8 +13,6 @@ import {
     courses_loading: true,
     courseLoading:true,
     todo:[],
-    user_todo:[],
-    user_todo_loading:true,
     todo_loading:true,
   };
 
@@ -39,12 +37,6 @@ import {
                 todo: payload.data,
                 todo_loading:false
             }
-        case GET_USER_TODO:
-            return{
-                ...state,
-                user_todo: payload.data,
-                user_todo_loading: false,
-            }
         case GET_ANNOUNCEMENT:
             return{
                 ...state,
@@ -59,7 +51,6 @@ import {
         case COURSES_ERROR:
         case ANNOUNCEMENT_ERROR:
         case COURSE_ERROR:
-        case USER_TODO_ERROR:
         case GET_FAVOURITE_COURSES_ERR:
             return{
                 ...state,

@@ -1,25 +1,25 @@
 import {
-    GET_TODO,ERR_GET_TODO
+    GET_USER_TODO,USER_TODO_ERROR
   } from "../Action/types";
   
   const initialState = {
     todo: [],
-    submission_loading:true,
+    user_todo_loading:true,
   };
 
   export default function (state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
-      case GET_TODO:
+      case GET_USER_TODO:
         return {
           ...state,
           
           todo: payload,
-          submission_loading:false,
+          user_todo_loading:false,
         };
-        case ERR_GET_TODO:
+        case USER_TODO_ERROR:
             return{
-                submission_loading:true,
+              user_todo_loading:true,
             }
       default:
         return state;

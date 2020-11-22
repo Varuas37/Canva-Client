@@ -48,22 +48,7 @@ export const getTodo=  (id) => async dispatch =>{
         })
     }
 }
-export const getUserTodo=  () => async dispatch =>{
-    try {
-       
-        const res = await axios.get(`http://localhost:3001/api/canvas/todo`);
-        // console.log(res.data)
-        dispatch({
-            type: GET_USER_TODO, 
-            payload:res.data
-        })
-    } catch (err) {
-        dispatch(setAlert("Todo Error","red"))
-        dispatch({
-            type: USER_TODO_ERROR,
-        })
-    }
-}
+
 export const getAnnouncement=  (id) => async dispatch =>{
     try {
         const res = await axios.get(`http://localhost:3001/api/canvas/courses/announcement/${id}`);

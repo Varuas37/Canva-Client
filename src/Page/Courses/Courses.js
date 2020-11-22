@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCourses } from "../../Redux/Action/courses";
 import {useStickyState} from "../../Components/utils/StickyState"
+import Skeleton from 'react-loading-skeleton';
+
 const Courses = ({
   auth,
   getCourses,
@@ -49,7 +51,7 @@ const Courses = ({
                       <option value="ta" >Teaching Assistant</option>
                       
                     </select>
-                  </div> : null
+                  </div> : <Skeleton count={3}/> 
                   }
       </div>
       <div class="flex flex-col">
@@ -86,7 +88,7 @@ const Courses = ({
                       ) : null
                     )
                   ) : (
-                   <p>Loading...</p>
+                    <Skeleton count={2}/> 
                   )}
                 </tbody>
               </table>

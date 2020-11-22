@@ -1,37 +1,39 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState ,useEffect} from "react";
 import { mainLogo } from "../../Static/Images/images";
 import logo from "./logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {disconnectCanvas} from "../../Redux/Action/auth"
+import {disconnectCanvas} from "../../Redux/Action/canvasauth"
 import SidebarWrapper from "../Sidebar/SidebarWrapper";
 import SidebarItem from "../Sidebar/SidebarItem";
-import OutsideAlerter from "../OutsideAlert/OutsideAlert";
+// import OutsideAlerter from "../OutsideAlert/OutsideAlert";
 const Navbar=({auth,disconnectCanvas,todo})=> {
   const [openProfile, setOpenProfile] = useState(false);
   const [toggleSidebar,setToggleSidebar]  = useState(true);
+  const [ClickedHeader,setClickedHeader] = useState("submitting");
+  const [openMenu,setOpenMenu] = useState(true);
   const handleToggle=()=>{
     console.log(toggleSidebar)
   setToggleSidebar(!toggleSidebar)
 
   }
+  useEffect(() => {
+  }, [ClickedHeader]);
   return auth.isAuthenticated && 
   (
     <Fragment>
-      {/* <!--
-  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
-  Read the documentation to get started: https://tailwindui.com/documentation
---> */}
-      <nav class="bg-gray-800" style={{position:"relative"}}>
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div class="relative flex items-center justify-between h-16">
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+
+      <nav className="bg-gray-800" style={{position:"relative"}}>
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="relative flex items-center justify-between h-16">
+            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}   
               <button
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
                 aria-label="Main menu"
                 aria-expanded="false"
+                onClick={()=>setOpenMenu(!openMenu)}
               >
                 {/* <!-- Icon when menu is closed. -->
           <!--
@@ -40,16 +42,16 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
             Menu open: "hidden", Menu closed: "block"
           --> */}
                 <svg
-                  class="block h-6 w-6"
+                  className="block h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
@@ -60,7 +62,7 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
             Menu open: "block", Menu closed: "hidden"
           --> */}
                 <svg
-                  class="hidden h-6 w-6"
+                  className="hidden h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -75,23 +77,23 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
                 </svg>
               </button>
             </div>
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <NavLink to="/">
-              <div class="flex-shrink-0">
+              <div className="flex-shrink-0">
                 <img
-                  class="block lg:hidden h-8 w-auto"
+                  className="block lg:hidden h-8 w-auto"
                   src={mainLogo}
                   alt="Workflow logo"
                 />
                 <img
-                  class="hidden lg:block h-8 w-auto"
+                  className="hidden lg:block h-8 w-auto"
                   src={mainLogo}
                   alt="Workflow logo"
                 />
               </div>
               </NavLink>
-              <div class="hidden sm:block sm:ml-6">
-                <div class="flex">
+              <div className="hidden sm:block sm:ml-6">
+                <div className="flex">
 
                   <NavLink exact to="/dashboard" activeClassName="text-white bg-gray-900  "
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
@@ -104,18 +106,18 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
                   >
                     Courses
                   </NavLink>
-                  <Link exact to ="/grading"
+                  <Link exact to ="/groups"
                     href="#"
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                   >
-                    Grading
+                    Groups
                   </Link>
-                  <NavLink exact to ="Schedule"
+                  {/* <NavLink exact to ="Schedule"
                     href="#"
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                   >
-                    Schedule
-                  </NavLink>
+                    Calendar
+                  </NavLink> */}
                 </div>
               </div>
             </div>
@@ -169,35 +171,35 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           --> */}
-        { openProfile?<div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+        { openProfile?<div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" style={{zIndex:"1"}}>
                   <div
                     className="py-1 rounded-md bg-white shadow-xs"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu"
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to="/profile"
                       className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                       role="menuitem"
                     >
                       Your Profile
-                    </a>
-                    <a
-                      href="#"
+                    </Link>
+                    <Link
+                      to="/settings"
                       className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                       role="menuitem"
                     >
                       Settings
-                    </a>
-                    <a
+                    </Link>
+                    <Link to="/"
                       href="#"
                       className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                       role="menuitem"
                       onClick={()=>disconnectCanvas()}
                     >
                       Sign out
-                    </a>
+                    </Link>
                   </div>
                 </div> : null}
               </div>
@@ -210,44 +212,48 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
 
     Menu open: "block", Menu closed: "hidden"
   --> */}
-        <div class="hidden sm:hidden">
-          <div class="px-2 pt-2 pb-3">
-            <a
-              href="#"
-              class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+        <div className={openMenu?`hidden sm:hidden`:"sm:hidden"}>
+          <div className="px-2 pt-2 pb-3">
+            <Link
+              to="/"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
             >
               Dashboard
-            </a>
-            <a
-              href="#"
-              class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+            </Link>
+            <Link
+              to="/courses"
+              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+           >
+              Courses
+            </Link>
+            <Link
+              to="/groups"
+              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
             >
-              Team
-            </a>
-            <a
+              Groups
+            </Link>
+            {/* <a
               href="#"
-              class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
             >
-              Projects
-            </a>
-            <a
-              href="#"
-              class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-            >
-              Calendar
-            </a>
+              Schedule
+
+            </a> */}
           </div>
         </div>
       </nav>
- 
-      <SidebarWrapper toggle={toggleSidebar} setToggle={setToggleSidebar}>
-      <ul class="divide-y divide-gray-200 overflow-y-auto">
-      {todo && todo.length > 0 ? (
+  {/* {alert(ClickedHeader)} */}
+      <SidebarWrapper toggle={toggleSidebar} setToggle={setToggleSidebar} setHeader={setClickedHeader} current={ClickedHeader}>
+      <ul className="divide-y divide-gray-200 overflow-y-auto">
+       
+      {todo && todo.length>0 ? (
               todo.map((item) => (
-                <SidebarItem
+
+                item.type==ClickedHeader &&<SidebarItem
                   key={item.assignment.id}
                  title={item.assignment.name}   
-                 dueDate={item.assignment.due_at}             />
+                 dueDate={item.assignment.due_at} 
+                 description={item.assignment.description}            />
               ))
             ) : (
               <h2>Items not found</h2>
@@ -262,13 +268,13 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
   );
 }
 Navbar.propTypes = {
-    logout: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    todo: PropTypes.object.isRequired,
+    todo: PropTypes.array.isRequired,
     disconnectCanvas: PropTypes.func.isRequired,
   };
 const mapStateToProps = (state) => ({
     auth: state.auth,
     todo: state.courses.todo,
+
   });
 export default connect (mapStateToProps,{disconnectCanvas})(Navbar);

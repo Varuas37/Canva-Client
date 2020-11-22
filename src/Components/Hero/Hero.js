@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import {mainLogo,heroImage} from "../../Static/Images/images"
+import { mainLogo, heroImage } from "../../Static/Images/images";
+import HeroNav from "./HeroNav";
+
 export default function Hero() {
   return (
     <Fragment>
@@ -16,71 +18,7 @@ export default function Hero() {
               <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
 
-            <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
-              <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start">
-                <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-                  <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#" aria-label="Home">
-                      <img
-                        className="h-8 w-auto sm:h-10"
-                        src={mainLogo}
-                        alt="Logo"
-                      />
-                    </a>
-                    <div className="-mr-2 flex items-center md:hidden">
-                      <button
-                        type="button"
-                        className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                        id="main-menu"
-                        aria-label="Main menu"
-                        aria-haspopup="true"
-                      >
-                        <svg
-                          className="h-6 w-6"
-                          stroke="currentColor"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="hidden md:block md:ml-10 md:pr-4">
-                  <a
-                    href="#"
-                    className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-                  >
-                    Product
-                  </a>
-                  <a
-                    href="#"
-                    className="ml-8 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-                  >
-                    Features
-                  </a>
-              
-                  <a
-                    href="#"
-                    className="ml-8 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-                  >
-                    Pricing
-                  </a>
-                  <Link
-                    to="/login"
-                    className="ml-8 font-medium text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
-                  >
-                    Log in
-                  </Link>
-                </div>
-              </nav>
-            </div>
+<HeroNav></HeroNav>
 
             {/* <!--
         Mobile menu, show/hide based on menu open state.
@@ -102,11 +40,7 @@ export default function Hero() {
                 >
                   <div className="px-5 pt-4 flex items-center justify-between">
                     <div>
-                      <img
-                        className="h-8 w-auto"
-                        src={mainLogo}
-                        alt=""
-                      />
+                      <img className="h-8 w-auto" src={mainLogo} alt="" />
                     </div>
                     <div className="-mr-2">
                       <button
@@ -131,7 +65,7 @@ export default function Hero() {
                     </div>
                   </div>
                   <div className="px-2 pt-2 pb-3">
-                    <a
+                    {/* <a
                       href="#"
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                       role="menuitem"
@@ -167,7 +101,7 @@ export default function Hero() {
                       role="menuitem"
                     >
                       Log in
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -176,29 +110,29 @@ export default function Hero() {
             <main className="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
-                 Automated {"  "}
+                   {"  "}
                   <br className="xl:hidden" />
-                  <span className="text-indigo-600">TA</span>
+                  <span className="text-indigo-600">Libri</span>
                 </h2>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Let us handle repitative task for you while you focus on important ones.
+                Canvas Redesigned for Students, by Students.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
-                    <a
-                      href="#"
+                    <Link
+                      to="/login"
                       className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
                     >
-                     Get Started
-                    </a>
+                      Login{" "}
+                    </Link>
                   </div>
                   <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <a
-                      href="#"
+                    <Link
+                      to="/register"
                       className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
                     >
-                      Live demo
-                    </a>
+                     Sign up
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -209,10 +143,8 @@ export default function Hero() {
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
             src={heroImage}
-            alt=""
-           
+            alt="Branding Image"
           />
-          
         </div>
       </div>
     </Fragment>

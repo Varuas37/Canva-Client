@@ -8,12 +8,14 @@ import Cards from "../../Components/Cards/Cards";
 import {
   getCourses,
   getFavCourses,
-  getUserTodo,
+  
 } from "../../Redux/Action/courses";
+import {getUserTodo} from "../../Redux/Action/todo"
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import CardWrapper from "../../Components/Cards/CardWrapper";
 import SidebarWrapper from "../../Components/Sidebar/SidebarWrapper";
 import SidebarItem from "../../Components/Sidebar/SidebarItem";
+import Skeleton from 'react-loading-skeleton';
 
 const Dashboard = ({
   auth,
@@ -42,19 +44,7 @@ const Dashboard = ({
       <div
         style={{ display: "flex", flexDirection: "column",  }}
       >
-        <Header data={auth.user.data.name}>
-        {/* <span class="inline-flex rounded-md shadow-sm" style={{position:"absolute",right:"5%",top:"25%"} }>
-          <button
-            type="button"
-            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-            onClick={()=>handleToggle()}
-          >
-            Toggle Tasksss
-          </button>
-        </span>  */}
-        </Header>
-      
-       
+        <Header data={auth.user.data.name}/>
       </div>
 
       <main
@@ -77,7 +67,11 @@ const Dashboard = ({
                   ) : null
                 )
               ) : (
-                <h2>No Courses Found</h2>
+                <div>
+                <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                 <Skeleton/>
+                </ul>
+                </div>
               )}
             </CardWrapper>
           </div>
@@ -104,3 +98,17 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { getFavCourses, getUserTodo })(
   Dashboard
 );
+
+
+
+
+
+      {/* <span class="inline-flex rounded-md shadow-sm" style={{position:"absolute",right:"5%",top:"25%"} }>
+          <button
+            type="button"
+            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+            onClick={()=>handleToggle()}
+          >
+            Toggle Tasksss
+          </button>
+        </span>  */}

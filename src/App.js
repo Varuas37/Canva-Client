@@ -1,9 +1,7 @@
 import React from "react";
-import Features from "./Components/Features/Features";
-import Hero from "./Components/Hero/Hero";
 import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import Home from "./Page/Home/Home";
-import Login from "./Page/Auth/Login/Login";
+import CanvasLogin from "./Page/CanvasAuth/Login/CanvasLogin";
 
 // Redux
 import {Provider} from "react-redux";
@@ -17,6 +15,14 @@ import Dashboard from "./Page/Dashboard/Dashboard";
 import Navbar from "./Components/Navbar/Navbar";
 import Courses from "./Page/Courses/Courses";
 import Course from "./Page/Courses/Course";
+import Profile from "./Page/Profile/Profile";
+import Groups from "./Page/Groups/Groups";
+import Settings from "./Page/Settings/Settings";
+import CommingSoon from "./Components/CommingSoon/CommingSoon";
+import Pricing from "./Page/Pricing/Pricing";
+import Login from "./Page/Authentication/Login";
+import Register from "./Page/Authentication/Register";
+import SampleLogin from "./Page/Authentication/SampleLogin";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,10 +36,16 @@ function App() {
     <Alert/>
     <Navbar></Navbar>
       <Switch>
+        
         <Route exact path ="/login" component={Login}/>
+        <Route exact path ="/register" component={Register}/>
         <Route exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/courses" component={Courses}/>
         <Route exact path="/courses/:id" component={Course}/>
+        <Route exact path="/profile/" component={Profile}/>
+        <Route exact path="/groups/" component={Groups}/>
+        <Route exact path="/settings/" component={Settings}/>
+        <Route exact path="/pricing/" component={Pricing}/>
       </Switch>
     </Router>
     </Provider>

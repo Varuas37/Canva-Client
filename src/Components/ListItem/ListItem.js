@@ -1,23 +1,48 @@
 import PropTypes from 'prop-types'
-import React,{Fragment} from 'react'
+import React,{Fragment,useState} from 'react'
 import Moment from 'react-moment'
+import imgDropdown from "./dropdown.png"
+import imgDropup from "./dropup.png"
+var parse = require('html-react-parser');
 
-function ListItem({data,title,subtitle,subtitleText,calendar,html_url,type,needsgrading}) {
-    return (
+function ListItem({data,title,subtitle,subtitleText,calendar,html_url,type,needsgrading,message}) {
+    
+  const [showDetails,setShowDetails]  = useState(true)
+  return (
         <Fragment>
-            <a href={html_url} target="_blank" rel="noopener noreferrer" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-        <div class="px-4 py-4 sm:px-6">
-          <div class="flex items-center justify-between">
-            <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
+            <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="px-4 py-4 sm:px-6" >
+          <div class="flex items-center justify-between" onClick={()=>setShowDetails(!showDetails)} style={{cursor:"pointer"}}>
+            <div class="text-sm leading-5 font-medium text-indigo-600 truncate" style={{display:"flex",flexDirection:"row", alignContent:"center",alignItems:"center"}} >
               {title}
+              <img src={showDetails? imgDropdown:imgDropup}  height="25px" width="25px" ></img>
             </div>
+       
+         
             {calendar? <div class="ml-2 flex-shrink-0 flex">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                {type == "grading" ? `${needsgrading}`: <Moment from={ calendar}></Moment>}
-               {console.log(type)}
               </span>
             </div>:null}
+
+           
+
           </div>
+          <div class="bg-gray-50 sm:rounded-lg">
+  <div className={`px-4 py-5 sm:p-6 ${showDetails?"hidden":null}`}>
+ 
+    <div class="canvas_message">
+      <p>
+       {message && parse(message)}
+      </p>
+    </div>
+    <a href={html_url} target="_blank" rel="noopener noreferrer"  className="mt-2 max-w-xl text-sm text-blue-500">
+      View on Canvas
+    </a>
+   
+  </div>
+</div>
+
           <div class="mt-2 sm:flex sm:justify-between">
             <div class="sm:flex">
               <div class="mr-6 flex items-center text-sm leading-5 text-gray-500">
@@ -45,7 +70,7 @@ function ListItem({data,title,subtitle,subtitleText,calendar,html_url,type,needs
             </div>
           </div>
         </div>
-      </a>
+      </div>
         </Fragment>
     )
 }

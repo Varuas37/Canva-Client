@@ -1,33 +1,174 @@
 import axios from "axios";
-import {CONNECTION_SUCCESS, CONNECTION_ERROR,USER_LOADED,END_CONNECTION} from "./types";
-import {setAlert} from "./alert";
+import { setAlert } from "./alert";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERR,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT,
+  CLEAR_PROFILE,
+  RESET_PASSWORD,
+  RESET_PASSWORD_FAILED
+} from "./types";
+import setAuthToken from "../../utils/setAuthToken";
+import { useHistory } from "react-router-dom";
 
+//LOAD USER
 
-// Checks if domain and token match
-export const connectToCanvas=  (domain,token) => async dispatch =>{
-    try {
-        const res = await axios.get("http://localhost:3001/api/canvas/auth");
-        dispatch({
-            type: CONNECTION_SUCCESS, 
-            payload:res.data
-        })
-        // dispatch(setAlert("Authentication Successful","green"))
-    } catch (err) {
-        console.log(err)
-        dispatch(setAlert("Authentication Failed","red"))
-        dispatch({
-            type: CONNECTION_ERROR,
-        })
+export const loadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get("/api/auth");
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERR,
+    });
+  }
+};
+// REGISTER USER
+
+export const registerUser = ({ name, lastname, email, password }) => async (
+  dispatch
+) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ name, lastname, email, password });
+  try {
+    const res = await axios.post("http://localhost:3300/api/users/register", body, config);
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: res.data,
+    });
+    
+    dispatch(setAlert(`${res.data.msg}`,"green"));
+    
+  } catch (err) {
+    const errors = err.response.data.errors;
+    console.log(err.response);
+
+    if (errors) {
+
+      dispatch(setAlert(`${err.response.data.errors[0].msg}`, "red"));
     }
+
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
+};
+
+// LOGIN USER
+
+export const login = (email, password) => async (dispatch) => {
+  
+  const config = {
+    headers: {
+      // "Content-Type": "application/json",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+  };
+  const body = JSON.stringify({ email, password });
+  try {
+    const res = await axios.post("http://localhost:3300/api/auth/login", body, config);
+    
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    dispatch(loadUser());
+  } catch (err) {
+  
+    if (err) {
+      console.log(err.response.data.errors[0].msg)
+       dispatch(setAlert(`${err.response.data.errors[0].msg}`, "red"));
+    }
+   
+    dispatch({
+      type: LOGIN_FAILED,
+    });
+  }
+};
+
+export const resetpassword = (email) => async (dispatch)=>{
+  const config={
+    headers:{
+      "Content-Type":"application/json"
+    },
+  }
+  const body = JSON.stringify({email})
+  try{
+    const res = await axios.post("/api/auth/reset-password",body,config);
+    
+    dispatch({
+      type:RESET_PASSWORD,
+      payload:res.data,
+    })
+    console.log(res.data)
+   
+    dispatch(setAlert(`${res.data.msg}`,"green"));
+
+  }
+  catch(err){
+    const errors = err.response.data;
+   
+    if (errors) {
+      console.log(errors)
+      dispatch(setAlert(`${errors.error}`, "red"));
+    }
+    dispatch({
+      type: RESET_PASSWORD_FAILED,
+    });
+    
+  }
 }
 
-export const disconnectCanvas = ()=> async dispatch =>{
-    try{
-        dispatch({
-            type: END_CONNECTION, 
-        })
+export const newPassword = (password,token) =>async (dispatch)=>{
+  const config = {
+    headers:{
+      "Content-Type":"application/json"
+    },
+  }
+  const body = JSON.stringify({password,token})
+  
+  try{
+    const res = await axios.post("/api/auth/newpassword",body,config);
+    dispatch({
+      type:RESET_PASSWORD,
+      payload:res.data,
+    })
+    console.log(res.data)
+   
+    dispatch(setAlert(`${res.data.msg}`,"green"));
+  }
+  catch(err){
+    const errors = err.response.data;
+   
+    if (errors) {
+      console.log(errors)
+      dispatch(setAlert(`${errors.error}`, "red"));
     }
-    catch (err){
-        console.log(err)
-    }
+    dispatch({
+      type: RESET_PASSWORD_FAILED,
+    });
+  }
+
+
 }
+
+// LOGOUT USESR /CLEAR PROFILE
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
+};

@@ -17,6 +17,7 @@ const Home=({isAuthenticated})=> {
     )
 }
 Home.propTypes = {
+  
     
 }
 const mapStateToProps = (state) => ({

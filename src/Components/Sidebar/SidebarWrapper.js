@@ -1,24 +1,26 @@
-import React, { Fragment,useState } from "react";
+import React, { Fragment,useState,useEffect } from "react";
 import PropTypes from "prop-types";
 
-function SidebarWrapper({props,toggle,children,setToggle} ) {
+function SidebarWrapper({props,toggle,children,setToggle,setHeader,current} ) {
+  // useEffect(() => {
+  //   console.log(current)
+  // },[current])
+   const [selectedClass, setSelectedClass] = useState("border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700")
+   const [teaching,setTeachingClass] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
+   const [student,setStudentClass] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
+  
+  const handleClick = (data)=>{
+    setHeader(data);
+    
+  }
 
-    // const[showSidebar,setShowSidebar] = useState(toggle);    
-  return toggle? (
+
+   return toggle? (
     <Fragment>
       <div class="fixed inset-0 overflow-hidden" style={{zIndex:"100"}}>
         <div class="absolute inset-0 overflow-hidden">
           <section class="absolute inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16">
-            {/* <!--
-        Slide-over panel, show/hide based on slide-over state.
 
-        Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-0"
-          To: "translate-x-full"
-      --> */}
             <div class="w-screen max-w-md">
               <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                 <header class="p-6">
@@ -55,24 +57,27 @@ function SidebarWrapper({props,toggle,children,setToggle} ) {
                     <nav class="-mb-px flex space-x-6">
                       <a
                         href="#"
-                        class="whitespace-no-wrap pb-4 px-1 border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700"
+                        class={current=="submitting"?selectedClass:student}
                         aria-current="page"
+                        onClick={()=>setHeader("submitting")}
                       >
                         Student
                       </a>
 
                       <a
                         href="#"
-                        class="whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
-                      >
+                        class={current=="grading"?selectedClass:teaching}
+                        onClick={()=>setHeader("grading")}
+                     >
                         Teaching
                       </a>
-                      <a
+                      {/* <a
                         href="#"
                         class="whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
+                        onClick={()=>setHeader("announcement")}
                       >
                         Annoucements
-                      </a>
+                      </a> */}
                     </nav>
 
 
@@ -90,4 +95,17 @@ function SidebarWrapper({props,toggle,children,setToggle} ) {
 
 SidebarWrapper.propTypes = {};
 
-export default SidebarWrapper;
+export default SidebarWrapper;         
+
+
+
+{/* <!--
+  Slide-over panel, show/hide based on slide-over state.
+
+  Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+    From: "translate-x-full"
+    To: "translate-x-0"
+  Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+    From: "translate-x-0"
+    To: "translate-x-full"
+--> */}
