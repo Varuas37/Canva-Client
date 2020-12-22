@@ -8,7 +8,6 @@ import Cards from "../../Components/Cards/Cards";
 import {
   getCourses,
   getFavCourses,
-  
 } from "../../Redux/Action/courses";
 import {getUserTodo} from "../../Redux/Action/todo"
 import Sidebar from "../../Components/Sidebar/Sidebar";
@@ -16,6 +15,7 @@ import CardWrapper from "../../Components/Cards/CardWrapper";
 import SidebarWrapper from "../../Components/Sidebar/SidebarWrapper";
 import SidebarItem from "../../Components/Sidebar/SidebarItem";
 import Skeleton from 'react-loading-skeleton';
+import CanvasConnectionError from "../../Components/CanvasError/CanvasConnectionError";
 
 const Dashboard = ({
   auth,
@@ -23,7 +23,12 @@ const Dashboard = ({
   getFavCourses,
   courses: { course_loading, favouriteCourse, todo },
   getUserTodo,
+  canvasAuth,
 }) => {
+  if (!auth.isAuthenticated){
+
+    <Redirect to="/"></Redirect>
+  }
   useEffect(() => {
     getUserTodo();
   }, []);
@@ -39,15 +44,16 @@ const Dashboard = ({
   }
 
   var d = new Date();
-  return auth.isAuthenticated ? (
+  
+  return(
     <div style={{ padding: "20px" }}>
       <div
         style={{ display: "flex", flexDirection: "column",  }}
       >
-        <Header data={auth.user.data.name}/>
+        <Header data={ auth.user && auth.user.name+ " " + auth.user.lastname}/>
       </div>
 
-      <main
+    {canvasAuth?    <main
         class="flex-1 relative z-0 overflow-y-auto focus:outline-none"
         tabindex="0"
       >
@@ -76,13 +82,11 @@ const Dashboard = ({
             </CardWrapper>
           </div>
         </div>
-      </main>
-
-    
-    </div>
-  ) : (
-    <Redirect to="/"></Redirect>
-  );
+      </main> : <CanvasConnectionError/>}
+  
+      
+      </div>
+  )
 };
 
 Dashboard.propTypes = {
@@ -94,6 +98,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   courses: state.courses,
   todos: state.courses.user_todo,
+  canvasAuth: state.canvasAuth
 });
 export default connect(mapStateToProps, { getFavCourses, getUserTodo })(
   Dashboard

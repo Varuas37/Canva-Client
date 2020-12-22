@@ -6,7 +6,7 @@ import {setAlert} from "./alert";
 // gets the submissions.
 export const getSubmissions=  (id) => async dispatch =>{
     try {
-        const res = await axios.get(`http://localhost:3001/api/canvas/submissions/${id}`);
+        const res = await axios.get(`http://localhost:3300/api/canvas/submissions/${id}`);
         dispatch({
             type: GET_SUBMISSIONS, 
             payload:res.data

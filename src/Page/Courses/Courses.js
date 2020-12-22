@@ -4,13 +4,15 @@ import TableRow from "../../Components/TableRow/TableRow";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCourses } from "../../Redux/Action/courses";
-import {useStickyState} from "../../Components/utils/StickyState"
+import {useStickyState} from "../../Components/StickyState/StickyState"
 import Skeleton from 'react-loading-skeleton';
+import CanvasConnectionError from "../../Components/CanvasError/CanvasConnectionError";
 
 const Courses = ({
   auth,
   getCourses,
   courses: { courses_loading, courses },
+  canvasAuth,
 }) => {
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const Courses = ({
                   </div> : <Skeleton count={3}/> 
                   }
       </div>
-      <div class="flex flex-col">
+{  canvasAuth ? <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -95,7 +97,7 @@ const Courses = ({
             </div>
           </div>
         </div>
-      </div>
+      </div>: <CanvasConnectionError/>}
     </Fragment>
   ) : (
     <Redirect to="/"></Redirect>
@@ -110,6 +112,7 @@ Courses.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   courses: state.courses,
+  canvasAuth: state.canvasAuth
 });
 
 export default connect(mapStateToProps, { getCourses })(Courses);

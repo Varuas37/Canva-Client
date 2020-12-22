@@ -22,12 +22,13 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get("/api/auth");
+    const res = await axios.get("http://localhost:3300/api/auth");
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
   } catch (err) {
+    console.log(err)
     dispatch({
       type: AUTH_ERR,
     });
@@ -59,7 +60,7 @@ export const registerUser = ({ name, lastname, email, password }) => async (
 
     if (errors) {
 
-      dispatch(setAlert(`${err.response.data.errors[0].msg}`, "red"));
+       dispatch(setAlert("Registration Error",`${err.response.data.errors[0].msg}`,"error","fas fa-exclamation-circle"));
     }
 
     dispatch({
@@ -74,8 +75,8 @@ export const login = (email, password) => async (dispatch) => {
   
   const config = {
     headers: {
-      // "Content-Type": "application/json",
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
   };
   const body = JSON.stringify({ email, password });
@@ -90,8 +91,8 @@ export const login = (email, password) => async (dispatch) => {
   } catch (err) {
   
     if (err) {
-      console.log(err.response.data.errors[0].msg)
-       dispatch(setAlert(`${err.response.data.errors[0].msg}`, "red"));
+      console.log(err.response)
+       dispatch(setAlert("Login Error",`Invalid User Credentials`,"error","fas fa-exclamation-circle"));
     }
    
     dispatch({

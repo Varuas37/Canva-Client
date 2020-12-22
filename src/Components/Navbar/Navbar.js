@@ -5,18 +5,23 @@ import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {disconnectCanvas} from "../../Redux/Action/canvasauth"
+import {logout} from "../../Redux/Action/auth"
 import SidebarWrapper from "../Sidebar/SidebarWrapper";
 import SidebarItem from "../Sidebar/SidebarItem";
 // import OutsideAlerter from "../OutsideAlert/OutsideAlert";
-const Navbar=({auth,disconnectCanvas,todo})=> {
+const Navbar=({auth,logout,todo,disconnectCanvas})=> {
   const [openProfile, setOpenProfile] = useState(false);
-  const [toggleSidebar,setToggleSidebar]  = useState(true);
+  const [toggleSidebar,setToggleSidebar]  = useState(false);
   const [ClickedHeader,setClickedHeader] = useState("submitting");
   const [openMenu,setOpenMenu] = useState(true);
   const handleToggle=()=>{
     console.log(toggleSidebar)
   setToggleSidebar(!toggleSidebar)
 
+  }
+  const handleLogout=()=>{
+    disconnectCanvas();
+    logout();
   }
   useEffect(() => {
   }, [ClickedHeader]);
@@ -80,16 +85,12 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <NavLink to="/">
               <div className="flex-shrink-0">
-                <img
-                  className="block lg:hidden h-8 w-auto"
-                  src={mainLogo}
-                  alt="Workflow logo"
-                />
-                <img
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                {/* <img
                   className="hidden lg:block h-8 w-auto"
                   src={mainLogo}
                   alt="Workflow logo"
-                />
+                /> */}
               </div>
               </NavLink>
               <div className="hidden sm:block sm:ml-6">
@@ -155,7 +156,7 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
                   >
                     <img
                       className="h-8 w-8 rounded-full"
-                      src={auth.user.data.avatar_url}
+                      src={auth.user && auth.user.avatar}
                       alt=""
                       onClick={()=> setOpenProfile(!openProfile)}
                     />
@@ -196,7 +197,7 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
                       href="#"
                       className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                       role="menuitem"
-                      onClick={()=>disconnectCanvas()}
+                      onClick={handleLogout}
                     >
                       Sign out
                     </Link>
@@ -270,11 +271,11 @@ const Navbar=({auth,disconnectCanvas,todo})=> {
 Navbar.propTypes = {
     auth: PropTypes.object.isRequired,
     todo: PropTypes.array.isRequired,
-    disconnectCanvas: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
   };
 const mapStateToProps = (state) => ({
     auth: state.auth,
     todo: state.courses.todo,
-
+    
   });
-export default connect (mapStateToProps,{disconnectCanvas})(Navbar);
+export default connect (mapStateToProps,{logout,disconnectCanvas})(Navbar);

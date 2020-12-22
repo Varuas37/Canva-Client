@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useEffect } from "react";
 import { mainLogo } from "../../../Static/Images/images";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,17 +6,29 @@ import {connect} from "react-redux"
 import {setAlert} from "../../../Redux/Action/alert"
 import {connectToCanvas} from "../../../Redux/Action/canvasauth";
 import PropTypes from 'prop-types'
+import store from "../../../store";
+import { loadCanvasUser } from "../../../Redux/Action/canvasauth";
 
-const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated}) => {
-    const { register, handleSubmit, errors } = useForm();
+
+
+const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated,auth}) => {
+
+  const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
       const { token, domain  } = data;
       connectToCanvas(domain,token);
     };
-    if (isAuthenticated) {
+
+    console.log("This is auth"+auth);
+    if (!auth){
+      return <Redirect to="/login"/>
+    }
+
+      else if (auth) {
       return <Redirect to="/Dashboard" />;
     }
-  return (
+  
+  return isAuthenticated && (
     <Fragment>
       {/* <!--
   Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
@@ -147,9 +159,10 @@ const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated}) => {
 CanvasLogin.propTypes = {
     setAlert: PropTypes.func.isRequired,
     connectToCanvas: PropTypes.func.isRequired,
-   
+
 }
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.canvasauth.isAuthenticated,
+  auth: state.auth
 });
 export default connect(mapStateToProps,{setAlert,connectToCanvas})(CanvasLogin);

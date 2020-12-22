@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import Home from "./Page/Home/Home";
 import CanvasLogin from "./Page/CanvasAuth/Login/CanvasLogin";
@@ -22,13 +22,29 @@ import CommingSoon from "./Components/CommingSoon/CommingSoon";
 import Pricing from "./Page/Pricing/Pricing";
 import Login from "./Page/Authentication/Login";
 import Register from "./Page/Authentication/Register";
-import SampleLogin from "./Page/Authentication/SampleLogin";
-
+import {loadUser} from "./Redux/Action/auth"
+import {loadCanvasUser} from "./Redux/Action/canvasauth"
+import setCanvasAuth from "./utils/setCanvasToken";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
+
+}
+if(localStorage.domain && localStorage.canvasToken){
+  console.log("I am inside localstorage domain and token")
+  setCanvasAuth(localStorage.domain)
+  setCanvasAuth(localStorage.canvasToken)
 }
 
-function App() {
+const App=()=> {
+
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[])
+  useEffect(()=>{
+    console.log("I am under Canvas Login Before Load User was dispatched")
+    store.dispatch(loadCanvasUser());
+    
+  },[])  
   return (
     <Provider store={store}>
     <Router history={history}>
@@ -38,6 +54,7 @@ function App() {
       <Switch>
         
         <Route exact path ="/login" component={Login}/>
+        <Route exact path ="/canvasAuth" component={CanvasLogin}/>
         <Route exact path ="/register" component={Register}/>
         <Route exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/courses" component={Courses}/>

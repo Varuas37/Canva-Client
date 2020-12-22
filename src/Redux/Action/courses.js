@@ -6,13 +6,13 @@ import {setAlert} from "./alert";
 // Checks if domain and token match
 export const getCourses=  () => async dispatch =>{
     try {
-        const res = await axios.get("http://localhost:3001/api/canvas/courses/");
+        const res = await axios.get("http://localhost:3300/api/canvas/courses/");
         dispatch({
             type: GET_COURSES, 
             payload:res.data
         })
     } catch (err) {
-        dispatch(setAlert("Courses Error","red"))
+        dispatch(setAlert("Courses Error",`Error loading Courses`,"error","fas fa-exclamation-circle"));
         dispatch({
             type: COURSES_ERROR,
         })
@@ -21,13 +21,13 @@ export const getCourses=  () => async dispatch =>{
 
 export const getCourse=  (id) => async dispatch =>{
     try {
-        const res = await axios.get(`http://localhost:3001/api/canvas/courses/${id}`);
+        const res = await axios.get(`http://localhost:3300/api/canvas/courses/${id}`);
         dispatch({
             type: GET_COURSE, 
             payload:res.data
         })
     } catch (err) {
-        dispatch(setAlert("Courses Error","red"))
+        dispatch(setAlert("Courses Error",`Error loading Courses`,"error","fas fa-exclamation-circle"));
         dispatch({
             type: COURSE_ERROR,
         })
@@ -36,7 +36,7 @@ export const getCourse=  (id) => async dispatch =>{
 
 export const getTodo=  (id) => async dispatch =>{
     try {
-        const res = await axios.get(`http://localhost:3001/api/canvas/courses/todo/${id}`);
+        const res = await axios.get(`http://localhost:3300/api/canvas/courses/todo/${id}`);
         dispatch({
             type: GET_TODO, 
             payload:res.data
@@ -51,7 +51,7 @@ export const getTodo=  (id) => async dispatch =>{
 
 export const getAnnouncement=  (id) => async dispatch =>{
     try {
-        const res = await axios.get(`http://localhost:3001/api/canvas/courses/announcement/${id}`);
+        const res = await axios.get(`http://localhost:3300/api/canvas/courses/announcement/${id}`);
         dispatch({
             type: GET_ANNOUNCEMENT, 
             payload:res.data
@@ -68,7 +68,7 @@ export const getAnnouncement=  (id) => async dispatch =>{
 
 export const getFavCourses = () =>async dispatch =>{
     try{
-        const res = await axios.get("http://localhost:3001/api/canvas/favourites");
+        const res = await axios.get("http://localhost:3300/api/canvas/favourites");
         dispatch({
             type: GET_FAVOURITE_COURSES, 
             payload:res.data,
@@ -76,7 +76,7 @@ export const getFavCourses = () =>async dispatch =>{
        
     }
     catch(err){
-        dispatch(setAlert("Favourite Courses Error","red"))
+        dispatch(setAlert("Favourite Courses Error",`Error loading Favourite Courses`,"error","fas fa-exclamation-circle"));
         dispatch({
             type: GET_FAVOURITE_COURSES_ERR,
         })

@@ -133,7 +133,7 @@ Course.propTypes = {
   getTodo: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  auth: state.canvasauth,
   courses: state.courses,
   todo: state.courses.todo,
   submission: state.submissions,

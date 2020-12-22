@@ -1,14 +1,15 @@
 import {
-    USER_LOADED,
-    AUTH_ERR,
+   
     CONNECTION_SUCCESS,
     CONNECTION_ERROR,
     END_CONNECTION,
+    CANVAS_USER_LOADED,
+    CANVAS_AUTH_ERR,
   } from "../Action/types";
   
   const initialState = {
     domain: localStorage.getItem("domain"),
-    token: localStorage.getItem("token"),
+    canvasToken: localStorage.getItem("canvasToken"),
     isAuthenticated: false,
     loading: true,
     user: null,
@@ -17,7 +18,7 @@ import {
   export default function (state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
-      case USER_LOADED:
+      case CANVAS_USER_LOADED:
         return {
           ...state,
           isAuthenticated: true,
@@ -26,24 +27,28 @@ import {
         };
       
       case CONNECTION_SUCCESS:
-        localStorage.setItem("token", payload.token);
-        localStorage.setItem("domain",payload.domain);
+        console.log("This is the payload in the reducer")
+        console.log(payload)
+        localStorage.setItem("canvasToken", payload.data.tokenData[0].token);
+        localStorage.setItem("domain",payload.data.tokenData[0].domain);
+        console.log(localStorage.getItem("canvasToken"))
+        console.log(localStorage.getItem("domain"))
         return {
           ...state,
-          payload,
+          user: payload,
           isAuthenticated: true,
           loading: false,
-          user: payload
+          
         };
   
-      case AUTH_ERR:
+      case CANVAS_AUTH_ERR:
       case CONNECTION_ERROR:
       case END_CONNECTION:
-        localStorage.removeItem("token");
+        localStorage.removeItem("canvasToken");
         localStorage.removeItem("domain");
         return {
           ...state,
-          token: null,
+          canvasToken: null,
           domain:null,
           isAuthenticated: false,
           loading: false,

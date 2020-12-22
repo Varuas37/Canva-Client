@@ -10,12 +10,12 @@ const Login = ({ login, isAuthenticated }) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(email,password)
+    
     login(email,password);
   };
-  // if (isAuthenticated) {
-  //   return <Redirect to="/Home" />;
-  // }
+  if (isAuthenticated) {
+    return <Redirect to="/canvasAuth" />;
+  }
   return (
     <Fragment>
       <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

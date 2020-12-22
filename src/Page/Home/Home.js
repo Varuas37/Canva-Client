@@ -8,6 +8,7 @@ const Home=({isAuthenticated})=> {
     if (isAuthenticated) {
         return <Redirect to="/Dashboard" />;
       }
+   
     return (
         <Fragment>
             <Hero></Hero>
@@ -21,6 +22,6 @@ Home.propTypes = {
     
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state.canvasauth.isAuthenticated,
   });
 export default connect(mapStateToProps,null)(Home);
