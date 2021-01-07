@@ -5,7 +5,8 @@ import profile from "./profile"
 import auth from "./auth"
 import courses from "./courses"
 import submissions from "./submissions"
+import excel from "./excel"
 import todo from "./todo"
 export default combineReducers({
-    alert, canvasauth,courses,submissions,todo,auth,profile
+    alert, canvasauth,courses,submissions,todo,auth,profile,excel
 });
