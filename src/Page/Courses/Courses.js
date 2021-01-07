@@ -35,7 +35,7 @@ const Courses = ({
         style={{ margin: "20px", display:"flex",flexDirection:"row", width:"100%", position:"relative"  }}
       >
         <h1>My Courses</h1>
-        {courses.length > 0 ? 
+        {courses && courses.length > 0 ? 
                   <div style={{ width:"fit-content", position:"absolute", right:"2%"}}>
                     <label
                       for="selectedCourse"
@@ -56,7 +56,7 @@ const Courses = ({
                   </div> : <Skeleton count={3}/> 
                   }
       </div>
-{  canvasAuth ? <div class="flex flex-col">
+{  courses ? <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -85,7 +85,7 @@ const Courses = ({
                     courses.map((course) =>
                       !course.access_restricted_by_date &&
                       !course.concluded &&
-                      course.term.name == "2020-FALL" && course.enrollments[0].type==filter.toString() ? (
+                      course.term.name == "2021-SPRING" && course.enrollments[0].type==filter.toString() ? (
                         <TableRow key={course.id} data={course} />
                       ) : null
                     )

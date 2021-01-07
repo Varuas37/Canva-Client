@@ -25,14 +25,11 @@ import Register from "./Page/Authentication/Register";
 import {loadUser} from "./Redux/Action/auth"
 import {loadCanvasUser} from "./Redux/Action/canvasauth"
 import setCanvasAuth from "./utils/setCanvasToken";
+import Tools from "./Page/Tools/Tools";
+import ExcelCheck from "./Page/ExcelCheck/ExcelCheck";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 
-}
-if(localStorage.domain && localStorage.canvasToken){
-  console.log("I am inside localstorage domain and token")
-  setCanvasAuth(localStorage.domain)
-  setCanvasAuth(localStorage.canvasToken)
 }
 
 const App=()=> {
@@ -52,7 +49,6 @@ const App=()=> {
     <Alert/>
     <Navbar></Navbar>
       <Switch>
-        
         <Route exact path ="/login" component={Login}/>
         <Route exact path ="/canvasAuth" component={CanvasLogin}/>
         <Route exact path ="/register" component={Register}/>
@@ -63,6 +59,8 @@ const App=()=> {
         <Route exact path="/groups/" component={Groups}/>
         <Route exact path="/settings/" component={Settings}/>
         <Route exact path="/pricing/" component={Pricing}/>
+        <Route exact path="/tools" component={Tools}/>
+        <Route exact path="/excelCheck" component={ExcelCheck}/>
       </Switch>
     </Router>
     </Provider>

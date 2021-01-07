@@ -11,24 +11,22 @@ import { loadCanvasUser } from "../../../Redux/Action/canvasauth";
 
 
 
-const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated,auth}) => {
+const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated,auth,user}) => {
 
   const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
       const { token, domain  } = data;
       connectToCanvas(domain,token);
     };
+    // if (!auth.isAuthenticated){
+    //   return <Redirect to="/login"/>
+    // }
 
-    console.log("This is auth"+auth);
-    if (!auth){
-      return <Redirect to="/login"/>
-    }
-
-      else if (auth) {
+    if (user.canvasConnected) {
       return <Redirect to="/Dashboard" />;
     }
   
-  return isAuthenticated && (
+  return !user.canvasConnected && (
     <Fragment>
       {/* <!--
   Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
@@ -162,7 +160,8 @@ CanvasLogin.propTypes = {
 
 }
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.canvasauth.isAuthenticated,
-  auth: state.auth
+  canvasAuth: state.canvasauth,
+  auth: state.auth,
+  user: state.auth.user,
 });
 export default connect(mapStateToProps,{setAlert,connectToCanvas})(CanvasLogin);

@@ -22,6 +22,6 @@ Home.propTypes = {
     
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.canvasauth.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated,
   });
 export default connect(mapStateToProps,null)(Home);

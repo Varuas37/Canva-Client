@@ -14,7 +14,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null,
+  user: [{canvasConnected:false}],
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -48,6 +48,7 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+        user:""
       };
     default:
       return state;

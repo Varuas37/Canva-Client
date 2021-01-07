@@ -27,6 +27,7 @@ const Course = ({
   getSubmissions,
   submission:{submission_loading,submissions},
   auth,
+  canvasAuth,
 }) => {
   useEffect(() => {
     getCourse(match.params.id);
@@ -133,10 +134,11 @@ Course.propTypes = {
   getTodo: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
-  auth: state.canvasauth,
+  auth: state.auth,
   courses: state.courses,
   todo: state.courses.todo,
   submission: state.submissions,
+  canvasAuth: state.canvasAuth,
   
 });
 export default connect(mapStateToProps, {

@@ -42,10 +42,13 @@ const Dashboard = ({
   setToggleSidebar(!toggleSidebar)
 
   }
+  if(!auth.isAuthenticated){
+    <Redirect to="/login"/>
+  }
 
   var d = new Date();
   
-  return(
+  return auth.isAuthenticated&& (
     <div style={{ padding: "20px" }}>
       <div
         style={{ display: "flex", flexDirection: "column",  }}
@@ -53,7 +56,7 @@ const Dashboard = ({
         <Header data={ auth.user && auth.user.name+ " " + auth.user.lastname}/>
       </div>
 
-    {canvasAuth?    <main
+    {favouriteCourse ?    <main
         class="flex-1 relative z-0 overflow-y-auto focus:outline-none"
         tabindex="0"
       >

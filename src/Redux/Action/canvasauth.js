@@ -49,11 +49,12 @@ export const connectToCanvas=  (domain,token) => async dispatch =>{
             type: CONNECTION_SUCCESS, 
             payload:res.data
         })
-        
-        // dispatch(setAlert("Authentication Successful","green"))
+        console.log(res.data)
+        dispatch(setAlert("Authentication Successful","green"))
+
     } catch (err) {
-        console.log(err)
-        dispatch(setAlert("Authentication Failed","red"))
+        console.log("❌❌❌❌"+err)
+        dispatch(setAlert("Canvas Authentication Error",`Couldn't Connect to canvas`,"error","fas fa-exclamation-circle"));
         dispatch({
             type: CONNECTION_ERROR,
         })

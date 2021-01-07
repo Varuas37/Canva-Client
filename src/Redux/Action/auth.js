@@ -52,7 +52,7 @@ export const registerUser = ({ name, lastname, email, password }) => async (
       payload: res.data,
     });
     
-    dispatch(setAlert(`${res.data.msg}`,"green"));
+    dispatch(setAlert("User Registered",`Please confirm your email to login`,"error","fas fa-check"));
     
   } catch (err) {
     const errors = err.response.data.errors;
@@ -92,7 +92,7 @@ export const login = (email, password) => async (dispatch) => {
   
     if (err) {
       console.log(err.response)
-       dispatch(setAlert("Login Error",`Invalid User Credentials`,"error","fas fa-exclamation-circle"));
+       dispatch(setAlert("Login Error",`${err.response.data.errors[0].msg}`,"error","fas fa-exclamation-circle"));
     }
    
     dispatch({
