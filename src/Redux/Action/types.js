@@ -51,6 +51,13 @@ export const ERR_GET_SUBMISSIONS = "ERR_GET_SUBMISSIONS";
 
 export const UPLOAD_FILE = "UPLOAD_FILE";
 export const UPLOAD_ERR = "UPLOAD_ERR";
+
+export const LIST_ALL_FILES = "LIST_ALL_FILES"
+export const LIST_ALL_FILES_ERR = "LIST_ALL_FILES_ERR"
+
 export const DOWNLOAD_FILE = "DOWNLOAD_FILE";
+export const DOWNLOAD_FILE_ERR = "DOWNLOAD_FILE_ERR";
+
 export const POST_FILES = "POST_FILES";
+export const POST_FILES_ERR = "POST_FILES_ERR";
 export const SUBMIT_UPLOAD = "SUBMIT_UPLOAD";

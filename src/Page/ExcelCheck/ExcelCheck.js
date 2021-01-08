@@ -2,20 +2,24 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { uploadFile } from "../../Redux/Action/excel";
+import { assignExcelFile, downloadFile, uploadFile } from "../../Redux/Action/excel";
+import { Link } from 'react-router-dom';
 
-function ExcelCheck({ courses: { favCourseLoading, favouriteCourse }, canvasAuth ,uploadFile}) {
+function ExcelCheck({ courses: { favCourseLoading, favouriteCourse }, canvasAuth ,uploadFile,assignExcelFile, downloadFile}) {
 	const { register, handleSubmit } = useForm();
 	const [uploadedFile, setuploadedFile] = useState(null);
 	const onFileUpload = (e) => {
     console.log(e.target.files[0]);
    setuploadedFile(e.target.files[0]);
 	};
-	const onSubmit = (data) => {
+	const onSubmit = async(data) => {
     const formData = new FormData();
     formData.append('fileName',uploadedFile)
-    uploadFile(formData);
-    
+    console.log(formData)
+    // uploadFile(formData);
+    await downloadFile(uploadedFile.name)
+    await assignExcelFile(uploadedFile.name,"1234")
+
 	};
 	return (
 		<>
@@ -135,7 +139,7 @@ function ExcelCheck({ courses: { favCourseLoading, favouriteCourse }, canvasAuth
 											className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
 										>
 											{!favCourseLoading ? (
-												favouriteCourse.map((item) => (
+												favouriteCourse.map((item) => item.enrollments[0].type=="teacher" &&(
 													<option key={item.id} value={item.id}>{item.name}</option>
 												))
 											) : (
@@ -189,12 +193,13 @@ function ExcelCheck({ courses: { favCourseLoading, favouriteCourse }, canvasAuth
 
 				<div className="pt-5">
 					<div className="flex justify-end">
-						<button
+            <Link 
+            to="/tools"
 							type="button"
 							className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
 							Cancel
-						</button>
+						</Link>
 						<button
 							type="submit"
 							className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -208,14 +213,16 @@ function ExcelCheck({ courses: { favCourseLoading, favouriteCourse }, canvasAuth
 	);
 }
 ExcelCheck.propTypes = {
-	// auth: PropTypes.object.isRequired,
-	// courses: PropTypes.object.isRequired,
+	auth: PropTypes.object.isRequired,
+  courses: PropTypes.object.isRequired,
+  assignExcelFile:PropTypes.func.isRequired, 
+  downloadFile: PropTypes.func.isRequired,
 	uploadFile: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 	courses: state.courses,
-	canvasAuth: state.canvasAuth,
+	
 });
 
-export default connect(mapStateToProps, {uploadFile})(ExcelCheck);
+export default connect(mapStateToProps, {uploadFile,assignExcelFile, downloadFile})(ExcelCheck);
