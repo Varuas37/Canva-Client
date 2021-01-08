@@ -19,6 +19,9 @@ export const uploadFile = (formData) => async (dispatch) => {
 				'Content-Type': 'multipart/form-data',
 			},
 		};
+		setTimeout(() => {
+			console.log("Uploading")
+		}, 10000);
 		// let fd = new FormData();
 		// fd.append('fileName', formData[0]);
 		const res = await axios.post('http://localhost:3300/api/files/upload', formData);
@@ -101,7 +104,8 @@ export const assignExcelFile = (formData, password) => async (dispatch) => {
 			type: POST_FILES,
 			payload: res.data,
 		});
-		dispatch(setAlert('Excel Files Assigned'));
+        dispatch(setAlert('Excel Files Assigned'));
+        
 	} catch (err) {
 		dispatch({
 			type: POST_FILES_ERR,

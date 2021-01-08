@@ -30,6 +30,7 @@ const Courses = ({
   var d = new Date();
   return auth.isAuthenticated ? (
     <Fragment>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8 m-8">
       <div
         class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900"
         style={{ margin: "20px", display:"flex",flexDirection:"row", width:"100%", position:"relative"  }}
@@ -97,8 +98,13 @@ const Courses = ({
             </div>
           </div>
         </div>
-      </div>: <CanvasConnectionError/>}
+        
+      </div>
+     
+      : <CanvasConnectionError/>}
+      </div>
     </Fragment>
+
   ) : (
     <Redirect to="/"></Redirect>
   );
