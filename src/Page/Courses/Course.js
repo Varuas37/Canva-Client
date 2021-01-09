@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {useParams} from 'react-router-dom'
 import { getAnnouncement, getCourse, getTodo } from '../../Redux/Action/courses';
 import { getSubmissions } from '../../Redux/Action/submissions';
 import Header from '../../Components/Header/Header';
@@ -23,23 +24,24 @@ const Course = ({
 	auth,
 	canvasAuth,
 }) => {
+	const {id} = useParams();
 	useEffect(() => {
-		getCourse(match.params.id);
-	}, [match.params.id]);
+		getCourse(id);
+	}, [id]);
 
 	useEffect(() => {
-		getTodo(match.params.id);
-	}, [match.params.id]);
+		getTodo(id);
+	}, [id]);
 	useEffect(() => {
-		getAnnouncement(match.params.id);
-	}, [match.params.id]);
+		getAnnouncement(id);
+	}, [id]);
 	useEffect(() => {
-		getSubmissions(match.params.id);
-	}, [match.params.id]);
+		getSubmissions(id);
+	}, [id]);
 	return auth.isAuthenticated && !courseLoading && !todo_loading && !submission_loading ? (
 		<>
 			{/* <TabItem></TabItem> */}
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8 m-8">
+			<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
 				<Header data={course.name ? course.name : <Skeleton />}>
 					<p className="mb-2 text-medium font-medium text-gray-600 dark:text-gray-400">
 						{course.enrollments[0].type == 'ta' ? 'Teacher' : 'Student' || <Skeleton />}

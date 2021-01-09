@@ -6,7 +6,7 @@ import imgDefault from "./default.png";
 const Cards = ({ data }) => {
   return data ? (
     <Fragment>
-      <Link to={`/courses/${data.id}`}>
+      <Link to={`/course/${data.id}`}>
         <li className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow">
           <div className="flex-1 flex flex-col p-8">
             <img

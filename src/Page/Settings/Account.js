@@ -112,6 +112,17 @@ function Account({ auth }) {
 											<option>University of Texas at Tyler</option>
 										</select>
 									</div>
+									<div class="col-span-6 sm:col-span-3">
+										<label for="about" class="block text-sm font-medium text-gray-700">
+											About
+										</label>
+										<textarea
+											type="text"
+											name="about"
+											id="about"
+											class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										/>
+									</div>
 								</div>
 							</div>
 							<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

@@ -27,6 +27,7 @@ import {loadCanvasUser} from "./Redux/Action/canvasauth"
 import setCanvasAuth from "./utils/setCanvasToken";
 import Tools from "./Page/Tools/Tools";
 import ExcelCheck from "./Page/ExcelCheck/ExcelCheck";
+import CourseHome from "./Page/Courses/CourseHome";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 
@@ -54,7 +55,7 @@ const App=()=> {
         <Route exact path ="/register" component={Register}/>
         <Route exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/courses" component={Courses}/>
-        <Route exact path="/courses/:id" component={Course}/>
+        <Route exact path="/course/:id" component={CourseHome}/>
         <Route exact path="/profile/" component={Profile}/>
         <Route exact path="/groups/" component={Groups}/>
         <Route exact path="/settings/" component={Settings}/>

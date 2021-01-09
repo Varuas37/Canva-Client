@@ -11,7 +11,8 @@ const Profile = ({ auth }) => {
 				<article>
 					{/* <!-- Profile header --> */}
 					<div>
-						<div>
+						<div className="h-32 w-full lg:h-48">
+            {/* bg-gradient-to-br from-yellow-800 rounded m-2 to-green-500  */}
 							<img
 								class="h-32 w-full object-cover lg:h-48"
 								src={"https://source.unsplash.com/random;w=1950&amp;q=80"}
@@ -85,12 +86,12 @@ const Profile = ({ auth }) => {
 							<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 								<nav class="-mb-px flex space-x-8" aria-label="Tabs">
 									{/* <!-- Current: "border-pink-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" --> */}
-                  <a
+                  {/* <a
 										href="#"
 										class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
 									>
 										Friends
-									</a>
+									</a> */}
                 	<a
 										href="#"
 										class="border-pink-500 text-gray-900 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
@@ -98,8 +99,6 @@ const Profile = ({ auth }) => {
 									>
 										Profile
 									</a>
-							
-						
 								</nav>
 							</div>
 						</div>
@@ -127,16 +126,10 @@ const Profile = ({ auth }) => {
 								<dt class="text-sm font-medium text-gray-500">About</dt>
 								<dd class="mt-1 max-w-prose text-sm text-gray-900">
 									<p>
-										Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut
-										sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean
-										posuere aliquam.
+										I made this website.
 									</p>
 									<p class="mt-5">
-										Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris
-										amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum,
-										cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget
-										quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus
-										suspendisse.
+										I hope you love it. Please let me know if you want more features.
 									</p>
 								</dd>
 							</div>
