@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-function Group({ courses: { course } }) {
-    const handleVisit=()=>{
-        
-    }
+import { Link, Redirect, useHistory } from 'react-router-dom';
+function CourseGroup({ courses: { course } }) {
+	const history = useHistory();
+	const HandleVisit = () => {
+	
+		history.push(`/groups/:id`);
+		// history.push(`/groups/${course.id}`);
+	};
 	return (
 		<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
 			<article>
@@ -31,9 +35,10 @@ function Group({ courses: { course } }) {
 								<div className="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
 									<h1 className="text-2xl font-bold text-gray-900 truncate">{course.name}</h1>
 								</div>
+
 								<div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
 									<button
-                                        onClick={handleVisit}
+										onClick={HandleVisit}
 										type="button"
 										className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
 									>
@@ -102,10 +107,10 @@ function Group({ courses: { course } }) {
 	);
 }
 
-Group.propTypes = {};
+CourseGroup.propTypes = {};
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 	courses: state.courses,
 });
-export default connect(mapStateToProps, null)(Group);
+export default connect(mapStateToProps, null)(CourseGroup);

@@ -14,7 +14,7 @@ function TableRow({data}) {
     return (
         <Fragment>
             <tr>
-              <Link to ={`/courses/${data.id}`}>
+              <Link to ={`/course/${data.id}`}>
           
               <td class="px-6 py-4 whitespace-no-wrap">
               <div class="flex items-center">

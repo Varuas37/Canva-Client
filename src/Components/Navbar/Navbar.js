@@ -136,14 +136,14 @@ const Navbar = ({ auth, logout, todo, disconnectCanvas }) => {
 									</div>
 								</div>
 							</div>
-              {/* <div class="relative z-0 flex-1 px-2 flex items-center justify-center sm:absolute sm:inset-0"> */}
+              {/* <div class="relative z-0 flex-1 px-2 flex items-center justify-end sm:absolute  sm:inset-0">
 							<div class="max-w-xs w-full">
 								<label for="search" class="sr-only">
 									Search
 								</label>
 								<div class="relative">
 									<div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-										{/* <!-- Heroicon name: search --> */}
+										
 										<svg
 											class="flex-shrink-0 h-5 w-5 text-gray-400"
 											xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +167,7 @@ const Navbar = ({ auth, logout, todo, disconnectCanvas }) => {
 									/>
 								</div>
 							</div>
-              {/* </div> */}
+              		</div> */}
 							<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 								<button
 									className="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
