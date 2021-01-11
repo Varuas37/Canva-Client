@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-function CourseGroup({ courses: { course } }) {
+import { joinGroup } from '../../../Redux/Action/group';
+import imgDefault from "../default.png"
+function CourseGroup({ courses: { course }, joinGroup }) {
 	const history = useHistory();
-	const HandleVisit = () => {
-	
-		history.push(`/groups/:id`);
-		// history.push(`/groups/${course.id}`);
+	const handleVisit = async() => {
+		await joinGroup(course.name, course.id, course.enrollments[0].type);
+		// history.push(`/groups/:id`);
+		history.push(`/groups/${course.id}`);
 	};
 	return (
 		<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
@@ -27,7 +29,9 @@ function CourseGroup({ courses: { course } }) {
 							<div className="flex">
 								<img
 									className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
-									src={course.image_download_url}
+									src={
+										course.image_download_url ? course.image_download_url : imgDefault
+									  }
 									alt=""
 								/>
 							</div>
@@ -38,7 +42,7 @@ function CourseGroup({ courses: { course } }) {
 
 								<div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
 									<button
-										onClick={HandleVisit}
+										onClick={handleVisit}
 										type="button"
 										className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
 									>
@@ -107,10 +111,12 @@ function CourseGroup({ courses: { course } }) {
 	);
 }
 
-CourseGroup.propTypes = {};
+CourseGroup.propTypes = {
+	joinGroup: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 	courses: state.courses,
 });
-export default connect(mapStateToProps, null)(CourseGroup);
+export default connect(mapStateToProps, { joinGroup })(CourseGroup);

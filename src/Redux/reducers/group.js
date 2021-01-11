@@ -1,38 +1,36 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../Action/types";
+import { GET_GROUP, GET_GROUP_ERR, JOIN_GROUP, CLEAR_GROUP } from '../Action/types';
 
 const initialState = {
-  name:null,
-  post: null,
-  comment:null,
-  posts: [],
-  comments:[],
-  loading: true,
-  members:null,
-  error: {},
+	groups: [],
+	group: [],
+	loading: true,
+	error: {},
 };
 export default function (state = initialState, action) {
-  const { type, payload } = action;
+	const { type, payload } = action;
 
-  switch (type) {
-    case GET_PROFILE:
-      return {
-        ...state,
-        profile: payload,
-        loading: false,
-      };
-    case PROFILE_ERROR:
-      return {
-        ...state,
-        error: payload,
-        loading: false,
-      };
-    case CLEAR_PROFILE:
-      return {
-        ...state,
-        profile: null,
-        loading: false,
-      };
-    default:
-      return state;
-  }
+	switch (type) {
+		case GET_GROUP:
+		case JOIN_GROUP:
+			return {
+				...state,
+				group: payload,
+				loading: false,
+			};
+		case GET_GROUP_ERR:
+			return {
+				...state,
+				error: payload,
+				loading: true,
+			};
+
+		case CLEAR_GROUP:
+			return {
+				...state,
+				group: null,
+				loading: true,
+			};
+		default:
+			return state;
+	}
 }

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
 
-function PostItem(props) {
+function PostItem({data}) {
 	const [showMore, setShowMore] = useState(false);
-	const [showComments, setShowComments] = useState(false);
+	const [showComments,setShowComments]= useState(false);
 	const handleMore = () => {
 		setShowMore(!showMore);
 	};
@@ -32,6 +32,7 @@ function PostItem(props) {
 							aria-expanded="true"
 							onClick={handleMore}
 						>
+						
 							<svg
 								class="-mr-1 ml-2 h-5 w-5"
 								xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +134,7 @@ function PostItem(props) {
 					<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
 				</div>
 				<div className="my-3 sm:yx-3 sm:my-2 sm:py-6 flex flex-row justify-between">
-					<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2 w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
+				<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2 w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
 						<svg
 							class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500"
 							fill="none"
@@ -150,10 +151,7 @@ function PostItem(props) {
 						</svg>
 						<span className="sm:inline hidden">Like</span>
 					</div>
-					<div
-						onClick={() => setShowComments(!showComments)}
-						className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
-					>
+					<div onClick={()=>setShowComments(!showComments)} className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
 						<svg
 							class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500 "
 							fill="none"
@@ -189,7 +187,8 @@ function PostItem(props) {
 					</div>
 				</div>
 			</div>
-			{showComments ? <CommentItem /> : null}
+			{showComments?<CommentItem/>:null}
+			
 		</div>
 	);
 }

@@ -7,7 +7,8 @@ import courses from "./courses"
 import submissions from "./submissions"
 import excel from "./excel"
 import todo from "./todo"
-import group from "./group"
+import groupData from "./group"
+import post from "./post"
 export default combineReducers({
-    alert, canvasauth,courses,submissions,todo,auth,profile,excel,group
+    alert, canvasauth,courses,submissions,todo,auth,profile,excel,groupData,post
 });
