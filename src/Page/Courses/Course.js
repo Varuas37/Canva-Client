@@ -24,6 +24,9 @@ const Course = ({
 	auth,
 	canvasAuth,
 }) => {
+	if(!auth.user.canvasConnected){
+		window.location.replace('/canvasAuth')
+	  }
 	const {id} = useParams();
 	useEffect(() => {
 		getCourse(id);
@@ -38,6 +41,7 @@ const Course = ({
 	useEffect(() => {
 		getSubmissions(id);
 	}, [id]);
+
 	return auth.isAuthenticated && !courseLoading && !todo_loading && !submission_loading ? (
 		<>
 			{/* <TabItem></TabItem> */}

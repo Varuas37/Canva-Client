@@ -4,15 +4,15 @@ import Modal from '../../Components/Modal/Modal';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { addPost } from '../../Redux/Action/post';
-function CreatePost({ id, addPost,groupID }) {
+function CreatePost({ id, addPost, groupID }) {
 	const { register, handleSubmit, errors } = useForm();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [showMore, setShowMore] = useState(false);
 
 	const onSubmit = (data) => {
-		const { text,tags } = data;
-		addPost(text, id,tags,groupID);
-		console.log(text,id,tags);
+		const { text, tags } = data;
+		addPost(text, id, tags, groupID);
+		console.log(text, id, tags);
 		setModalOpen(false);
 	};
 	const toggleModal = () => {
@@ -83,8 +83,13 @@ function CreatePost({ id, addPost,groupID }) {
 								</div>
 
 								<div>
-									
-									<input ref={register({})} id="tags" name="tags" className="w-full sm:mt-4 p-2 shadow " placeholder="Tags, seperate with space"/>
+									<input
+										ref={register({})}
+										id="tags"
+										name="tags"
+										className="w-full sm:mt-4 p-2 shadow "
+										placeholder="Tags, seperate with space"
+									/>
 								</div>
 
 								<div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">

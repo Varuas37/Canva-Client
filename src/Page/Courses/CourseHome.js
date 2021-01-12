@@ -17,7 +17,6 @@ const CourseHome = ({ match }) => {
 				<div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
 					<ClassNavBar id={id} />
 					<Switch>
-						<PrivateRoute exact path="/groups/:id" component={Group} />
 						<PrivateRoute exact path="/course/:id" component={Course} />
 						<PrivateRoute exact path="/course/:id/announcement" component={Announcements} />
 						<PrivateRoute exact path="/course/:id/assignment" component={Assignments} />

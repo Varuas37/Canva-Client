@@ -1,6 +1,49 @@
 import React, { Fragment, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+
+const SingleComment = ({data}) => {
+	return (
+		<>
+			<li>
+				<div className="flex space-x-3 ">
+					<div className="flex-shrink-0">
+						<img
+							className="h-10 w-10 rounded-full"
+							src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+							alt=""
+						/>
+					</div>
+					<div >
+						<div className="text-sm">
+							<a href="#" className="font-medium text-gray-900">
+								{/* {data.name} */}
+								Saurav Panthee
+							</a>
+						</div>
+						<div className="mt-1 text-sm text-gray-700">
+							<p>
+								{/* {data.text} */}
+								Hello 
+							</p>
+						</div>
+						<div className="mt-2 text-sm space-x-2">
+							<span className="text-gray-500 font-medium">
+								{/* {data.time} */}
+								4d ago
+							</span>
+							<span className="text-gray-500 font-medium">&middot;</span>
+							<button type="button" className="text-gray-900 font-medium">
+								Like
+							</button>
+						</div>
+					</div>
+				</div>
+			</li>
+		</>
+	);
+};
+
 function CommentItem(props) {
 	const { register, handleSubmit, watch, errors } = useForm();
 	const createComment = useRef(null);
@@ -53,37 +96,11 @@ function CommentItem(props) {
 					<div className="divide-y divide-gray-200">
 						<div className="px-4 py-6 sm:px-6">
 							<ul className="space-y-8">
-								<li>
-									<div className="flex space-x-3">
-										<div className="flex-shrink-0">
-											<img
-												className="h-10 w-10 rounded-full"
-												src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-												alt=""
-											/>
-										</div>
-										<div>
-											<div className="text-sm">
-												<a href="#" className="font-medium text-gray-900">
-													Leslie Alexander
-												</a>
-											</div>
-											<div className="mt-1 text-sm text-gray-700">
-												<p>
-													Ducimus quas delectus ad maxime totam doloribus reiciendis ex.
-													Tempore dolorem maiores. Similique voluptatibus tempore non ut.
-												</p>
-											</div>
-											<div className="mt-2 text-sm space-x-2">
-												<span className="text-gray-500 font-medium">4d ago</span>
-												<span className="text-gray-500 font-medium">&middot;</span>
-												<button type="button" className="text-gray-900 font-medium">
-													Like
-												</button>
-											</div>
-										</div>
-									</div>
-								</li>
+								<SingleComment/>
+								<SingleComment/>
+								<SingleComment/>
+								<SingleComment/>
+								<SingleComment/>
 							</ul>
 						</div>
 					</div>

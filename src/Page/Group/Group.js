@@ -12,13 +12,17 @@ const Group = ({ match }) => {
 
 	return (
 		<Router history={history}>
-			<GroupNavbar id={id} />
-			<Switch>
-				<Route exact path={`/groups/:${id}`}  component={GrpHome} />
-				<Route exact path={`/groups/:${id}/resources`} component={GrpResources} />
-				<Route exact path={`/groups/:${id}/notes`} component={GrpNotes} />
-				<Route exact path={`/groups/:${id}/study`} component={GrpStudy} />
-			</Switch>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8 m-8 ">
+				<div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
+					<GroupNavbar id={id} />
+					<Switch>
+						<Route exact path={`/groups/:${id}`} component={GrpHome} />
+						<Route exact path={`/groups/:${id}/resources`} component={GrpResources} />
+						<Route exact path={`/groups/:${id}/notes`} component={GrpNotes} />
+						<Route exact path={`/groups/:${id}/study`} component={GrpStudy} />
+					</Switch>
+				</div>
+			</div>
 		</Router>
 	);
 };

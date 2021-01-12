@@ -12,6 +12,8 @@ import {
   RESET_PASSWORD,
   RESET_PASSWORD_FAILED
 } from "./types";
+import * as types from './types';
+
 import setAuthToken from "../../utils/setAuthToken";
 import { useHistory } from "react-router-dom";
 

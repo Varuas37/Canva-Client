@@ -17,6 +17,9 @@ const Courses = ({ auth, getCourses, courses: { courses_loading, courses }, canv
 
 	var startTerm = new Date();
 	var d = new Date();
+	if(!auth.user.canvasConnected){
+		window.location.replace('/canvasAuth')
+	  }
 	return auth.isAuthenticated ? (
 		<Fragment>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8 m-8">

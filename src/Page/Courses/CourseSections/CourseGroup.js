@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { joinGroup } from '../../../Redux/Action/group';
 import imgDefault from "../default.png"
-function CourseGroup({ courses: { course }, joinGroup }) {
+function CourseGroup({ courses: { course }, joinGroup ,auth}) {
+
 	const history = useHistory();
 	const handleVisit = async() => {
-		await joinGroup(course.name, course.id, course.enrollments[0].type);
+		await joinGroup(course.original_name, course.id, course.enrollments[0].type);
 		// history.push(`/groups/:id`);
-		history.push(`/groups/${course.id}`);
+		// history.push(`/groups/${course.id}`);
+		window.location = `/groups/${course.id}`
 	};
 	return (
 		<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">

@@ -16,6 +16,7 @@ const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated,auth,user}) => {
   const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
       const { token, domain  } = data;
+      window.location.replace("/dashboard")
       connectToCanvas(domain,token);
     };
     // if (!auth.isAuthenticated){

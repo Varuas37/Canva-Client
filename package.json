@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "focus-trap": "^6.2.3",
     "html-react-parser": "^0.14.1",
+    "logrocket": "^1.0.14",
     "lottie-web": "^5.7.5",
     "moment": "^2.29.1",
     "mongoose": "^5.10.15",

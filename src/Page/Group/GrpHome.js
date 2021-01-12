@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PostItem from './PostItem';
@@ -6,18 +6,20 @@ import CreatePost from './CreatePost';
 import { connect } from 'react-redux';
 import { getGroup } from '../../Redux/Action/group';
 import { getPosts } from '../../Redux/Action/post';
-function GrpHome({ getGroup, groupData, match, post }) {
+function GrpHome({ getGroup, groupData, match, post, getPosts }) {
+	const [id, setID] = useState(match.params[match.params[Object.keys(match.params)[0]]]);
 	useEffect(() => {
-		const id = match.params[match.params[Object.keys(match.params)[0]]];
+        console.log(id);
 		getGroup(parseInt(id));
-	}, []);
+	}, [id]);
 	useEffect(() => {
-		getPosts(groupData._id);
-	}, [post]);
+		getPosts(parseInt(id));
+    }, [id]);
 
 	return (
-		!groupData.loading && (
-			<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+		!groupData.loading &&
+		(
+			<div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9 ">
 				<div>
 					<div className="h-32 w-full lg:h-48">
 						{/* bg-gradient-to-br from-yellow-800 rounded m-2 to-green-500  */}
@@ -62,7 +64,7 @@ function GrpHome({ getGroup, groupData, match, post }) {
 											></path>
 										</svg>
 
-										<span className="text-white">Joined</span>
+										<span className="text-white">Member</span>
 									</button>
 								</div>
 							</div>
@@ -75,7 +77,14 @@ function GrpHome({ getGroup, groupData, match, post }) {
 					</div>
 				</div>
 				<CreatePost id={groupData.group[0]._id} groupID={groupData.group[0].groupID} />
-				<PostItem id={groupData.group[0]._id} groupID={groupData.group[0].groupID} data={post} />
+				{post.posts.map((item) => ( item&&
+					<PostItem
+						key={item._id}
+						id={groupData.group[0]._id}
+						groupID={groupData.group[0].groupID}
+						data={item}
+					/>
+				))}
 			</div>
 		)
 	);
@@ -85,7 +94,7 @@ GrpHome.propTypes = {
 	getGroup: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
-    groupData: state.groupData,
-    post:state.post
+	groupData: state.groupData,
+	post: state.post,
 });
-export default connect(mapStateToProps, { getGroup })(GrpHome);
+export default connect(mapStateToProps, { getGroup, getPosts })(GrpHome);

@@ -68,10 +68,11 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const UPDATE_LIKES_ERROR = 'UPDATE_LIKES_ERROR';
 export const DELETE_POST = 'DELETE_POST';
+export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
-
+export const COMMENT_ERR="COMMENT_ERR";
 // SPECIFIC USER'S POST
 export const GET_USERS_POSTS = "GET_USERS_POSTS";
 

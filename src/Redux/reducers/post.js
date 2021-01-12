@@ -13,6 +13,7 @@ import {
 const initialState = {
 	posts: [],
 	post: null,
+	comment:null,
 	userPosts: [],
 	user_Posts_Loading: true,
 	post_loading: true,
@@ -73,15 +74,15 @@ export default function (state = initialState, action) {
 		case ADD_COMMENT:
 			return {
 				...state,
-				post: { ...state.post, comments: payload },
+				comment: { ...state.comment, comment: payload },
 				post_loading: false,
 			};
 		case REMOVE_COMMENT:
 			return {
 				...state,
-				post: {
-					...state.post,
-					comments: state.post.comments.filter((comment) => comment._id === payload),
+				comment: {
+					...state.comment,
+					comments: state.comment.filter((item) => item._id === payload),
 				},
 				post_loading: false,
 			};
