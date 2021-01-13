@@ -9,10 +9,12 @@ import {
 	REMOVE_COMMENT,
 	GET_USERS_POSTS,
 	UPDATE_LIKES_ERROR,
+	GET_COMMENTS,
 } from '../Action/types';
 const initialState = {
 	posts: [],
 	post: null,
+	comments: [],
 	comment:null,
 	userPosts: [],
 	user_Posts_Loading: true,
@@ -71,19 +73,22 @@ export default function (state = initialState, action) {
 				...state,
 				error: payload,
 			};
+		case GET_COMMENTS:
+			return {
+				...state,
+				comments: payload,
+	
+			};
 		case ADD_COMMENT:
 			return {
 				...state,
-				comment: { ...state.comment, comment: payload },
+				comments: [payload, ...state.comments],
 				post_loading: false,
 			};
 		case REMOVE_COMMENT:
 			return {
 				...state,
-				comment: {
-					...state.comment,
-					comments: state.comment.filter((item) => item._id === payload),
-				},
+				comments: state.comments.filter((item) => item._id !== payload),
 				post_loading: false,
 			};
 		default:

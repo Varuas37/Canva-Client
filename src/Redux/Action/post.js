@@ -93,12 +93,13 @@ export const likePost=(id)=>async(dispatch)=>{
 //Get comments for a specific post
 export const getComments = (id) => async (dispatch) => {
 	try {
-		const res = await axios.post(`http://localhost:3300/api/post/comment/${id}`);
+		const res = await axios.get(`http://localhost:3300/api/post/comment/${id}`);
 
 		dispatch({
 			type: GET_COMMENTS,
 			payload: res.data,
 		});
+		return res.data
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
@@ -118,15 +119,16 @@ export const addComment = (id, text) => async (dispatch) => {
 		const res = await axios.post(`http://localhost:3300/api/post/comment/${id}`,params);
 
 		dispatch({
-			type: GET_COMMENTS,
+			type: ADD_COMMENT,
 			payload: res.data,
 		});
+		return res.data
 	} catch (err) {
 		dispatch({
 			type: COMMENT_ERR,
 			payload: err.response,
 		});
-		dispatch(setAlert('Error Loading Comments'));
+		dispatch(setAlert('Error adding Comments'));
 	}
 };
 

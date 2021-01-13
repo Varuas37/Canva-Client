@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
-
+import {Link, Redirect }from 'react-router-dom'
+// import {likeComment} from ""
 function PostItem({ data }) {
 	const [showMore, setShowMore] = useState(false);
+	
 	const [showComments, setShowComments] = useState(false);
 	const handleMore = () => {
 		setShowMore(!showMore);
 	};
 	return (
+		
 		data && (
 			<div className="bg-white overflow-hidden shadow rounded-lg">
 				<div className="px-4 py-5 sm:p-6 flex flex-row justify-between">
@@ -147,7 +150,7 @@ function PostItem({ data }) {
 							</svg>
 							<span className="sm:inline hidden">Like</span>
 						</div>
-						<div
+						<button
 							onClick={() => setShowComments(!showComments)}
 							className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
 						>
@@ -166,7 +169,7 @@ function PostItem({ data }) {
 								></path>
 							</svg>
 							<span className="sm:inline hidden">Comment</span>
-						</div>
+						</button>
 						<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
 							<svg
 								class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500 "
@@ -186,7 +189,7 @@ function PostItem({ data }) {
 						</div>
 					</div>
 				</div>
-				{showComments ? <CommentItem /> : null}
+				{showComments ? <CommentItem postID={data._id} setShowComments={setShowComments} /> : null}
 			</div>
 		)
 	);

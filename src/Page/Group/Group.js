@@ -6,6 +6,7 @@ import GrpHome from './GrpHome';
 import GrpResources from './GrpResources';
 import GrpNotes from './GrpNotes';
 import GrpStudy from './GrpStudy';
+import SinglePost from './SinglePost';
 
 const Group = ({ match }) => {
 	const { id } = useParams();
@@ -17,6 +18,7 @@ const Group = ({ match }) => {
 					<GroupNavbar id={id} />
 					<Switch>
 						<Route exact path={`/groups/:${id}`} component={GrpHome} />
+						<Route exact path={`/groups/post/:${id}`} component={SinglePost} />
 						<Route exact path={`/groups/:${id}/resources`} component={GrpResources} />
 						<Route exact path={`/groups/:${id}/notes`} component={GrpNotes} />
 						<Route exact path={`/groups/:${id}/study`} component={GrpStudy} />

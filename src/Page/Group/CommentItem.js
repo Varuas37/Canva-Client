@@ -1,8 +1,10 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-
-const SingleComment = ({data}) => {
+import { connect } from 'react-redux';
+import { addComment, getComments } from '../../Redux/Action/post';
+import Moment from "react-moment";
+const SingleComment = ({ data, user }) => {
 	return (
 		<>
 			<li>
@@ -10,27 +12,28 @@ const SingleComment = ({data}) => {
 					<div className="flex-shrink-0">
 						<img
 							className="h-10 w-10 rounded-full"
-							src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-							alt=""
+							// src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+							src={user.avatar }
+							alt=""       
 						/>
 					</div>
-					<div >
+					<div>
 						<div className="text-sm">
 							<a href="#" className="font-medium text-gray-900">
-								{/* {data.name} */}
-								Saurav Panthee
+								{user.name}
+								{/* Saurav Panthee */}
 							</a>
 						</div>
 						<div className="mt-1 text-sm text-gray-700">
 							<p>
-								{/* {data.text} */}
-								Hello 
+								{data.text}
+								{/* Hello */}
 							</p>
 						</div>
 						<div className="mt-2 text-sm space-x-2">
 							<span className="text-gray-500 font-medium">
 								{/* {data.time} */}
-								4d ago
+							 <Moment fromNow>{data.createdAt}</Moment>
 							</span>
 							<span className="text-gray-500 font-medium">&middot;</span>
 							<button type="button" className="text-gray-900 font-medium">
@@ -44,13 +47,28 @@ const SingleComment = ({data}) => {
 	);
 };
 
-function CommentItem(props) {
+function CommentItem({ addComment, postID, getComments, comment,auth ,setShowComments}) {
+	const [comments, setComments] = useState([]);
+	useEffect(() => {
+		getComments(postID).then((data)=>setComments(data));
+		
+	}, []);
 	const { register, handleSubmit, watch, errors } = useForm();
+
 	const createComment = useRef(null);
 	const refSubmit = useRef(null);
 	const onSubmit = async (data) => {
-		// addComment(postID, data);
-		createComment.current.value = '';
+		const { comment } = data;
+		if (createComment.current.value.length>0){
+const addedComment = await addComment(postID, createComment.current.value)
+setComments( oldComments=> [...oldComments,addedComment] );
+		createComment.current.value=''
+		}
+		else{
+			console.log("No text")
+		}
+		
+		
 	};
 
 	const [rows, setRows] = useState(3);
@@ -64,10 +82,9 @@ function CommentItem(props) {
 
 		// On pressing Shift and Enter
 		if (event.keyCode == 13 && event.shiftKey) {
-			//Stops enter from creating a new line
-			event.preventDefault();
-			refSubmit.current.click();
-			return true;
+			
+			createComment.current.rows = rows.toString();
+			setRows((prev) => prev + 1);
 		}
 
 		// On pressing BackSpace
@@ -84,8 +101,12 @@ function CommentItem(props) {
 
 		// On pressing Enter
 		if (event.keyCode == 13 && !event.shiftKey) {
-			createComment.current.rows = rows.toString();
-			setRows((prev) => prev + 1);
+
+			//Stops enter from creating a new line
+			event.preventDefault();
+			refSubmit.current.click();
+			return true;
+
 		}
 	};
 
@@ -96,11 +117,7 @@ function CommentItem(props) {
 					<div className="divide-y divide-gray-200">
 						<div className="px-4 py-6 sm:px-6">
 							<ul className="space-y-8">
-								<SingleComment/>
-								<SingleComment/>
-								<SingleComment/>
-								<SingleComment/>
-								<SingleComment/>
+								{comments && comments.map((item) => <SingleComment data={item} user={item.user} key={item._id} />)}
 							</ul>
 						</div>
 					</div>
@@ -109,17 +126,18 @@ function CommentItem(props) {
 							<div className="flex-shrink-0">
 								<img
 									className="h-10 w-10 rounded-full"
-									src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+									src={auth.user.avatar}
 									alt=""
 								/>
 							</div>
 							<div className="min-w-0 flex-1">
-								<form action="#">
+								<form onSubmit={handleSubmit(onSubmit)} noValidate>
 									<div>
 										<label for="comment" className="sr-only">
 											About
 										</label>
 										<textarea
+											ref={register({ required: true})}
 											ref={createComment}
 											id="comment"
 											name="comment"
@@ -132,6 +150,9 @@ function CommentItem(props) {
 											style={{ resize: 'none' }}
 										></textarea>
 									</div>
+										{errors.comment && errors.comment.type === 'required' && (
+											<p className="text-red-800 text-xs ">Text is required</p>
+										)}
 									<div className="mt-3 flex items-center justify-between">
 										<button
 											ref={refSubmit}
@@ -141,6 +162,7 @@ function CommentItem(props) {
 											Comment
 										</button>
 									</div>
+									<button onClick={()=>setShowComments(false)} className="text-sm text-gray-400">Hide All Comments</button>
 								</form>
 							</div>
 						</div>
@@ -151,6 +173,12 @@ function CommentItem(props) {
 	);
 }
 
-CommentItem.propTypes = {};
+CommentItem.propTypes = {
+	addComment: PropTypes.func.isRequired,
+};
 
-export default CommentItem;
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+	comment: state.post.comments,
+});
+export default connect(mapStateToProps, { addComment, getComments })(CommentItem);
