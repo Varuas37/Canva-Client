@@ -8,7 +8,7 @@ function CourseGroup({ courses: { course }, joinGroup }) {
 
 
 	const handleVisit = async() => {
-		await joinGroup(course.original_name, course.id, course.enrollments[0].type);
+		await joinGroup(course.course_code, course.id, course.enrollments[0].type);
 		
 		window.location = `/groups/${course.id}`
 	};

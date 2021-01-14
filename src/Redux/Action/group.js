@@ -16,7 +16,7 @@ export const joinGroup = (name, id, status) => async (dispatch) => {
 
 		const res = await axios.post('http://localhost:3300/api/groups/join', params);
 		console.log('I am in join group 🧑🏼‍🎄  ');
-		console.log(res.data);
+	
 		dispatch({
 			type: JOIN_GROUP,
 			payload: res.data,

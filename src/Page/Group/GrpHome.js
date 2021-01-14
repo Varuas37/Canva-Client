@@ -71,7 +71,7 @@ function GrpHome({ getGroup, groupData, match, post, getPosts }) {
 						</div>
 						<div className="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
 							<h1 className="text-2xl font-bold text-gray-900 truncate">
-								{groupData.group && groupData.group[0].title}
+								{groupData.group? groupData.group[0].title:null}
 							</h1>
 						</div>
 					</div>
