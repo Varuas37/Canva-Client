@@ -8,7 +8,7 @@ import GrpNotes from './GrpNotes';
 import GrpStudy from './GrpStudy';
 import SinglePost from './SinglePost';
 
-const Group = ({ match }) => {
+const Group = () => {
 	const { id } = useParams();
 
 	return (

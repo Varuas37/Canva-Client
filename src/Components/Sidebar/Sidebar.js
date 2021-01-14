@@ -25,7 +25,7 @@ function Sidebar({data}) {
 }
 
 Sidebar.propTypes = {
-
+data: PropTypes.object.isRequired,
 }
 
 export default Sidebar

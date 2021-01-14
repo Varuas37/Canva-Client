@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import CardWrapper from "../../Components/Cards/CardWrapper";
+
+
 import { Link } from "react-router-dom";
 
-const ToolRow = ({title,link,btnText})=>{
+const ToolRow = ({title,link})=>{
     return(
 
         <section>
@@ -17,7 +17,7 @@ const ToolRow = ({title,link,btnText})=>{
               <div className="ml-4 mt-2 flex-shrink-0">
                 <Link
                   type="button"
-                  to={`/${link}`}
+                  to={link}
                   className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                    
                 >
@@ -30,13 +30,13 @@ const ToolRow = ({title,link,btnText})=>{
     )
 }
 
-function Tools(props) {
+function Tools() {
   return (
     <>
       <div className="py-16 container m-auto px-6">
         <h1 className="text-4xl font-bold leading-tight mb-5"> Tools</h1>
-         <ToolRow title={"Excel Sheet Generator"} link={"ExcelCheck"}/>
-         <ToolRow title={"SAP User Info"} link={"SAP"}/>
+         <ToolRow title={"Excel Sheet Generator"} link={"/ExcelCheck"}/>
+         <ToolRow title={"SAP User Info"} link={"/SAP"}/>
 
       </div>
     </>

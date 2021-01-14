@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function TabItem(props) {
+
+function TabItem() {
     return (
         <div >
            
@@ -95,9 +95,6 @@ function TabItem(props) {
     )
 }
 
-TabItem.propTypes = {
-
-}
 
 export default TabItem
 

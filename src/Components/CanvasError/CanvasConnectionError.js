@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import CanvasAuthError from "./CanvasAuthError.png";
-function CanvasConnectionError(props) {
+function CanvasConnectionError() {
   return (
     <div
       style={{
@@ -29,6 +29,6 @@ function CanvasConnectionError(props) {
   );
 }
 
-CanvasConnectionError.propTypes = {};
+
 
 export default CanvasConnectionError;

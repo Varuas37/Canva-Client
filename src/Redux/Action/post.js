@@ -7,12 +7,12 @@ import {
 	UPDATE_LIKES,
 	DELETE_POST,
 	ADD_POST,
-	GET_POST,
+	
 	ADD_COMMENT,
 	REMOVE_COMMENT,
 	GET_COMMENTS,
 	COMMENT_ERR,
-	GET_USERS_POSTS,
+	
 	UPDATE_LIKES_ERROR,
 } from './types';
 
@@ -34,11 +34,7 @@ export const getPosts = (id) => async (dispatch) => {
 // Add a post to a group.
 export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 	try {
-		const config = {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		};
+	
 		const body = {
 			text: post,
 			postTo: id,
@@ -64,14 +60,15 @@ export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 
 export const deletePost=(id)=>async(dispatch)=>{
 	try{	
-		const res = await axios.post(`http://localhost:3300/api/post/${id}`)
+		await axios.post(`http://localhost:3300/api/post/${id}`)
 		dispatch({
 			type:DELETE_POST,
+			
 		})
 		dispatch(setAlert('Post Deleted'));
 
 	}catch(err){
-
+dispatch(setAlert('Error Deleting Post'));
 	}
 }
 
@@ -81,9 +78,13 @@ export const likePost=(id)=>async(dispatch)=>{
 			parentType:"Post"
 		}
 		const res = await axios.put(`http://localhost:3300/api/post/like/${id}`,params)
-	}catch(err){
 		dispatch({
 			type:UPDATE_LIKES,
+			payload:res.data,
+		})
+	}catch(err){
+		dispatch({
+			type:UPDATE_LIKES_ERROR,
 			payload:err.response,
 		})
 		dispatch(setAlert("Couldn't Like Post"));
@@ -155,7 +156,7 @@ export const likeComment=(id)=>async(dispatch)=>{
 		const params={
 			parentType:"Comment"
 		}
-		const res = await axios.put(`http://localhost:3300/api/post/like/${id}`,params)
+		await axios.put(`http://localhost:3300/api/post/like/${id}`,params)
 	}catch(err){
 		dispatch({
 			type:UPDATE_LIKES,

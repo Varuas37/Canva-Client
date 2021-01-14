@@ -18,7 +18,7 @@ function ExcelCheck ({
   assignExcelFile,
   downloadFile
 }) {
-  const { register, handleSubmit, watch, errors } = useForm()
+  const { register, handleSubmit,  errors } = useForm()
   let history = useHistory()
   const lottieContainer = useRef()
   const btnSubmit = useRef()

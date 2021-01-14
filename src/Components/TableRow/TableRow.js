@@ -1,5 +1,5 @@
 import React, { Fragment ,useState} from 'react'
-import PropTypes from 'prop-types'
+
 import iconStar from "./Star.png"
 import iconFilledStar from "./FilledStar.png"
 import Moment from "react-moment"
@@ -8,7 +8,7 @@ import imgDefault from "./default.png"
 import Skeleton from 'react-loading-skeleton';
 function TableRow({data}) {
 
-    const [favourite,setFavourite] = useState(data.is_favorite?iconFilledStar:iconStar)
+    const [favourite] = useState(data.is_favorite?iconFilledStar:iconStar)
     
     
     return (
@@ -53,9 +53,7 @@ function TableRow({data}) {
     )
 }
 
-TableRow.propTypes = {
 
-}
 
 export default TableRow
 

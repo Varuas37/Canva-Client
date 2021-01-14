@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+// import { useForm } from "react-hook-form";
 
-import PropTypes from 'prop-types'
 
-function CanvasIntegration(props) {
-    const { register, handleSubmit, errors } = useForm();
-    const onSubmit=(data)=>{
-        console.log(data);
-    }
+
+
+function CanvasIntegration() {
+    // const { register, handleSubmit, errors } = useForm();
+    // const onSubmit=(data)=>{
+    //     console.log(data);
+    // }
     return (
         <Fragment>
              <div class='space-y-6 sm:px-6 lg:px-0 lg:col-span-9'>

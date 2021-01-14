@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+
 
 function ListWrapper(props) {
   return (
@@ -15,6 +15,6 @@ function ListWrapper(props) {
   );
 }
 
-ListWrapper.propTypes = {};
+
 
 export default ListWrapper;

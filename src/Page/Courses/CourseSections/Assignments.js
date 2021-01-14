@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Assignments(props) {
+
+function Assignments() {
     return (
         <div>
             
@@ -10,9 +10,6 @@ function Assignments(props) {
     )
 }
 
-Assignments.propTypes = {
-
-}
 
 export default Assignments
 

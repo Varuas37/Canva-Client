@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Page/Home/Home';
 import CanvasLogin from './Page/CanvasAuth/Login/CanvasLogin';
 
@@ -24,8 +24,6 @@ import Tools from './Page/Tools/Tools';
 import ExcelCheck from './Page/ExcelCheck/ExcelCheck';
 import CourseHome from './Page/Courses/CourseHome';
 import Group from './Page/Group/Group';
-import CourseGroup from './Page/Courses/CourseSections/CourseGroup';
-import GrpHome from './Page/Group/GrpHome';
 import LogRocket from 'logrocket';
 
 if (localStorage.token) {

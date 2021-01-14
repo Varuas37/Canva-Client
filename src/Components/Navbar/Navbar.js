@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { mainLogo } from '../../Static/Images/images';
-import logo from './logo.png';
+
+
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -83,7 +83,7 @@ const Navbar = ({ auth, logout, todo, disconnectCanvas }) => {
 								<NavLink to="/">
 									<div className="flex-shrink-0">
 										<svg
-											class="w-10 h-10 text-white"
+											className="w-10 h-10 text-white"
 											fill="none"
 											stroke="currentColor"
 											viewBox="0 0 24 24"

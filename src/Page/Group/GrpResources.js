@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function GrpResources(props) {
+
+function GrpResources() {
     return (
         <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
             Resources
@@ -9,9 +9,7 @@ function GrpResources(props) {
     )
 }
 
-GrpResources.propTypes = {
 
-}
 
 export default GrpResources
 

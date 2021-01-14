@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
+
 function GroupNavbar({ id }) {
 	// const {id} = useParams();
 	return (
@@ -109,6 +109,8 @@ function GroupNavbar({ id }) {
 	);
 }
 
-GroupNavbar.propTypes = {};
+GroupNavbar.propTypes = {
+	id:PropTypes.string.isRequired,
+};
 
 export default GroupNavbar;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Fragment } from 'react';
+
 import { setAlert } from './alert';
 import {
 	DOWNLOAD_FILE,
@@ -14,11 +14,11 @@ import {
 
 export const uploadFile = (formData) => async (dispatch) => {
 	try {
-		const config = {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		};
+		// const config = {
+		// 	headers: {
+		// 		'Content-Type': 'multipart/form-data',
+		// 	},
+		// };
 		setTimeout(() => {
 			console.log("Uploading")
 		}, 10000);

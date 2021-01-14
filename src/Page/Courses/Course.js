@@ -13,7 +13,7 @@ import imgNoAnnoucemnts from './Announcement.png';
 import Skeleton from 'react-loading-skeleton';
 
 const Course = ({
-	match,
+	
 	courses: { course, courseLoading, todo_loading, todo, announcement },
 
 	getCourse,
@@ -22,7 +22,7 @@ const Course = ({
 	getSubmissions,
 	submission: { submission_loading, submissions },
 	auth,
-	canvasAuth,
+	
 }) => {
 	if(!auth.user.canvasConnected){
 		window.location.replace('/canvasAuth')

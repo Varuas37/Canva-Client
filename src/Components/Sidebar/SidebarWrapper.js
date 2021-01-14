@@ -1,18 +1,13 @@
-import React, { Fragment,useState,useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment,useState } from "react";
 
-function SidebarWrapper({props,toggle,children,setToggle,setHeader,current} ) {
-  // useEffect(() => {
-  //   console.log(current)
-  // },[current])
-   const [selectedClass, setSelectedClass] = useState("border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700")
-   const [teaching,setTeachingClass] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
-   const [student,setStudentClass] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
+
+function SidebarWrapper({toggle,children,setToggle,setHeader,current} ) {
+
+   const [selectedClass] = useState("border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700")
+   const [teaching] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
+   const [student] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
   
-  const handleClick = (data)=>{
-    setHeader(data);
-    
-  }
+  
 
 
    return toggle? (
@@ -71,13 +66,7 @@ function SidebarWrapper({props,toggle,children,setToggle,setHeader,current} ) {
                      >
                         Teaching
                       </a>
-                      {/* <a
-                        href="#"
-                        class="whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
-                        onClick={()=>setHeader("announcement")}
-                      >
-                        Annoucements
-                      </a> */}
+                    
                     </nav>
 
 
@@ -93,7 +82,7 @@ function SidebarWrapper({props,toggle,children,setToggle,setHeader,current} ) {
   ):null;
 }
 
-SidebarWrapper.propTypes = {};
+
 
 export default SidebarWrapper;         
 

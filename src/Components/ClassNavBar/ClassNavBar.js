@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink,useLocation } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { NavLink,useLocation } from 'react-router-dom';
 function ClassNavBar({ id }) {
 	const location = useLocation();
 	if (location.pathname.match(/groups/)){
@@ -113,6 +112,8 @@ function ClassNavBar({ id }) {
 	);
 }
 
-ClassNavBar.propTypes = {};
+ClassNavBar.propTypes = {
+	id: PropTypes.number.isRequired,
+};
 
 export default ClassNavBar;

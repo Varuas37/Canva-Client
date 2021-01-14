@@ -47,7 +47,9 @@ function SidebarItem({title,dueDate,description}) {
 }
 
 SidebarItem.propTypes = {
-
+title: PropTypes.string.isRequired,
+description: PropTypes.string.isRequired,
+dueDate: PropTypes.string.isRequired,
 }
 
 export default SidebarItem

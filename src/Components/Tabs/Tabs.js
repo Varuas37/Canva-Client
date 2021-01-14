@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
-const Tabs=(props)=> {
+
+const Tabs=()=> {
     return (
         <Fragment>
             <div>
@@ -37,9 +37,6 @@ const Tabs=(props)=> {
     )
 }
 
-Tabs.propTypes = {
-
-}
 
 export default Tabs
 

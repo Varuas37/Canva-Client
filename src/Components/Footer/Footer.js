@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import {mainLogo} from "../../Static/Images/images"
+
 export default function Footer() {
     return (
         <Fragment>

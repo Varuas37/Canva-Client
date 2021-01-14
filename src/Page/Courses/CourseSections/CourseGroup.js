@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+
 import { joinGroup } from '../../../Redux/Action/group';
 import imgDefault from "../default.png"
-function CourseGroup({ courses: { course }, joinGroup ,auth}) {
+function CourseGroup({ courses: { course }, joinGroup }) {
 
-	const history = useHistory();
+
 	const handleVisit = async() => {
 		await joinGroup(course.original_name, course.id, course.enrollments[0].type);
-		// history.push(`/groups/:id`);
-		// history.push(`/groups/${course.id}`);
+		
 		window.location = `/groups/${course.id}`
 	};
 	return (
@@ -118,7 +117,7 @@ CourseGroup.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	auth: state.auth,
+	
 	courses: state.courses,
 });
 export default connect(mapStateToProps, { joinGroup })(CourseGroup);

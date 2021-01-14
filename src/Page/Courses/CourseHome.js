@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, useParams } from 'react-router-dom';
 import React from 'react';
 import ClassNavBar from '../../Components/ClassNavBar/ClassNavBar';
 import history from '../../utils/history';
@@ -7,9 +7,9 @@ import Announcements from './CourseSections/Announcements';
 import Assignments from './CourseSections/Assignments';
 import CourseGroup from './CourseSections/CourseGroup';
 import PrivateRoute from '../../Components/routing/PrivateRoute';
-import Group from '../Group/Group';
 
-const CourseHome = ({ match }) => {
+
+const CourseHome = () => {
 	const { id } = useParams();
 	return (
 		<Router history={history}>

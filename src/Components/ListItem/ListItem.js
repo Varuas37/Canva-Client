@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
+
 import React,{Fragment,useState} from 'react'
 import Moment from 'react-moment'
 import imgDropdown from "./dropdown.png"
 import imgDropup from "./dropup.png"
 var parse = require('html-react-parser');
 
-function ListItem({data,title,subtitle,subtitleText,calendar,html_url,type,needsgrading,message}) {
+function ListItem({title,subtitle,subtitleText,calendar,html_url,type,needsgrading,message}) {
     
   const [showDetails,setShowDetails]  = useState(true)
   return (
@@ -75,9 +75,7 @@ function ListItem({data,title,subtitle,subtitleText,calendar,html_url,type,needs
     )
 }
 
-ListItem.propTypes = {
 
-}
 
 export default ListItem
 

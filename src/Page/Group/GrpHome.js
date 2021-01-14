@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useParams } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import PostItem from './PostItem';
 import CreatePost from './CreatePost';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getGroup } from '../../Redux/Action/group';
 import { getPosts } from '../../Redux/Action/post';
 function GrpHome({ getGroup, groupData, match, post, getPosts }) {
-	const [id, setID] = useState(match.params[match.params[Object.keys(match.params)[0]]]);
+	const [id] = useState(match.params[match.params[Object.keys(match.params)[0]]]);
 	useEffect(() => {
         console.log(id);
 		getGroup(parseInt(id));

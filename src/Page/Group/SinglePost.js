@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import PostItem from './PostItem'
 
-function SinglePost(props) {
+function SinglePost() {
     
     return (
         <div>
@@ -12,9 +12,7 @@ function SinglePost(props) {
     )
 }
 
-SinglePost.propTypes = {
 
-}
 
 export default SinglePost
 

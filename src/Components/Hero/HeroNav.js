@@ -1,7 +1,5 @@
 import React,{Fragment} from 'react'
 import { Link } from "react-router-dom";
-
-import { mainLogo, heroImage } from "../../Static/Images/images";
 export default function HeroNav() {
     return (
         <Fragment>

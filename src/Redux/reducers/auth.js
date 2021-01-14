@@ -7,7 +7,7 @@ import {
   LOGIN_FAILED,
   LOGOUT,
   RESET_PASSWORD,
-  RESET_PASSWORD_FAILED,
+  
 } from "../Action/types";
 
 const initialState = {

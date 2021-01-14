@@ -3,7 +3,7 @@ import Features from '../../Components/Features/Features'
 import Footer from '../../Components/Footer/Footer'
 import Hero from '../../Components/Hero/Hero'
 import {connect} from 'react-redux'
-import {Link, Redirect} from "react-router-dom";
+import { Redirect} from "react-router-dom";
 const Home=({isAuthenticated})=> {
     if (isAuthenticated) {
         return <Redirect to="/Dashboard" />;

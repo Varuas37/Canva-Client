@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
-import Alert from "../../Components/Alert/Alert";
+
 import PropTypes from "prop-types";
 import { login } from "../../Redux/Action/auth";
 

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
-function Billing (props) {
+
+function Billing () {
   return (
     <Fragment>
       {/* <!-- Payment details --> */}

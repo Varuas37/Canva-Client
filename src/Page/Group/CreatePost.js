@@ -7,7 +7,7 @@ import { addPost } from '../../Redux/Action/post';
 function CreatePost({ id, addPost, groupID }) {
 	const { register, handleSubmit, errors } = useForm();
 	const [modalOpen, setModalOpen] = useState(false);
-	const [showMore, setShowMore] = useState(false);
+	
 
 	const onSubmit = (data) => {
 		const { text, tags } = data;
@@ -18,9 +18,7 @@ function CreatePost({ id, addPost, groupID }) {
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
 	};
-	const handleMore = () => {
-		setShowMore(!showMore);
-	};
+
 	return (
 		<div>
 			<div className="bg-white overflow-hidden shadow rounded-lg">
@@ -118,8 +116,14 @@ function CreatePost({ id, addPost, groupID }) {
 	);
 }
 
-CreatePost.propTypes = {};
+CreatePost.propTypes = {
+	id:PropTypes.string.isRequired,
+	addPost:PropTypes.func.isRequired,
+	groupID:PropTypes.string.isRequired,
+};
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	auth:state.auth,
+});
 
 export default connect(mapStateToProps, { addPost })(CreatePost);

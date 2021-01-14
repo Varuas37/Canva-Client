@@ -141,7 +141,9 @@ function Account({ auth }) {
 	);
 }
 
-Account.propTypes = {};
+Account.propTypes = {
+	auth:PropTypes.object.isRequired,
+};
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 });

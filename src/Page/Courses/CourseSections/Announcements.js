@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Announcements(props) {
+
+function Announcements() {
     return (
         <div>
             Annoucements
@@ -9,9 +9,7 @@ function Announcements(props) {
     )
 }
 
-Announcements.propTypes = {
 
-}
 
 export default Announcements
 

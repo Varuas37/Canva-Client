@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '../../Components/TableRow/TableRow';
 import { connect } from 'react-redux';
@@ -8,15 +8,15 @@ import { useStickyState } from '../../Components/StickyState/StickyState';
 import Skeleton from 'react-loading-skeleton';
 import CanvasConnectionError from '../../Components/CanvasError/CanvasConnectionError';
 
-const Courses = ({ auth, getCourses, courses: { courses_loading, courses }, canvasAuth }) => {
+const Courses = ({ auth, getCourses, courses: { courses } }) => {
 	useEffect(() => {
 		getCourses();
 	}, []);
 
 	const [filter, setFilter] = useStickyState('student', 'selectedCourse');
 
-	var startTerm = new Date();
-	var d = new Date();
+	
+	
 	if(!auth.user.canvasConnected){
 		window.location.replace('/canvasAuth')
 	  }
@@ -79,6 +79,7 @@ const Courses = ({ auth, getCourses, courses: { courses_loading, courses }, canv
 											</tr>
 										</thead>
 										<tbody class="bg-white divide-y divide-gray-200">
+											{/* Span cannot appear as a child of Tbody error . Need to fix this. */}
 											{courses && courses.length > 0 ? (
 												courses.map((course) =>
 													!course.access_restricted_by_date &&

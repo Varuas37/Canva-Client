@@ -47,18 +47,18 @@ const SingleComment = ({ data, user }) => {
 	);
 };
 
-function CommentItem({ addComment, postID, getComments, comment,auth ,setShowComments}) {
+function CommentItem({ addComment, postID, getComments, auth ,setShowComments}) {
 	const [comments, setComments] = useState([]);
 	useEffect(() => {
 		getComments(postID).then((data)=>setComments(data));
 		
 	}, []);
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register, handleSubmit,  errors } = useForm();
 
 	const createComment = useRef(null);
 	const refSubmit = useRef(null);
-	const onSubmit = async (data) => {
-		const { comment } = data;
+	const onSubmit = async () => {
+		
 		if (createComment.current.value.length>0){
 const addedComment = await addComment(postID, createComment.current.value)
 setComments( oldComments=> [...oldComments,addedComment] );

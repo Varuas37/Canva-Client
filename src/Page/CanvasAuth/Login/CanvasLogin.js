@@ -1,17 +1,16 @@
-import React, { Fragment,useEffect } from "react";
+import React, { Fragment } from "react";
 import { mainLogo } from "../../../Static/Images/images";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {connect} from "react-redux"
-import {setAlert} from "../../../Redux/Action/alert"
 import {connectToCanvas} from "../../../Redux/Action/canvasauth";
 import PropTypes from 'prop-types'
-import store from "../../../store";
-import { loadCanvasUser } from "../../../Redux/Action/canvasauth";
 
 
 
-const CanvasLogin = ({setAlert,connectToCanvas,isAuthenticated,auth,user}) => {
+
+
+const CanvasLogin = ({connectToCanvas,user}) => {
 
   const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
@@ -162,7 +161,6 @@ CanvasLogin.propTypes = {
 }
 const mapStateToProps = (state) => ({
   canvasAuth: state.canvasauth,
-  auth: state.auth,
   user: state.auth.user,
 });
-export default connect(mapStateToProps,{setAlert,connectToCanvas})(CanvasLogin);
+export default connect(mapStateToProps,{connectToCanvas})(CanvasLogin);

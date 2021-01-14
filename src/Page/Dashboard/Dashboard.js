@@ -1,26 +1,26 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, {  useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Navbar from '../../Components/Navbar/Navbar';
+
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
 import Cards from '../../Components/Cards/Cards';
-import { getCourses, getFavCourses } from '../../Redux/Action/courses';
+import { getFavCourses } from '../../Redux/Action/courses';
 import { getUserTodo } from '../../Redux/Action/todo';
-import Sidebar from '../../Components/Sidebar/Sidebar';
+
 import CardWrapper from '../../Components/Cards/CardWrapper';
-import SidebarWrapper from '../../Components/Sidebar/SidebarWrapper';
-import SidebarItem from '../../Components/Sidebar/SidebarItem';
+
+
 import Skeleton from 'react-loading-skeleton';
 import CanvasConnectionError from '../../Components/CanvasError/CanvasConnectionError';
 import LogRocket from 'logrocket';
 const Dashboard = ({
 	auth,
-	getCourses,
+	
 	getFavCourses,
-	courses: { course_loading, favouriteCourse, todo },
+	courses: {  favouriteCourse },
 	getUserTodo,
-	canvasAuth,
+	
 }) => {
 	if (!auth.isAuthenticated) {
 		<Redirect to="/"></Redirect>;
@@ -41,11 +41,8 @@ const Dashboard = ({
 		getFavCourses();
 	}, []);
 
-	const [toggleSidebar, setToggleSidebar] = useState(true);
-	const handleToggle = () => {
-		console.log(toggleSidebar);
-		setToggleSidebar(!toggleSidebar);
-	};
+	
+
 	if (!auth.isAuthenticated) {
 		<Redirect to="/login" />;
 	}
@@ -54,7 +51,7 @@ const Dashboard = ({
 		window.location.replace('/canvasAuth');
 	}
 
-	var d = new Date();
+	
 
 	return (
 		auth.isAuthenticated && (

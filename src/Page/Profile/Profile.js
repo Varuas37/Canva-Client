@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import Skeleton from 'react-loading-skeleton';
-import auth from '../../Redux/reducers/auth';
 
-
-const Profile = ({ auth }) => {
+const Profile = ({auth}) => {
 	return !auth.loading && (
 		<Fragment>
 			<div className="container mx-auto sm:px-6 lg:px-8 ">

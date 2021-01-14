@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+
 import { Link } from 'react-router-dom'
 
-function SettingNavbar (props) {
+function SettingNavbar () {
   return (
     <Fragment>
      
@@ -108,6 +108,6 @@ function SettingNavbar (props) {
   )
 }
 
-SettingNavbar.propTypes = {}
+
 
 export default SettingNavbar

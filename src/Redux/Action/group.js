@@ -1,16 +1,12 @@
 import axios from 'axios';
-import { Fragment } from 'react';
+
 import { setAlert } from './alert';
-import { JOIN_GROUP, GET_GROUP, GET_GROUP_ERR, CLEAR_GROUP } from './types';
+import { JOIN_GROUP, GET_GROUP_ERR } from './types';
 
 export const joinGroup = (name, id, status) => async (dispatch) => {
 	try {
 		console.log('I am in join group 🧑🏼‍🎄  ');
-		const config = {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		};
+	
 		const params = {
 			groupName: name,
 			groupID: id,

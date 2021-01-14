@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import TableRow from "../TableRow/TableRow";
 import "./Cards.css";
 import imgDefault from "./default.png";
 const Cards = ({ data }) => {

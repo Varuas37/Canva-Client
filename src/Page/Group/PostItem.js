@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
 import CommentItem from './CommentItem';
-import {Link, Redirect }from 'react-router-dom'
+
 // import {likeComment} from ""
 function PostItem({ data }) {
 	const [showMore, setShowMore] = useState(false);
@@ -195,6 +195,6 @@ function PostItem({ data }) {
 	);
 }
 
-PostItem.propTypes = {};
+
 
 export default PostItem;

@@ -18,5 +18,7 @@ function Header({data,children}) {
     </header>
   </Fragment>;
 }
-
+Header.propTypes = {
+data:PropTypes.object.isRequired,
+};
 export default Header;

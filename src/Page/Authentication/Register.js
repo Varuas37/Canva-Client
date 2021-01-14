@@ -2,12 +2,12 @@ import React,{Fragment} from "react";
 import { connect } from "react-redux";
 import { Link, Redirect,useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import Alert from "../../Components/Alert/Alert";
+
 import PropTypes from "prop-types";
 import { registerUser } from "../../Redux/Action/auth";
 
 const Register = ({ registerUser, isAuthenticated }) => {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   const onSubmit = async (data) => {
     const { name, lastname, email, password, password2 } = data;
