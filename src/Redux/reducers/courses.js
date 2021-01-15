@@ -1,5 +1,5 @@
 import {
-   GET_COURSES,COURSES_ERROR,GET_FAVOURITE_COURSES,GET_FAVOURITE_COURSES_ERR,GET_COURSE,COURSE_ERROR,TODO_ERROR,GET_TODO, ANNOUNCEMENT_ERROR, GET_ANNOUNCEMENT,
+   GET_COURSES,COURSES_ERROR,GET_FAVOURITE_COURSES,GET_FAVOURITE_COURSES_ERR,GET_COURSE,COURSE_ERROR,TODO_ERROR,GET_TODO, ANNOUNCEMENT_ERROR, GET_ANNOUNCEMENT,GET_ASSIGNMENT,GET_ASSIGNMENT_ERR,GET_ASSIGNMENTS
   } from "../Action/types";
   
   const initialState = {
@@ -10,6 +10,9 @@ import {
     favouriteCourse:[],
     favCourseLoading:false,
     courseName:[],
+    assignments:[],
+    assignment:null,
+    assignment_loading:true,
     courses_loading: true,
     courseLoading:true,
     todo:[],
@@ -43,6 +46,19 @@ import {
                 announcement:payload.data,
                 announcement_loading:false
             }
+        case GET_ASSIGNMENTS:
+            return{
+                ...state,
+                assignments:payload.data,
+                assignment_loading:false,
+            }
+        case GET_ASSIGNMENT:
+            return {
+                ...state,
+                assignment:payload.data,
+                assignment_loading:false,
+            }
+        
         case TODO_ERROR:
             return{
                 ...state,
@@ -52,6 +68,7 @@ import {
         case ANNOUNCEMENT_ERROR:
         case COURSE_ERROR:
         case GET_FAVOURITE_COURSES_ERR:
+        case GET_ASSIGNMENT_ERR:
             return{
                 ...state,
                 courses_loading:true, 

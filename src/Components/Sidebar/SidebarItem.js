@@ -23,9 +23,9 @@ function SidebarItem({title,dueDate,description}) {
                   </span> */}
                   <div class="ml-4 truncate">
                     <div class="text-sm leading-5 font-medium text-gray-900 truncate">{title}</div>
-                    <div class="text-sm leading-5 text-gray-500 truncate"><Moment from={dueDate}></Moment></div>
+                    <div class="text-sm leading-5 text-gray-500 truncate">Due : <Moment fromNow>{dueDate}</Moment> (<Moment format="dddd, MMMM DD">{dueDate}</Moment>)</div>
                   </div>
-                 
+    
                 </div>
               
               </a>

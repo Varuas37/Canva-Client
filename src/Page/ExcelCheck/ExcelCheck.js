@@ -37,6 +37,7 @@ function ExcelCheck ({
 	console.log(data);
     const { excelPassword } = data
     setClickedSubmit(true)
+
     lottie.loadAnimation({
       container: lottieContainer.current,
       renderer: 'svg',
@@ -52,7 +53,7 @@ function ExcelCheck ({
     await assignExcelFile(uploadedFile.name, excelPassword)
 	setTimeout(() => {
 		history.push("/");
-	}, 3000);
+	}, 4000);
   }
   return (
     <>
@@ -63,7 +64,7 @@ function ExcelCheck ({
         >
           <h1>Posting Data</h1>
           Animated by:{' '}
-          <a href='https://lottiefiles.com/Mikhail_V94'>Mikhail Voloshin</a>
+          <a href='https://lottiefiles.com/jeevan'>Jeevan Prakash</a>
           <div className='lottieContainer' ref={lottieContainer}></div>
         </div>
       ) : (
@@ -200,7 +201,7 @@ function ExcelCheck ({
                         {!favCourseLoading ? (
                           favouriteCourse.map(
                             item =>
-                              item.enrollments[0].type == 'teacher' && (
+                              item.enrollments[0].type !== 'student' && (
                                 <option key={item.id} value={item.id}>
                                   {item.name}
                                 </option>

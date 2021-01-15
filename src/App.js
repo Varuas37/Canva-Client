@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {ErrorBoundary} from 'react-error-boundary'
+
 import Home from './Page/Home/Home';
 import CanvasLogin from './Page/CanvasAuth/Login/CanvasLogin';
 
@@ -25,6 +27,7 @@ import ExcelCheck from './Page/ExcelCheck/ExcelCheck';
 import CourseHome from './Page/Courses/CourseHome';
 import Group from './Page/Group/Group';
 import LogRocket from 'logrocket';
+import NotFound from './Page/404/NotFound';
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -42,8 +45,16 @@ const App = () => {
 		store.dispatch(loadUser());
 	}, []);
 	return (
+		<ErrorBoundary
+    FallbackComponent={ErrorFallback}
+	onError={myErrorHandler}
+    onReset={() => {
+      // reset the state of your app so the error doesn't happen again
+    }}
+  >
 		<Provider store={store}>
 			<Router history={history}>
+			
 				<Alert />
 				<Navbar></Navbar>
 				<Switch>
@@ -62,10 +73,32 @@ const App = () => {
 					<Route exact path="/pricing/" component={Pricing} />
 					<PrivateRoute exact path="/tools" component={Tools} />
 					<PrivateRoute exact path="/excelCheck" component={ExcelCheck} />
+					<Route component={NotFound} />
+
 				</Switch>
+				
 			</Router>
 		</Provider>
+		 </ErrorBoundary>
 	);
 };
 
 export default App;
+
+
+
+// 
+const myErrorHandler = (error: Error, info: {componentStack: string}) => {
+  // Do something with the error
+  // E.g. log to an error logging client here
+  console.log(error,info)
+}
+function ErrorFallback({error,resetErrorBoundary}) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+     <p>{error.message}</p>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  )
+}

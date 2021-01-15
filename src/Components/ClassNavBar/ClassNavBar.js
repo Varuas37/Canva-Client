@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink,useLocation } from 'react-router-dom';
-function ClassNavBar({ id }) {
+import { NavLink, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
+function ClassNavBar({ id, courseData }) {
 	const location = useLocation();
-	if (location.pathname.match(/groups/)){
+	if (location.pathname.match(/groups/)) {
 		return null;
-	  }
+	}
 	// const {id} = useParams();
 	return (
 		<Fragment>
@@ -14,7 +15,8 @@ function ClassNavBar({ id }) {
 					{/* <!-- Current: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" --> */}
 					<NavLink
 						activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
-						exact to={`/course/${id}`}
+						exact
+						to={`/course/${id}`}
 						className="group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 						aria-current="page"
 					>
@@ -40,7 +42,7 @@ function ClassNavBar({ id }) {
 
 					<NavLink
 						activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
-						to={`/course/${id}/announcement`}
+						to={`/course/${id}/grades`}
 						className="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 					>
 						{/* <!-- Heroicon name: key --> */}
@@ -55,10 +57,10 @@ function ClassNavBar({ id }) {
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+								d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
 							></path>
 						</svg>
-						<span className="truncate"> Annoucements </span>
+						<span className="truncate"> Grades </span>
 					</NavLink>
 
 					<NavLink
@@ -84,9 +86,9 @@ function ClassNavBar({ id }) {
 						<span className="truncate"> Assignments </span>
 					</NavLink>
 					<NavLink
-					
 						activeClassName="text-indigo-700 shadow-sm hover:text-gray-700 hover:bg-white "
-						push to={`/course/${id}/group`}
+						push
+						to={`/course/${id}/group`}
 						className="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 					>
 						{/* <!-- Heroicon name: view-grid-add --> */}
@@ -106,6 +108,32 @@ function ClassNavBar({ id }) {
 						</svg>
 						<span className="truncate">Group</span>
 					</NavLink>
+					{!courseData.courseLoading && courseData.course.enrollments[0].type !== 'student' ? (
+						<NavLink
+							activeClassName="text-indigo-700 shadow-sm hover:text-gray-700 hover:bg-white "
+							push
+							to={`/course/${id}/reports`}
+							className="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+						>
+							<svg
+								className="group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+								></path>
+							</svg>
+
+							<span className="truncate">Reported posts</span>
+						</NavLink>
+					) : null}
+					{console.log(courseData)}
 				</nav>
 			</aside>
 		</Fragment>
@@ -114,6 +142,9 @@ function ClassNavBar({ id }) {
 
 ClassNavBar.propTypes = {
 	id: PropTypes.string.isRequired,
+	courseData: PropTypes.object.isRequired,
 };
-
-export default ClassNavBar;
+const mapStatesToProps = (state) => ({
+	courseData: state.courses,
+});
+export default connect(mapStatesToProps, null)(ClassNavBar);

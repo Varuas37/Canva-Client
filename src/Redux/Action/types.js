@@ -81,3 +81,7 @@ export const FOLLOW_USER = "FOLLOW_USER"
 export const UNFOLLOW_USER = "UNFOLOW_USER"
 export const FOLLOW_ERR = "FOLLOW_ERR"
 
+// Get Assignments
+export const GET_ASSIGNMENTS = "GET_ASSIGNMENTS"
+export const GET_ASSIGNMENT = "GET_ASSIGNMENT"
+export const GET_ASSIGNMENT_ERR = "GET_ASSIGNMENT_ERR"

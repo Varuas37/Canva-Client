@@ -5,13 +5,15 @@ import CommentItem from './CommentItem';
 // import {likeComment} from ""
 function PostItem({ data }) {
 	const [showMore, setShowMore] = useState(false);
-	
+
 	const [showComments, setShowComments] = useState(false);
 	const handleMore = () => {
 		setShowMore(!showMore);
 	};
+	const handleComment = () => {
+		setShowComments(!showComments);
+	};
 	return (
-		
 		data && (
 			<div className="bg-white overflow-hidden shadow rounded-lg">
 				<div className="px-4 py-5 sm:p-6 flex flex-row justify-between">
@@ -129,11 +131,11 @@ function PostItem({ data }) {
 					</div>
 				</div>
 				<div className="px-4 py-4 sm:px-4">
-					<div className="col-span-12 sm:col-span-6" style={{whiteSpace:'pre-wrap'}}>
+					<div className="col-span-12 sm:col-span-6" style={{ whiteSpace: 'pre-wrap' }}>
 						<p> {data.text}</p>
 					</div>
 					<div className="my-3 sm:yx-3 sm:my-2 sm:py-6 flex flex-row justify-between">
-						<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2 w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
+						<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
 							<svg
 								class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500"
 								fill="none"
@@ -151,7 +153,7 @@ function PostItem({ data }) {
 							<span className="sm:inline hidden">Like</span>
 						</div>
 						<button
-							onClick={() => setShowComments(!showComments)}
+							onClick={handleComment}
 							className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
 						>
 							<svg
@@ -194,7 +196,5 @@ function PostItem({ data }) {
 		)
 	);
 }
-
-
 
 export default PostItem;

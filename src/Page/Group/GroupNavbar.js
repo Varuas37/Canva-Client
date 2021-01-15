@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {  NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function GroupNavbar({ id }) {
 	// const {id} = useParams();
 	return (
 		<Fragment>
-			<aside className="py-6 px-2 shadow h-screen	 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
+			<aside className="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3 ">
 				<nav className="space-y-1">
 					{/* <!-- Current: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" --> */}
 					<NavLink
 						activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
+						exact
 						to={`/groups/${id}`}
 						className="group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 						aria-current="page"
@@ -18,7 +19,7 @@ function GroupNavbar({ id }) {
 						{/* <!-- Current: "text-indigo-500 group-hover:text-indigo-500", Default: "text-gray-400 group-hover:text-gray-500" --> */}
 
 						<svg
-							className="text-indego-500 group-hover:text-indigo-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+							className="group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -35,13 +36,13 @@ function GroupNavbar({ id }) {
 					</NavLink>
 
 					<NavLink
-					activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
+						activeClassName="text-indigo-700 shadow-sm hover:text-gray-700 hover:bg-white "
 						to={`/groups/${id}/resources`}
 						className="group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 					>
 						{/* <!-- Heroicon name: library --> */}
 						<svg
-							className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+							className="group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -58,13 +59,13 @@ function GroupNavbar({ id }) {
 					</NavLink>
 
 					<NavLink
-					activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
+						activeClassName="text-indigo-700 shadow-sm hover:text-gray-700 hover:bg-white "
 						to={`/groups/${id}/notes`}
 						className="group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 					>
 						{/* <!-- Heroicon name: credit-card --> */}
 						<svg
-							className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+							className="group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -80,7 +81,7 @@ function GroupNavbar({ id }) {
 						<span className="truncate"> Notes </span>
 					</NavLink>
 					<NavLink
-					activeClassName="text-indigo-700  shadow-sm  hover:text-gray-700 hover:bg-white "
+						activeClassName="text-indigo-700 shadow-sm hover:text-gray-700 hover:bg-white "
 						to={`/groups/${id}/study`}
 						// className="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
 						className="group rounded-md px-3 py-2 flex items-center text-sm font-medium"
@@ -88,7 +89,7 @@ function GroupNavbar({ id }) {
 						{/* <!-- Heroicon name: users --> */}
 
 						<svg
-							className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+							className="group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -110,7 +111,7 @@ function GroupNavbar({ id }) {
 }
 
 GroupNavbar.propTypes = {
-	id:PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export default GroupNavbar;

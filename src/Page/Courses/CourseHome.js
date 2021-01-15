@@ -3,10 +3,11 @@ import React from 'react';
 import ClassNavBar from '../../Components/ClassNavBar/ClassNavBar';
 import history from '../../utils/history';
 import Course from './Course';
-import Announcements from './CourseSections/Announcements';
+import Grades from './CourseSections/Grades';
 import Assignments from './CourseSections/Assignments';
 import CourseGroup from './CourseSections/CourseGroup';
 import PrivateRoute from '../../Components/routing/PrivateRoute';
+import ReportedPost from './CourseSections/ReportedPosts';
 
 
 const CourseHome = () => {
@@ -18,9 +19,10 @@ const CourseHome = () => {
 					<ClassNavBar id={id} />
 					<Switch>
 						<PrivateRoute exact path="/course/:id" component={Course} />
-						<PrivateRoute exact path="/course/:id/announcement" component={Announcements} />
+						<PrivateRoute exact path="/course/:id/grades" component={Grades} />
 						<PrivateRoute exact path="/course/:id/assignment" component={Assignments} />
 						<PrivateRoute exact path="/course/:id/group" component={CourseGroup} />
+						<PrivateRoute exact path="/course/:id/reports" component={ReportedPost} />
 					</Switch>
 				</div>
 			</div>
