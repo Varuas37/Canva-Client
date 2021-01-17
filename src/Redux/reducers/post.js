@@ -10,16 +10,21 @@ import {
 	GET_USERS_POSTS,
 	UPDATE_LIKES_ERROR,
 	GET_COMMENTS,
+	SAVE_POST,
+	REPORT_POST,
+	CATEGORIZE_ERR,
 } from '../Action/types';
 const initialState = {
 	posts: [],
 	post: null,
 	comments: [],
-	comment:null,
+	comment: null,
 	userPosts: [],
 	user_Posts_Loading: true,
 	post_loading: true,
 	error: {},
+	categorizedPosts: [],
+	categorizedPosts_loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -65,7 +70,8 @@ export default function (state = initialState, action) {
 		case DELETE_POST:
 			return {
 				...state,
-				posts: state.posts.filter((post) => post._id !== payload),
+				post:payload,
+				posts: state.posts.filter((post) => post._id == payload),
 				post_loading: false,
 			};
 		case UPDATE_LIKES_ERROR:
@@ -77,7 +83,20 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				comments: payload,
-	
+			};
+		case SAVE_POST:
+		case REPORT_POST:
+			return {
+				...state,
+				categorizedPosts: payload,
+				categorizedPosts_loading: false,
+				
+			};
+		case CATEGORIZE_ERR:
+			return {
+				...state,
+				categorizedPosts: null,
+				categorizedPosts_loading: true,
 			};
 		case ADD_COMMENT:
 			return {

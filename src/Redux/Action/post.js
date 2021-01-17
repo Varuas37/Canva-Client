@@ -7,12 +7,13 @@ import {
 	UPDATE_LIKES,
 	DELETE_POST,
 	ADD_POST,
-	
+	SAVE_POST,
+	REPORT_POST,
+	CATEGORIZE_ERR,
 	ADD_COMMENT,
 	REMOVE_COMMENT,
 	GET_COMMENTS,
 	COMMENT_ERR,
-	
 	UPDATE_LIKES_ERROR,
 } from './types';
 
@@ -34,7 +35,6 @@ export const getPosts = (id) => async (dispatch) => {
 // Add a post to a group.
 export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 	try {
-	
 		const body = {
 			text: post,
 			postTo: id,
@@ -58,39 +58,77 @@ export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 	}
 };
 
-export const deletePost=(id)=>async(dispatch)=>{
-	try{	
-		await axios.post(`http://localhost:3300/api/post/${id}`)
+export const deletePost = (id) => async (dispatch) => {
+	try {
+		await axios.delete(`http://localhost:3300/api/post/${id}`);
 		dispatch({
-			type:DELETE_POST,
-			
-		})
+			type: DELETE_POST,
+		});
 		dispatch(setAlert('Post Deleted'));
-
-	}catch(err){
-dispatch(setAlert('Error Deleting Post'));
+	} catch (err) {
+		dispatch(setAlert('Error Deleting Post'));
 	}
-}
+};
 
-export const likePost=(id)=>async(dispatch)=>{
-	try{
-		const params={
-			parentType:"Post"
-		}
-		const res = await axios.put(`http://localhost:3300/api/post/like/${id}`,params)
+export const likePost = (id) => async (dispatch) => {
+	try {
+		const params = {
+			parentType: 'post',
+		};
+		const res = await axios.put(`http://localhost:3300/api/post/like/${id}`, params);
 		dispatch({
-			type:UPDATE_LIKES,
-			payload:res.data,
-		})
-	}catch(err){
+			type: UPDATE_LIKES,
+			payload: res.data,
+		});
+	} catch (err) {
 		dispatch({
-			type:UPDATE_LIKES_ERROR,
-			payload:err.response,
-		})
+			type: UPDATE_LIKES_ERROR,
+			payload: err.response,
+		});
 		dispatch(setAlert("Couldn't Like Post"));
 	}
-}
+};
 
+export const savePost = (id,groupID) => async (dispatch) => {
+	try {
+		const params = {
+			type: 'save',
+			groupID:groupID
+		};
+		const res = await axios.put(`http://localhost:3300/api/post/categorize/${id}`, params);
+		console.log('🧛🏼‍♀️ I am inside Save Post');
+		dispatch({
+			type: SAVE_POST,
+			payload: res.data,
+		});
+		return res;
+	} catch (err) {
+		dispatch({
+			type: CATEGORIZE_ERR,
+			payload: err.response,
+		});
+		dispatch(setAlert('Error Saving Post'));
+	}
+};
+export const reportPost = (id,groupID) => async (dispatch) => {
+	try {
+		const params = {
+			type: 'report',
+			groupID:groupID
+		};
+		const res = await axios.put(`http://localhost:3300/api/post/categorize/${id}`, params);
+		dispatch({
+			type: REPORT_POST,
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: CATEGORIZE_ERR,
+			payload: err.response,
+		});
+		dispatch(setAlert('Error Reporting Posts'));
+	}
+};
 //Get comments for a specific post
 export const getComments = (id) => async (dispatch) => {
 	try {
@@ -100,7 +138,7 @@ export const getComments = (id) => async (dispatch) => {
 			type: GET_COMMENTS,
 			payload: res.data,
 		});
-		return res.data
+		return res.data;
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
@@ -117,13 +155,13 @@ export const addComment = (id, text) => async (dispatch) => {
 			text: text,
 		};
 
-		const res = await axios.post(`http://localhost:3300/api/post/comment/${id}`,params);
+		const res = await axios.post(`http://localhost:3300/api/post/comment/${id}`, params);
 
 		dispatch({
 			type: ADD_COMMENT,
 			payload: res.data,
 		});
-		return res.data
+		return res.data;
 	} catch (err) {
 		dispatch({
 			type: COMMENT_ERR,
@@ -134,34 +172,35 @@ export const addComment = (id, text) => async (dispatch) => {
 };
 
 //Delete comments
-export const deleteComment=(id)=>async(dispatch)=>{
-
-	try{
-		const res = await axios.post(`http://localhost:3300/api/post/comment/${id}`)
+export const deleteComment = (id) => async (dispatch) => {
+	try {
+		const res = await axios.delete(`http://localhost:3300/api/post/comment/${id}`);
 		dispatch({
-			type:REMOVE_COMMENT,
-			payload:res.data
-		})
-	}catch(err){
+			type: REMOVE_COMMENT,
+			payload: res.data,
+		});
+		return res.data;
+	} catch (err) {
 		dispatch({
-			type:COMMENT_ERR,
-			payload:err.response,
-		})
+			type: COMMENT_ERR,
+			payload: err.response,
+		});
 		dispatch(setAlert('Comment could not be deleted'));
 	}
-}
+};
 
-export const likeComment=(id)=>async(dispatch)=>{
-	try{
-		const params={
-			parentType:"Comment"
-		}
-		await axios.put(`http://localhost:3300/api/post/like/${id}`,params)
-	}catch(err){
+export const likeComment = (id) => async (dispatch) => {
+	try {
+		const params = {
+			parentType: 'comment',
+		};
+		const res = await axios.put(`http://localhost:3300/api/post/like/${id}`, params);
+		return res.data;
+	} catch (err) {
 		dispatch({
-			type:UPDATE_LIKES,
-			payload:err.response,
-		})
+			type: UPDATE_LIKES,
+			payload: err.response,
+		});
 		dispatch(setAlert("Couldn't Like Comment"));
 	}
-}
+};

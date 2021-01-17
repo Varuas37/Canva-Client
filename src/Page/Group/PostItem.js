@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
+import Moment from 'react-moment';
+import { connect } from 'react-redux';
 import CommentItem from './CommentItem';
+import { likePost, savePost, reportPost, deletePost } from '../../Redux/Action/post';
 
-// import {likeComment} from ""
-function PostItem({ data }) {
+function PostItem({ data, likePost, savePost, deletePost, reportPost,groupID }) {
 	const [showMore, setShowMore] = useState(false);
 
 	const [showComments, setShowComments] = useState(false);
@@ -13,6 +14,9 @@ function PostItem({ data }) {
 	const handleComment = () => {
 		setShowComments(!showComments);
 	};
+	const handleClick = async (func, id) => {
+		await func(id,groupID);
+	};
 	return (
 		data && (
 			<div className="bg-white overflow-hidden shadow rounded-lg">
@@ -21,7 +25,9 @@ function PostItem({ data }) {
 						<img className="inline-block h-10 w-10 rounded-full" src={data.user.avatar} alt="" />
 						<span className="flex flex-col w-full">
 							<span className="text-sm ">{data.user && data.user.name}</span>{' '}
-							<h1 className="text-xs text-gray-500"></h1>
+							<h1 className="text-xs text-gray-500">
+								<Moment fromNow>{data.createdAt}</Moment>
+							</h1>
 						</span>
 					</div>
 					<div class="relative inline-block text-left">
@@ -60,7 +66,8 @@ function PostItem({ data }) {
 								aria-labelledby="options-menu"
 							>
 								<div class="py-1">
-									<a
+									<span
+										onClick={() => handleClick(deletePost, data._id)}
 										href="#"
 										class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 										role="menuitem"
@@ -80,8 +87,9 @@ function PostItem({ data }) {
 											></path>
 										</svg>
 										Delete
-									</a>
-									<a
+									</span>
+									<span
+										onClick={() => handleClick(savePost, data._id)}
 										href="#"
 										class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 										role="menuitem"
@@ -101,9 +109,9 @@ function PostItem({ data }) {
 											></path>
 										</svg>
 										Save
-									</a>
+									</span>
 								</div>
-								<div class="py-1">
+								<span onClick={() => handleClick(reportPost, data._id)} class="py-1">
 									<a
 										href="#"
 										class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -125,7 +133,7 @@ function PostItem({ data }) {
 										</svg>
 										Report
 									</a>
-								</div>
+								</span>
 							</div>
 						) : null}
 					</div>
@@ -135,7 +143,10 @@ function PostItem({ data }) {
 						<p> {data.text}</p>
 					</div>
 					<div className="my-3 sm:yx-3 sm:my-2 sm:py-6 flex flex-row justify-between">
-						<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
+						<button
+							onClick={() => handleClick(likePost, data._id)}
+							className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
+						>
 							<svg
 								class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500"
 								fill="none"
@@ -151,7 +162,7 @@ function PostItem({ data }) {
 								></path>
 							</svg>
 							<span className="sm:inline hidden">Like</span>
-						</div>
+						</button>
 						<button
 							onClick={handleComment}
 							className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
@@ -170,9 +181,12 @@ function PostItem({ data }) {
 									d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
 								></path>
 							</svg>
-							<span className="sm:inline hidden">Comment</span>
+							<button className="sm:inline hidden">Comment</button>
 						</button>
-						<div className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center">
+						<button
+							onClick={() => handleClick(savePost, data._id)}
+							className="flex flex-row sm:hover:bg-gray-200 px-2 py-2  w-full rounded-lg sm:px-2 sm:py-2 border-top cursor-pointer justify-center"
+						>
 							<svg
 								class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indego-500 "
 								fill="none"
@@ -188,7 +202,7 @@ function PostItem({ data }) {
 								></path>
 							</svg>
 							<span className="sm:inline hidden">Save</span>
-						</div>
+						</button>
 					</div>
 				</div>
 				{showComments ? <CommentItem postID={data._id} setShowComments={setShowComments} /> : null}
@@ -196,5 +210,7 @@ function PostItem({ data }) {
 		)
 	);
 }
-
-export default PostItem;
+const mapStateToProps = (state) => ({
+	posts: state.posts,
+});
+export default connect(mapStateToProps, { likePost, reportPost, savePost, deletePost })(PostItem);

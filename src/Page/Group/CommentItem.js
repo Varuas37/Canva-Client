@@ -2,9 +2,9 @@ import React, { Fragment, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { addComment, getComments } from '../../Redux/Action/post';
-import Moment from "react-moment";
-const SingleComment = ({ data, user }) => {
+import { addComment, getComments, deleteComment, likeComment } from '../../Redux/Action/post';
+import Moment from 'react-moment';
+const SingleComment = ({ data, user, handlCommentLike, handleComment, auth, likesData, id }) => {
 	return (
 		<>
 			<li>
@@ -13,8 +13,8 @@ const SingleComment = ({ data, user }) => {
 						<img
 							className="h-10 w-10 rounded-full"
 							// src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-							src={user.avatar }
-							alt=""       
+							src={user.avatar}
+							alt=""
 						/>
 					</div>
 					<div>
@@ -33,12 +33,17 @@ const SingleComment = ({ data, user }) => {
 						<div className="mt-2 text-sm space-x-2">
 							<span className="text-gray-500 font-medium">
 								{/* {data.time} */}
-							 <Moment fromNow>{data.createdAt}</Moment>
+								<Moment fromNow>{data.createdAt}</Moment>
 							</span>
 							<span className="text-gray-500 font-medium">&middot;</span>
-							<button type="button" className="text-gray-900 font-medium">
-								Like
+							<button onClick={handlCommentLike(id)} type="button" className="text-gray-900 font-medium">
+								{likesData.totalLikes} Like
 							</button>
+							{auth.user._id == user._id ? (
+								<button onClick={handleComment} type="button" className="text-gray-900 font-medium">
+									Delete
+								</button>
+							) : null}
 						</div>
 					</div>
 				</div>
@@ -47,28 +52,33 @@ const SingleComment = ({ data, user }) => {
 	);
 };
 
-function CommentItem({ addComment, postID, getComments, auth ,setShowComments}) {
+function CommentItem({ addComment, postID, getComments, auth, setShowComments, deleteComment, likeComment }) {
 	const [comments, setComments] = useState([]);
-	useEffect(() => {
-		getComments(postID).then((data)=>setComments(data));
-		
+	const [likes, setLikes] = useState([]);
+	useEffect(() => { 
+		getComments(postID).then((data) => setComments(data));
 	}, []);
-	const { register, handleSubmit,  errors } = useForm();
+	const handlCommentLike = async () => {
+		const Likedata = await likeComment(postID);
+		setLikes(Likedata);
+	};
+
+	const handleComment = async (id) => {
+		await deleteComment(postID);
+		console.log(id);
+	};
+	const { register, handleSubmit, errors } = useForm();
 
 	const createComment = useRef(null);
 	const refSubmit = useRef(null);
 	const onSubmit = async () => {
-		
-		if (createComment.current.value.length>0){
-const addedComment = await addComment(postID, createComment.current.value)
-setComments( oldComments=> [...oldComments,addedComment] );
-		createComment.current.value=''
+		if (createComment.current.value.length > 0) {
+			const addedComment = await addComment(postID, createComment.current.value);
+			setComments((oldComments) => [...oldComments, addedComment]);
+			createComment.current.value = '';
+		} else {
+			console.log('No text');
 		}
-		else{
-			console.log("No text")
-		}
-		
-		
 	};
 
 	const [rows, setRows] = useState(3);
@@ -82,7 +92,6 @@ setComments( oldComments=> [...oldComments,addedComment] );
 
 		// On pressing Shift and Enter
 		if (event.keyCode == 13 && event.shiftKey) {
-			
 			createComment.current.rows = rows.toString();
 			setRows((prev) => prev + 1);
 		}
@@ -101,12 +110,10 @@ setComments( oldComments=> [...oldComments,addedComment] );
 
 		// On pressing Enter
 		if (event.keyCode == 13 && !event.shiftKey) {
-
 			//Stops enter from creating a new line
 			event.preventDefault();
 			refSubmit.current.click();
 			return true;
-
 		}
 	};
 
@@ -117,18 +124,26 @@ setComments( oldComments=> [...oldComments,addedComment] );
 					<div className="divide-y divide-gray-200">
 						<div className="px-4 py-6 sm:px-6">
 							<ul className="space-y-8">
-								{comments && comments.map((item) => <SingleComment data={item} user={item.user} key={item._id} />)}
+								{comments &&
+									comments.map((item) => (
+										<SingleComment
+											data={item}
+											user={item.user}
+											key={item._id}
+											handlCommentLike={handlCommentLike}
+											handleComment={handleComment}
+											auth={auth}
+											likesData={likes}
+											id={item._id}
+										/>
+									))}
 							</ul>
 						</div>
 					</div>
 					<div className="bg-gray-50 px-4 py-6 sm:px-6">
 						<div className="flex space-x-3">
 							<div className="flex-shrink-0">
-								<img
-									className="h-10 w-10 rounded-full"
-									src={auth.user.avatar}
-									alt=""
-								/>
+								<img className="h-10 w-10 rounded-full" src={auth.user.avatar} alt="" />
 							</div>
 							<div className="min-w-0 flex-1">
 								<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -137,7 +152,7 @@ setComments( oldComments=> [...oldComments,addedComment] );
 											About
 										</label>
 										<textarea
-											ref={register({ required: true})}
+											ref={register({ required: true })}
 											ref={createComment}
 											id="comment"
 											name="comment"
@@ -150,9 +165,9 @@ setComments( oldComments=> [...oldComments,addedComment] );
 											style={{ resize: 'none' }}
 										></textarea>
 									</div>
-										{errors.comment && errors.comment.type === 'required' && (
-											<p className="text-red-800 text-xs ">Text is required</p>
-										)}
+									{errors.comment && errors.comment.type === 'required' && (
+										<p className="text-red-800 text-xs ">Text is required</p>
+									)}
 									<div className="mt-3 flex items-center justify-between">
 										<button
 											ref={refSubmit}
@@ -162,7 +177,9 @@ setComments( oldComments=> [...oldComments,addedComment] );
 											Comment
 										</button>
 									</div>
-									<button onClick={()=>setShowComments(false)} className="text-sm text-gray-400">Hide All Comments</button>
+									<button onClick={() => setShowComments(false)} className="text-sm text-gray-400">
+										Hide All Comments
+									</button>
 								</form>
 							</div>
 						</div>
@@ -181,4 +198,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth,
 	comment: state.post.comments,
 });
-export default connect(mapStateToProps, { addComment, getComments })(CommentItem);
+export default connect(mapStateToProps, { addComment, getComments, deleteComment, likeComment })(CommentItem);

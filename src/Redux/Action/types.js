@@ -85,3 +85,9 @@ export const FOLLOW_ERR = "FOLLOW_ERR"
 export const GET_ASSIGNMENTS = "GET_ASSIGNMENTS"
 export const GET_ASSIGNMENT = "GET_ASSIGNMENT"
 export const GET_ASSIGNMENT_ERR = "GET_ASSIGNMENT_ERR"
+
+
+//Save and Report Posts
+export const SAVE_POST = "SAVE_POST"
+export const REPORT_POST = "REPORT_POST"
+export const CATEGORIZE_ERR = "CATEGORIZE_ERR"

@@ -9,8 +9,9 @@ import excel from "./excel"
 import todo from "./todo"
 import groupData from "./group"
 import post from "./post"
+import tasks from "./tasks"
 
 
 export default combineReducers({
-    alert, canvasauth,courses,submissions,todo,auth,profile,excel,groupData,post
+    alert, canvasauth,courses,submissions,todo,auth,profile,excel,groupData,post,tasks
 });

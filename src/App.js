@@ -28,6 +28,7 @@ import CourseHome from './Page/Courses/CourseHome';
 import Group from './Page/Group/Group';
 import LogRocket from 'logrocket';
 import NotFound from './Page/404/NotFound';
+import TaskManagement from './Page/TaskManagement/TaskManagement';
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -71,6 +72,7 @@ const App = () => {
 
 					<PrivateRoute exact path="/settings/" component={Settings} />
 					<Route exact path="/pricing/" component={Pricing} />
+					<Route exact path="/tasks" component={TaskManagement} />
 					<PrivateRoute exact path="/tools" component={Tools} />
 					<PrivateRoute exact path="/excelCheck" component={ExcelCheck} />
 					<Route component={NotFound} />
