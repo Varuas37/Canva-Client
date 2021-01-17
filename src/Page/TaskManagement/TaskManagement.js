@@ -4,6 +4,7 @@ import TaskCard from '../../Components/TaskList/TaskCard';
 import TaskList from '../../Components/TaskList/TaskList';
 import { connect } from 'react-redux';
 // import TaskActionButton from '../../Components/TaskList/TaskActionButton';
+//Layout works well in this commit
 function TaskManagement({ lists }) {
 	return (
 		<div>
