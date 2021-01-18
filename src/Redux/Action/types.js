@@ -98,3 +98,5 @@ export const REMOVE_LIST = "REMOVE_LIST"
 export const ADD_CARDS = "ADD_CARDS"
 export const REMOVE_CARDS = "REMOVE_CARDS"
 export const TASK_ERR = "TASK_ERR"
+    //TASK MANAGEMENT DND
+    export const SORT_CARDS = "SORT_CARDS"

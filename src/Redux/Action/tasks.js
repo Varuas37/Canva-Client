@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARDS, REMOVE_CARDS, TASK_ERR } from './types';
+import { ADD_LIST, ADD_CARDS, REMOVE_CARDS, TASK_ERR, SORT_CARDS } from './types';
 import { setAlert } from './alert';
 
 export const addList = (data) => async (dispatch) => {
@@ -19,7 +19,7 @@ export const addCards = (listID, data) => async (dispatch) => {
 	try {
 		dispatch({
 			type: ADD_CARDS,
-			payload: {listID, data},
+			payload: { listID, data },
 		});
 	} catch (err) {
 		dispatch(setAlert('Error', `Error adding tasks`, 'error', 'fas fa-exclamation-circle'));
@@ -41,4 +41,23 @@ export const removeCards = (id) => async (dispatch) => {
 			type: TASK_ERR,
 		});
 	}
+};
+
+export const sortCards = (
+	droppableIdStart,
+	droppableIdEnd,
+	droppableIndexStart,
+	droppableIndexEnd,
+	draggableID
+) => async (dispatch) => {
+	dispatch({
+		type: SORT_CARDS,
+		payload: {
+			droppableIdStart,
+			droppableIdEnd,
+			droppableIndexStart,
+			droppableIndexEnd,
+			draggableID,
+		},
+	});
 };
