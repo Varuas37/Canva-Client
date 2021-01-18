@@ -15,7 +15,7 @@ function TaskList({ list, index }) {
 						<Droppable droppableId={String(list.id)} type="card">
 							{(provide) => (
 								<div
-									className="sm:rounded-lg border border-red-600"
+									className="sm:rounded-lg"
 									ref={provide.innerRef}
 									{...provide.droppableProps}
 									{...provide.dragHandleProps}
