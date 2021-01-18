@@ -1,46 +1,49 @@
 import React from 'react';
 import TaskActionButton from './TaskActionButton';
-import { Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
 
-function TaskList({ list }) {
+function TaskList({ list, index }) {
 	return (
-		<Droppable droppableId={String(list.id)}>
+		<Draggable draggableId={String(list.id)} index={index}>
 			{(provided) => (
 				<div
-					{...provided.droppableProps}
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}
 					ref={provided.innerRef}
-					className="overflow-hidden sm:rounded-lg sm:w-17 m-2 bg-gray-50"
+					className="overflow-hidden sm:rounded-lg sm:w-17 m-2  bg-gray-50"
 					style={{ height: 'fit-content', padding: '10px' }}
 				>
-					<div className="px-4 py-5 sm:p-3">
-						<div
-							// className="overflow-hidden sm:rounded-lg rounded-lg divide-y  divide-gray-200"
-							className="sm:rounded-lg "
-						>
-							<div className="px-2 py-5 sm:px-6 sm:text-xl sm:font-medium">{list.title}</div>
-							<div
-								className="overflow-y-scroll rounded"
-								style={{
-									maxHeight: '600px',
-									maxWidth: '272px',
-									minWidth: '272px',
-									height: 'fit-content',
-									padding: '10px',
-								}}
-							>
-								{list.cards.map((card, index) => (
-									<TaskCard key={card.id} text={card.text} id={card.id} index={index} />
-								))}
-								{provided.placeholder}
-							</div>
+					<Droppable droppableId={String(list.id)} type="card">
+						{(provide) => (
+							<div className="sm:rounded-lg border border-red-600">
+								<div className="px-2 py-5 sm:px-6 sm:text-xl font-medium">{list.title}</div>
+								<div
+									className="overflow-y-scroll rounded"
+									ref={provide.innerRef}
+									{...provide.droppableProps}
+									// {...provide.dragHandleProps}
+									style={{
+										maxHeight: '600px',
+										maxWidth: '272px',
+										minWidth: '272px',
+										height: 'fit-content',
+										padding: '10px',
+									}}
+								>
+									{list.cards.map((card, index) => (
+										<TaskCard key={card.id} text={card.text} id={card.id} index={index} />
+									))}
+									{provide.placeholder}
+								</div>
 
-							<TaskActionButton listID={list.id} />
-						</div>
-					</div>
+								<TaskActionButton listID={list.id} />
+							</div>
+						)}
+					</Droppable>
 				</div>
 			)}
-		</Droppable>
+		</Draggable>
 	);
 }
 

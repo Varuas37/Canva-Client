@@ -8,11 +8,11 @@ const initialState = {
 			id: uuidv4(),
 			cards: [
 				{
-					id: 0,
+					id: uuidv4(),
 					text: 'We created a static list and static Card',
 				},
 				{
-					id: 1,
+					id: uuidv4(),
 					text: 'We are using React and Nodejs',
 				},
 			],
@@ -58,9 +58,9 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-	const { payload, type } = action;
+	const { payload } = action;
 	const { tasks } = state;
-	switch (type) {
+	switch (action.type) {
 		case ADD_LIST: {
 			const newList = {
 				title: payload,
@@ -96,13 +96,31 @@ export default function (state = initialState, action) {
 				droppableIdEnd,
 				droppableIndexStart,
 				droppableIndexEnd,
+				type,
 				//  draggableID
 			} = payload;
-			const newState = {...state};
+			const newState = { ...state };
+
+			//Dragging list around
+			if (type === 'list') {
+				const list = newState.tasks.splice(droppableIndexStart, 1);
+				newState.tasks.splice(droppableIndexEnd, 0, ...list);
+				return newState;
+			}
 			if (droppableIdStart === droppableIdEnd) {
 				const list = state.tasks.find((task) => droppableIdStart === task.id);
 				const card = list.cards.splice(droppableIndexStart, 1);
 				list.cards.splice(droppableIndexEnd, 0, ...card);
+			}
+			if (droppableIdStart !== droppableIdEnd) {
+				//Find the list where the drop happened
+				const list = state.tasks.find((task) => droppableIdStart === task.id);
+				// Pull out the card from that list
+				const card = list.cards.splice(droppableIndexStart, 1);
+				// Find the list where the drag ended
+				const listEnd = state.tasks.find((task) => droppableIdEnd === task.id);
+				// Put the card in the new list
+				listEnd.cards.splice(droppableIndexEnd, 0, ...card);
 			}
 			return newState;
 		}

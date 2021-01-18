@@ -48,7 +48,8 @@ export const sortCards = (
 	droppableIdEnd,
 	droppableIndexStart,
 	droppableIndexEnd,
-	draggableID
+	draggableID,
+	type
 ) => async (dispatch) => {
 	dispatch({
 		type: SORT_CARDS,
@@ -58,6 +59,7 @@ export const sortCards = (
 			droppableIndexStart,
 			droppableIndexEnd,
 			draggableID,
+			type,
 		},
 	});
 };

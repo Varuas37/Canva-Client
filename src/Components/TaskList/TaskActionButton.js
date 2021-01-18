@@ -65,7 +65,7 @@ function TaskActionButton({ list, addList, addCards, listID }) {
 	) : (
 		<div
 			onClick={handleFormOpen}
-			className="flex flex-row overflow-y-scroll rounded cursor-pointer hover:bg-indigo-400 sm:p-2 mt-2 bg-gray-50"
+			className="flex flex-row items-center overflow-y-scroll rounded cursor-pointer hover:bg-indigo-400 sm:p-2 mt-2 bg-gray-50"
 			style={{
 				maxHeight: '600px',
 				maxWidth: '272px',
