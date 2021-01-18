@@ -91,3 +91,10 @@ export const GET_ASSIGNMENT_ERR = "GET_ASSIGNMENT_ERR"
 export const SAVE_POST = "SAVE_POST"
 export const REPORT_POST = "REPORT_POST"
 export const CATEGORIZE_ERR = "CATEGORIZE_ERR"
+
+//TASK MANAGEMENT
+export const ADD_LIST = "ADD_LIST"
+export const REMOVE_LIST = "REMOVE_LIST"
+export const ADD_CARDS = "ADD_CARDS"
+export const REMOVE_CARDS = "REMOVE_CARDS"
+export const TASK_ERR = "TASK_ERR"

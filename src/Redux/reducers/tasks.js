@@ -1,3 +1,6 @@
+import { ADD_LIST, ADD_CARDS, REMOVE_CARDS } from '../Action/types';
+import { v4 as uuidv4 } from 'uuid';
+
 const initialState = {
 	tasks: [
 		{
@@ -84,12 +87,42 @@ const initialState = {
 			],
 		},
 	],
-	tasks_loading: true,
+	// tasks_loading: true,
 };
 
 export default function (state = initialState, action) {
-	const { type } = action;
+	const { payload, type } = action;
+	const { tasks } = state;
 	switch (type) {
+		case ADD_LIST: {
+			const newList = {
+				title: payload,
+				id: uuidv4(),
+				cards: [],
+			};
+
+			return {
+				...state,
+				tasks: tasks.concat(newList),
+			};
+		}
+		case ADD_CARDS: {
+			const newCard = {
+				id: uuidv4(),
+				text: payload.data,
+			};
+
+			return {
+				...state,
+				tasks: state.tasks.map((task) =>
+					task.id === payload.listID ? { ...task, cards: [...task.cards, newCard] } : task
+				),
+			};
+		}
+		case REMOVE_CARDS:
+			return {
+				user_todo_loading: true,
+			};
 		default:
 			return state;
 	}
