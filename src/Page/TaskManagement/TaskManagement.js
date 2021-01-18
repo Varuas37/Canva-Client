@@ -24,7 +24,6 @@ function TaskManagement({ lists, sortCards }) {
 					{(provided) => (
 						<div
 							{...provided.droppableProps}
-						
 							ref={provided.innerRef}
 							class="bg-white h-screen mt-5 overflow-x-scroll rounded-lg  "
 						>
@@ -34,8 +33,8 @@ function TaskManagement({ lists, sortCards }) {
 										lists.map((list, index) => (
 											<TaskList key={list.id} list={list} index={index}></TaskList>
 										))}
-									<TaskActionButton list />
 									{provided.placeholder}
+									<TaskActionButton list />
 								</div>
 							</div>
 						</div>
