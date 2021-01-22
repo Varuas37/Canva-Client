@@ -14,16 +14,7 @@ import {
 
 export const uploadFile = (formData) => async (dispatch) => {
 	try {
-		// const config = {
-		// 	headers: {
-		// 		'Content-Type': 'multipart/form-data',
-		// 	},
-		// };
-		setTimeout(() => {
-			console.log("Uploading")
-		}, 10000);
-		// let fd = new FormData();
-		// fd.append('fileName', formData[0]);
+	
 		const res = await axios.post('http://localhost:3300/api/files/upload', formData);
 		dispatch({
 			type: UPLOAD_FILE,
@@ -66,7 +57,7 @@ export const downloadFile = (formData) => async (dispatch) => {
 		fd.append('fileName', formData);
 
 		const params = {
-			'fileName': `${formData}`,
+			fileName: `${formData}`,
 		};
 
 		const res = await axios.post(`http://localhost:3300/api/files/download`, params, config);
@@ -83,20 +74,18 @@ export const downloadFile = (formData) => async (dispatch) => {
 		dispatch(setAlert("Couldn't download file"));
 	}
 };
-export const assignExcelFile = (formData, password) => async (dispatch) => {
+export const assignExcelFile = (formData, password, courseID,assignmentID) => async (dispatch) => {
 	try {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
-
-		let fd = new FormData();
-		fd.append('fileName', formData);
-        fd.append('password', password);
-        const params = {
-            'fileName': `${formData}`,
-            'password': `${password}`,
+		const params = {
+			fileName: `${formData}`,
+			password: `${password}`,
+			courseID: `${courseID}`,
+			assignmentID: `${assignmentID}`,
 		};
 
 		const res = await axios.post(`http://localhost:3300/api/excel/`, params, config);
@@ -104,8 +93,7 @@ export const assignExcelFile = (formData, password) => async (dispatch) => {
 			type: POST_FILES,
 			payload: res.data,
 		});
-        dispatch(setAlert('Excel Files Assigned'));
-        
+		dispatch(setAlert('Excel Files Assigned'));
 	} catch (err) {
 		dispatch({
 			type: POST_FILES_ERR,

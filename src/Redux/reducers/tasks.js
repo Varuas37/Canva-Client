@@ -4,52 +4,48 @@ import { v4 as uuidv4 } from 'uuid';
 const initialState = {
 	tasks: [
 		{
-			title: 'All Assignments',
+			title: 'Todo',
 			id: uuidv4(),
 			cards: [
 				{
 					id: uuidv4(),
-					text: 'We created a static list and static Card',
+					text: 'Connect to Backend',
 				},
 				{
 					id: uuidv4(),
-					text: 'We are using React and Nodejs',
+					text: 'Fix layout issue',
+				},
+				{
+					id: uuidv4(),
+					text: 'Add Card Details and Modal',
 				},
 			],
 		},
 		{
-			title: 'Due Soon',
+			title: 'Currently Working',
 			id: uuidv4(),
 			cards: [
 				{
 					id: uuidv4(),
-					text: 'This will contain cards that are due soon',
+					text: 'Finish setting up all the features in groups',
 				},
 				{
 					id: uuidv4(),
-					text: 'Complete these as much as you can',
+					text: 'Quiz Generator',
 				},
 				{
 					id: uuidv4(),
-					text: 'This will contain cards that are due soon',
-				},
-				{
-					id: uuidv4(),
-					text: 'Complete these as much as you can',
+					text: 'Excel Sheet Generator',
 				},
 			],
 		},
 		{
-			title: 'Completed',
+			title: 'Test',
 			id: uuidv4(),
 			cards: [
 				{
 					id: uuidv4(),
-					text: 'Drags the assignments that you completed',
-				},
-				{
-					id: uuidv4(),
-					text: 'Get points for completing each assingments',
+					text: 'Try adding cards or lists. Have fun!',
 				},
 			],
 		},

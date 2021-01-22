@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import { getAnnouncement, getCourse, getTodo } from '../../Redux/Action/courses';
 import { getSubmissions } from '../../Redux/Action/submissions';
 import Header from '../../Components/Header/Header';
@@ -13,7 +13,6 @@ import imgNoAnnoucemnts from './Announcement.png';
 import Skeleton from 'react-loading-skeleton';
 
 const Course = ({
-	
 	courses: { course, courseLoading, todo_loading, todo, announcement },
 
 	getCourse,
@@ -22,12 +21,11 @@ const Course = ({
 	getSubmissions,
 	submission: { submission_loading, submissions },
 	auth,
-	
 }) => {
-	if(!auth.user.canvasConnected){
-		window.location.replace('/canvasAuth')
-	  }
-	const {id} = useParams();
+	if (!auth.user.canvasConnected) {
+		window.location.replace('/canvasAuth');
+	}
+	const { id } = useParams();
 	useEffect(() => {
 		getCourse(id);
 	}, [id]);
@@ -51,12 +49,7 @@ const Course = ({
 						{course.enrollments[0].type == 'ta' ? 'Teacher' : 'Student' || <Skeleton />}
 					</p>
 				</Header>
-				<Info
-					data={todo}
-					courseData={course}
-					announcementData={announcement}
-					submissionData={submissions}
-				></Info>
+				<Info data={todo} courseData={course} announcementData={announcement} submissionData={submissions} />
 				{console.log(submissions)}
 				<h1 className="text-2xl font-bold leading-tight text-gray-900" style={{ margin: '10px' }}>
 					Todo
