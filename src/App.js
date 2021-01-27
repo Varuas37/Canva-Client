@@ -28,6 +28,7 @@ import CourseHome from './Page/Courses/CourseHome';
 import Group from './Page/Group/Group';
 import LogRocket from 'logrocket';
 import NotFound from './Page/404/NotFound';
+import CanvasComment from './Page/CanvasComment/CanvasComment';
 import TaskManagement from './Page/TaskManagement/TaskManagement';
 
 if (localStorage.token) {
@@ -75,6 +76,7 @@ const App = () => {
 					<Route exact path="/tasks" component={TaskManagement} />
 					<PrivateRoute exact path="/tools" component={Tools} />
 					<PrivateRoute exact path="/excelCheck" component={ExcelCheck} />
+					<Route exact path="/canvas-comment" component={CanvasComment} />
 					<Route component={NotFound} />
 
 				</Switch>

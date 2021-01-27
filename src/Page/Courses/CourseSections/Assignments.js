@@ -21,7 +21,8 @@ const AssignmentRow = ({ data }) => {
 								onClick={toggleMore}
 								class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 cursor-pointer"
 							>
-								<Moment fromNow>{data.due_at}</Moment>
+								<Moment fromNow>{data.due_at} </Moment>
+								 {/* <Moment format ={"dddd hhhh"}>{data.due_at}</Moment> */}
 								{showMore ? (
 									<svg
 										class="w-4 h-4"
