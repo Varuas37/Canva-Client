@@ -30,11 +30,11 @@ import LogRocket from 'logrocket';
 import NotFound from './Page/404/NotFound';
 import CanvasComment from './Page/CanvasComment/CanvasComment';
 import TaskManagement from './Page/TaskManagement/TaskManagement';
+import CreateBoard from './Page/TaskManagement/CreateBoard';
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
 }
-
 const App = () => {
 	useEffect(() => {
 		LogRocket.init('oi4xgz/automatedcanvas', {
@@ -43,7 +43,6 @@ const App = () => {
 				inputSanitizer: true,
 			},
 		});
-
 		store.dispatch(loadUser());
 	}, []);
 	return (
@@ -56,7 +55,6 @@ const App = () => {
   >
 		<Provider store={store}>
 			<Router history={history}>
-			
 				<Alert />
 				<Navbar></Navbar>
 				<Switch>
@@ -68,15 +66,14 @@ const App = () => {
 					<PrivateRoute exact path="/courses" component={Courses} />
 					<PrivateRoute exact path="/course/:id" component={CourseHome} />
 					<PrivateRoute exact path="/profile/" component={Profile} />
-
 					<PrivateRoute exact path="/groups/:id" component={Group} />
-
 					<PrivateRoute exact path="/settings/" component={Settings} />
 					<Route exact path="/pricing/" component={Pricing} />
-					<Route exact path="/tasks" component={TaskManagement} />
+					<PrivateRoute exact path="/tasks" component={TaskManagement} />
+					<PrivateRoute exact path="/boards" component={CreateBoard} />
 					<PrivateRoute exact path="/tools" component={Tools} />
 					<PrivateRoute exact path="/excelCheck" component={ExcelCheck} />
-					<Route exact path="/canvas-comment" component={CanvasComment} />
+					<PrivateRoute exact path="/canvas-comment" component={CanvasComment} />
 					<Route component={NotFound} />
 
 				</Switch>

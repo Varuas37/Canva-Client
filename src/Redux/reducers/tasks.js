@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARDS, REMOVE_CARDS, SORT_CARDS } from '../Action/types';
+import { ADD_LIST, ADD_CARDS, REMOVE_CARDS, SORT_CARDS, ADD_BOARD, BOARD_ERR ,GET_BOARDS} from '../Action/types';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
@@ -50,13 +50,36 @@ const initialState = {
 			],
 		},
 	],
+	boards: [{}],
+	err: null,
 	// tasks_loading: true,
 };
 
 export default function (state = initialState, action) {
 	const { payload } = action;
-	const { tasks } = state;
+	const { tasks, boards } = state;
 	switch (action.type) {
+		case ADD_BOARD: {
+			const newBoard = payload;
+			console.log("This is from ADD_BOARD reducers"+payload);
+			return {
+				...state,
+				boards: boards.concat(newBoard),
+			};
+		}
+		case GET_BOARDS:{
+			console.log("This is from ADD_BOARD reducers"+payload);
+			return{
+				...state,
+				boards:payload,
+			}
+		}
+		case BOARD_ERR: {
+			return {
+				...state,
+				err: payload,
+			};
+		}
 		case ADD_LIST: {
 			const newList = {
 				title: payload,
@@ -84,7 +107,7 @@ export default function (state = initialState, action) {
 		}
 		case REMOVE_CARDS:
 			return {
-				user_todo_loading: true,
+				... state,
 			};
 		case SORT_CARDS: {
 			const {
