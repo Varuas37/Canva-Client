@@ -17,7 +17,7 @@ import tasks from "./tasks";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [auth, todo,tasks,courses],
+  whitelist: [],
 };
 const rootReducer = combineReducers({
   alert,

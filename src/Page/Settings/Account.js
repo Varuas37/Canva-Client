@@ -7,15 +7,15 @@ function Account({ auth }) {
   return (
     !auth.loading && (
       <Fragment>
-        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+        <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
           <div>
-            <div class="shadow sm:rounded-md sm:overflow-hidden">
-              <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
                 <div>
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
                     Profile
                   </h3>
-                  <p class="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500">
                     This information will be displayed publicly so be careful
                     what you share.
                   </p>
@@ -25,13 +25,13 @@ function Account({ auth }) {
           </div>
 
           <div>
-            <div class="shadow sm:rounded-md sm:overflow-hidden">
-              <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
-                <div class="flex flex-row justify-between">
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                <div className="flex flex-row justify-between">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
                     Personal Information
                   </h3>
-                  <p class="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500">
                     {" "}
                     <button onClick={() => setEdit(!edit)}>
                       {edit ? "Cancel" : "Edit"}
@@ -39,12 +39,12 @@ function Account({ auth }) {
                   </p>
                 </div>
 
-                <div class="grid grid-cols-6 gap-6">
+                <div className="grid grid-cols-6 gap-6">
                   {edit ? (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="first_name"
-                        class="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         First name
                       </label>
@@ -55,29 +55,29 @@ function Account({ auth }) {
                         name="first_name"
                         id="first_name"
                         autocomplete="given-name"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   ) : (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="first_name"
-                        class="block text-md font-medium text-gray-700"
+                        className="block text-md font-medium text-gray-700"
                       >
                         First name
                       </label>
 
-                      <h1 class="text-gray-500 w-full text-base sm:text-base">
+                      <h1 className="text-gray-500 w-full text-base sm:text-base">
                         {auth.user.name}
                       </h1>
                     </div>
                   )}
 
                   {edit ? (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="last_name"
-                        class="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Last name
                       </label>
@@ -87,27 +87,27 @@ function Account({ auth }) {
                         value={auth.user.lastname}
                         id="last_name"
                         autocomplete="family-name"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   ) : (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="last_name"
-                        class="block text-md font-medium text-gray-700"
+                        className="block text-md font-medium text-gray-700"
                       >
                         Last name
                       </label>
-                      <h1 class="w-full text-gray-500 text-base sm:text-base">
+                      <h1 className="w-full text-gray-500 text-base sm:text-base">
                         {auth.user.lastname}
                       </h1>
                     </div>
                   )}
                   {edit ? (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="email"
-                        class="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Email address
                       </label>
@@ -117,27 +117,27 @@ function Account({ auth }) {
                         name="email"
                         id="email"
                         autocomplete="email"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   ) : (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="email"
-                        class="block text-md font-medium text-gray-700"
+                        className="block text-md font-medium text-gray-700"
                       >
                         Email address
                       </label>
-                      <h1 class="text-gray-500 w-full text-base sm:text-base">
+                      <h1 className="text-gray-500 w-full text-base sm:text-base">
                         {auth.user.email}
                       </h1>
                     </div>
                   )}
 
-                  {/* <div class="col-span-6 sm:col-span-3">
+                  {/* <div className="col-span-6 sm:col-span-3">
                     <label
                       for="schoolEmail"
-                      class="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       School Email
                     </label>
@@ -145,14 +145,14 @@ function Account({ auth }) {
                       type="text"
                       name="schoolEmail"
                       id="schoolEmail"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div> */}
 
-                  {/* <div class="col-span-6 sm:col-span-3">
+                  {/* <div className="col-span-6 sm:col-span-3">
                     <label
                       for="user_type"
-                      class="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       Type
                     </label>
@@ -160,16 +160,16 @@ function Account({ auth }) {
                       id="user_type"
                       name="user_type"
                       autocomplete="user_type"
-                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
                       <option>Teacher</option>
                       <option>Student</option>
                     </select>
                   </div> */}
-                  {/* <div class="col-span-6 sm:col-span-3">
+                  {/* <div className="col-span-6 sm:col-span-3">
                     <label
                       for="country"
-                      class="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       University
                     </label>
@@ -177,16 +177,16 @@ function Account({ auth }) {
                       id="country"
                       name="country"
                       autocomplete="country"
-                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
                       <option>University of Texas at Tyler</option>
                     </select>
                   </div> */}
                   {edit ? (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="about"
-                        class="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         About
                       </label>
@@ -194,18 +194,18 @@ function Account({ auth }) {
                         type="text"
                         name="about"
                         id="about"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   ) : (
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
                         for="about"
-                        class="block text-md font-medium text-gray-700"
+                        className="block text-md font-medium text-gray-700"
                       >
                         About
                       </label>
-                      <h1 class="text-gray-500 w-full text-base sm:text-base">
+                      <h1 className="text-gray-500 w-full text-base sm:text-base">
                         Hi I am Saurav
                       </h1>
                     </div>
@@ -213,16 +213,16 @@ function Account({ auth }) {
                 </div>
               </div>
               {edit ? (
-                <div class="flex flex-row space-x-4 px-4 justify-end py-3 bg-gray-50 text-right sm:px-6">
+                <div className="flex flex-row space-x-4 px-4 justify-end py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     onClick={() => setEdit(false)}
-                    class="bg-gray-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="bg-gray-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Update
                   </button>

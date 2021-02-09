@@ -38,6 +38,8 @@ const initialState = {
     // },
   ],
   boards: [{}],
+  getboard: true,
+  boardsLoading: true,
   board: null,
   cards: [{}],
   card: null,
@@ -60,12 +62,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         boards: payload,
+        boardsLoading: false,
       };
     }
     case GET_BOARD: {
       return {
         ...state,
         board: payload,
+        getboard: false,
       };
     }
     case DELETE_BOARD: {
@@ -78,6 +82,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         err: payload,
+        getBoard: true,
       };
     }
     case ADD_LIST: {
@@ -93,21 +98,16 @@ export default function (state = initialState, action) {
       };
     }
     case GET_LISTS: {
-      
       var newTask = [];
       payload.map((task) => {
-
         const lists = {
           title: task.title,
           id: task._id,
-          cards: task.cards
-            ? task.cards
-            : [],
+          cards: task.cards ? task.cards : [],
         };
         newTask = newTask.concat(lists);
       });
-      
-   
+
       return {
         ...state,
         tasks: newTask,
@@ -152,7 +152,7 @@ export default function (state = initialState, action) {
       if (type === "list") {
         const list = newState.tasks.splice(droppableIndexStart, 1);
         newState.tasks.splice(droppableIndexEnd, 0, ...list);
-        return newState;  
+        return newState;
       }
       if (droppableIdStart === droppableIdEnd) {
         const list = state.tasks.find((task) => droppableIdStart === task.id);

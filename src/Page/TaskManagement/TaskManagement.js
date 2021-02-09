@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../Components/Header/Header";
 import TaskList from "../../Components/TaskList/TaskList";
 import { connect } from "react-redux";
@@ -6,10 +6,12 @@ import TaskActionButton from "../../Components/TaskList/TaskActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { deleteBoard, sortCards } from "../../Redux/Action/tasks";
 import { useParams, useHistory } from "react-router-dom";
+import DeleteModal from "../../Components/Modal/DeleteModal";
 
 //Layout works well in this commit
 function TaskManagement({ lists, sortCards, board, deleteBoard }) {
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
   let history = useHistory();
   const handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -31,6 +33,12 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
     deleteBoard(board._id);
     history.push("/boards");
   };
+  const funcshowModal = () => {
+    setShowModal(true);
+  };
+  const funcDismissModal = ()=>{
+    setShowModal(false);
+  }
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div style={{ padding: "20px" }} className="mx-auto px-4 sm:px-6 md:px-8">
@@ -40,7 +48,7 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
         >
           <Header data={board && board.title}>
             <span
-              onClick={handleDelete}
+              onClick={funcshowModal}
               href="#"
               class="cursor-pointer group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
@@ -63,6 +71,17 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
             </span>
           </Header>
         </div>
+        {showModal ? (
+          <DeleteModal
+            title={"Delete Board"}
+            message={
+              "Are you sure you want to delete the board. This action is irreversible"
+            }
+            deleteModal={handleDelete}
+            deleteText="Delete Board"
+            dismissModal = {funcDismissModal}
+          />
+        ) : null}
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided) => (
             <div

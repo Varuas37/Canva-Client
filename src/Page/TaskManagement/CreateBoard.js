@@ -12,8 +12,7 @@ function CreateBoard({ tasks, getBoards, addBoard }) {
   const { boards } = tasks;
   const refModal = useRef(null);
   const onSubmit = async () => {
-    
-    if(refModal.current.value){
+    if (refModal.current.value) {
       await addBoard(refModal.current.value);
     }
     toggleModal();
@@ -27,7 +26,7 @@ function CreateBoard({ tasks, getBoards, addBoard }) {
     setModalOpen(!modalOpen);
   };
   useEffect(() => {
-    if(modalOpen){
+    if (modalOpen) {
       refModal.current.focus();
     }
   }, [modalOpen]);
@@ -115,12 +114,12 @@ function CreateBoard({ tasks, getBoards, addBoard }) {
           {boards &&
             boards.map((board) => (
               <Link
-                to={`/boards/${board._id}`}
-                key={board.id}
+                to={`/boards/${board && board._id}`}
+                key={board && board.id}
                 className={` m-4 hover:shadow-lg flex rounded  justify-center items-center space-y-4 w-full overflow-hidden sm:my-1 sm:px-1 xl:w-1/5 bg-gray-200 `}
                 style={{ height: "160px", width: "260px" }}
               >
-                {board.title}
+                {board && board.title}
               </Link>
             ))}
         </div>
