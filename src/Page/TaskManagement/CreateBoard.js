@@ -11,8 +11,11 @@ function CreateBoard({ tasks, getBoards, addBoard }) {
   const { register, handleSubmit, errors } = useForm();
   const { boards } = tasks;
   const refModal = useRef(null);
-  const onSubmit = (data) => {
-    addBoard(data);
+  const onSubmit = async () => {
+    
+    if(refModal.current.value){
+      await addBoard(refModal.current.value);
+    }
     toggleModal();
   };
   useEffect(() => {
@@ -21,9 +24,7 @@ function CreateBoard({ tasks, getBoards, addBoard }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const toggleModal = () => {
-    console.log("Clicked Toggle Modal");
-    setModalOpen(true);
-    console.log(modalOpen);
+    setModalOpen(!modalOpen);
   };
   useEffect(() => {
     if(modalOpen){
