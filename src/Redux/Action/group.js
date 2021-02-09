@@ -27,7 +27,7 @@ export const joinGroup = (name, id, status) => async (dispatch) => {
 			type: GET_GROUP_ERR,
 			payload: { msg: err, status: err.response.status },
 		});
-		dispatch(setAlert('Error Joining Group'));
+		dispatch(setAlert(err.err));
 	}
 };
 
