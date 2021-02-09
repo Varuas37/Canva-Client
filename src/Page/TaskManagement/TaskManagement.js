@@ -5,28 +5,31 @@ import { connect } from "react-redux";
 import TaskActionButton from "../../Components/TaskList/TaskActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { deleteBoard, sortCards } from "../../Redux/Action/tasks";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 //Layout works well in this commit
 function TaskManagement({ lists, sortCards, board, deleteBoard }) {
   const { id } = useParams();
+  let history = useHistory();
   const handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
       return;
     }
-    
+
     sortCards(
       source.droppableId,
       destination.droppableId,
       source.index,
       destination.index,
       draggableId,
+      board._id,
       type
     );
   };
   const handleDelete = () => {
     deleteBoard(board._id);
+    history.push("/boards");
   };
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

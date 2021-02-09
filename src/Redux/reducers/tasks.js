@@ -71,7 +71,7 @@ export default function (state = initialState, action) {
     case DELETE_BOARD: {
       return {
         ...state,
-        boards: boards.filter((item) => item._id == payload._id),
+        boards: boards.filter((item) => item._id !== payload._id),
       };
     }
     case BOARD_ERR: {
@@ -115,7 +115,7 @@ export default function (state = initialState, action) {
     }
     case ADD_CARDS: {
       const newCard = {
-        id: payload.card._id,
+        _id: payload.card._id,
         title: payload.card.title,
       };
 
@@ -148,7 +148,6 @@ export default function (state = initialState, action) {
         //  draggableID
       } = payload;
       const newState = { ...state };
-
       //Dragging list around
       if (type === "list") {
         const list = newState.tasks.splice(droppableIndexStart, 1);

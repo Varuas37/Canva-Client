@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { setAlert } from "./alert";
 import {
   ADD_LIST,
@@ -17,7 +18,6 @@ import {
 
 export const addBoard = (title) => async (dispatch) => {
   try {
-    
     const body = {
       title: title,
     };
@@ -102,15 +102,15 @@ export const deleteBoard = (id) => async (dispatch) => {
       `http://localhost:3300/api/boards/${id}`,
       header
     );
-    
+
     dispatch({
       type: DELETE_BOARD,
       payload: res.data,
     });
     dispatch(setAlert("Delete", `Board Deleted`, "success", "fas fa-trash"));
     //TODO: Push to boards
+  
   } catch (err) {
-    
     dispatch(
       setAlert(
         "Error",
@@ -192,7 +192,7 @@ export const addCards = (boardID, listID, title) => async (dispatch) => {
       title: title,
       listID: listID,
     };
-    
+
     const res = await axios.post(`http://localhost:3300/api/cards`, body, {
       headers: header,
     });
@@ -215,25 +215,26 @@ export const addCards = (boardID, listID, title) => async (dispatch) => {
   }
 };
 
-export const getCards = (listID,boardID)=>async (dispatch)=>{
-  try{
+export const getCards = (listID, boardID) => async (dispatch) => {
+  try {
     const header = {
-      boardId:boardID
+      boardId: boardID,
     };
-    const res = await axios.get(`http://localhost:3300/api/cards/listCards/${listID}`,header)
+    const res = await axios.get(
+      `http://localhost:3300/api/cards/listCards/${listID}`,
+      header
+    );
     dispatch({
-      type:GET_CARDS,
-      payload:res.data,
-    })
+      type: GET_CARDS,
+      payload: res.data,
+    });
     return res.data;
-  }catch(err){
+  } catch (err) {
     dispatch({
-      type:TASK_ERR
-    })
+      type: TASK_ERR,
+    });
   }
-}
-
-
+};
 
 export const removeCards = (id) => async (dispatch) => {
   try {
@@ -262,8 +263,15 @@ export const sortCards = (
   droppableIndexStart,
   droppableIndexEnd,
   draggableID,
+  boardID,
   type
 ) => async (dispatch) => {
+  console.log("Droppable ID Start: 😎" + droppableIdStart);
+  console.log("Droppable ID End: 😎" + droppableIdEnd);
+  console.log("Droppable Index Start: 😎" + droppableIndexStart);
+  console.log("Droppable Index End: 😎" + droppableIndexEnd);
+  console.log("Draggable ID: 😎" + draggableID);
+  console.log("boardID 😎" + boardID);
   dispatch({
     type: SORT_CARDS,
     payload: {
@@ -275,4 +283,31 @@ export const sortCards = (
       type,
     },
   });
+  if (type === "list") {
+    const header = {
+      boardId: boardID,
+    };
+    const body = {
+      toIndex: droppableIndexEnd,
+    };
+    await axios.patch(
+      `http://localhost:3300/api/lists/move/${draggableID}`,
+      body,
+      { headers: header }
+    );
+  } else {
+    const header = {
+      boardId: boardID,
+    };
+    const body = {
+      fromId: droppableIdStart,
+      toId: droppableIdEnd,
+      toIndex: droppableIndexEnd,
+    };
+    await axios.patch(
+      `http://localhost:3300/api/cards/move/${draggableID}`,
+      body,
+      { headers: header }
+    );
+  }
 };
