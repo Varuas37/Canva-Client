@@ -60,9 +60,10 @@ export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 
 export const deletePost = (id) => async (dispatch) => {
 	try {
-		await axios.delete(`http://localhost:3300/api/post/${id}`);
+await axios.delete(`http://localhost:3300/api/post/${id}`);
 		dispatch({
 			type: DELETE_POST,
+		
 		});
 		dispatch(setAlert('Post Deleted'));
 	} catch (err) {
@@ -177,8 +178,9 @@ export const deleteComment = (id) => async (dispatch) => {
 		const res = await axios.delete(`http://localhost:3300/api/post/comment/${id}`);
 		dispatch({
 			type: REMOVE_COMMENT,
-			payload: res.data,
+			payload: res.data.msg,
 		});
+		
 		return res.data;
 	} catch (err) {
 		dispatch({

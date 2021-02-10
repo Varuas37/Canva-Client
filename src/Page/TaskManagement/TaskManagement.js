@@ -36,9 +36,9 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
   const funcshowModal = () => {
     setShowModal(true);
   };
-  const funcDismissModal = ()=>{
+  const funcDismissModal = () => {
     setShowModal(false);
-  }
+  };
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div style={{ padding: "20px" }} className="mx-auto px-4 sm:px-6 md:px-8">
@@ -77,9 +77,9 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
             message={
               "Are you sure you want to delete the board. This action is irreversible"
             }
-            deleteModal={handleDelete}
+            deleteAction={handleDelete}
             deleteText="Delete Board"
-            dismissModal = {funcDismissModal}
+            dismissModal={funcDismissModal}
           />
         ) : null}
         <Droppable droppableId="all-lists" direction="horizontal" type="list">

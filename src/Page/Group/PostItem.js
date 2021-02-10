@@ -33,6 +33,9 @@ function PostItem({
   const handleClick = async (func, id) => {
     await func(id, groupID);
   };
+  const handleDelete = async () => {
+    await deletePost(data._id);
+  };
   return (
     data && (
       <div className="bg-white overflow-hidden shadow rounded-lg">
@@ -54,7 +57,7 @@ function PostItem({
             <DeleteModal
               title="Delete Post"
               message="Are you sure you want to delete this post?"
-              deleteModal={handleClick(deletePost, data._id)}
+              deleteAction={handleDelete}
               deleteText={"Delete Post"}
               dismissModal={handleModal}
             />

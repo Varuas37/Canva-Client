@@ -5,12 +5,13 @@ import Modal from "./Modal";
 function DeleteModal({
   title,
   message,
-  deleteModal,
+  deleteAction,
   deleteText,
   dismissModal,
 }) {
   const handleDelete = () => {
-    deleteModal();
+    deleteAction();
+    dismissModal();
   };
   const handleDismiss = () => {
     dismissModal();
@@ -111,7 +112,7 @@ function DeleteModal({
 }
 
 DeleteModal.propTypes = {
-  delete: PropTypes.func.isRequired,
+  deleteAction: PropTypes.func.isRequired,
 };
 
 export default DeleteModal;
