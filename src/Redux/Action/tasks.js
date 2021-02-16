@@ -4,7 +4,7 @@ import { setAlert } from "./alert";
 import {
   ADD_LIST,
   ADD_CARDS,
-  REMOVE_CARDS,
+  ARCHIVE_CARDS,
   TASK_ERR,
   SORT_CARDS,
   ADD_BOARD,
@@ -109,7 +109,6 @@ export const deleteBoard = (id) => async (dispatch) => {
     });
     dispatch(setAlert("Delete", `Board Deleted`, "success", "fas fa-trash"));
     //TODO: Push to boards
-  
   } catch (err) {
     dispatch(
       setAlert(
@@ -236,17 +235,25 @@ export const getCards = (listID, boardID) => async (dispatch) => {
   }
 };
 
-export const removeCards = (id) => async (dispatch) => {
+export const archiveCards = (boardID, id, condition) => async (dispatch) => {
   try {
+    const header = {
+      boardId: boardID,
+    };
+    const res = await axios.patch(
+      `http://localhost:3300/api/archive/${condition}/${id}`,
+      header
+    );
+
     dispatch({
-      type: REMOVE_CARDS,
-      payload: id,
+      type: ARCHIVE_CARDS,
+      payload: res.data,
     });
   } catch (err) {
     dispatch(
       setAlert(
         "Error",
-        `Error adding tasks`,
+        `Error archiving tasks`,
         "error",
         "fas fa-exclamation-circle"
       )
