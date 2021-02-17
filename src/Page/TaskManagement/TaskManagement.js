@@ -4,14 +4,27 @@ import TaskList from "../../Components/TaskList/TaskList";
 import { connect } from "react-redux";
 import TaskActionButton from "../../Components/TaskList/TaskActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { deleteBoard, sortCards } from "../../Redux/Action/tasks";
+import {
+  deleteBoard,
+  sortCards,
+  importTodos,
+  getLists,
+} from "../../Redux/Action/tasks";
 import { useParams, useHistory } from "react-router-dom";
 import DeleteModal from "../../Components/Modal/DeleteModal";
 
 //Layout works well in this commit
-function TaskManagement({ lists, sortCards, board, deleteBoard }) {
+function TaskManagement({
+  lists,
+  sortCards,
+  board,
+  deleteBoard,
+  importTodos,
+  getLists,
+}) {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
+  const [importedTodo, setImportedTodo] = useState(false);
   let history = useHistory();
   const handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -39,6 +52,11 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
   const funcDismissModal = () => {
     setShowModal(false);
   };
+  const handleImportTodo = async () => {
+    await importTodos(id);
+    await getLists(id);
+    setImportedTodo(true);
+  };
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div style={{ padding: "20px" }} className="mx-auto px-4 sm:px-6 md:px-8">
@@ -47,27 +65,38 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <Header data={board && board.title}>
-            <span
-              onClick={funcshowModal}
-              href="#"
-              class="cursor-pointer group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              <svg
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            <span className="flex flex-row justify-center items-center ">
+              <span
+                onClick={funcshowModal}
+                href="#"
+                className="cursor-pointer rounded group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                ></path>
-              </svg>
-              Delete
+                <svg
+                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  ></path>
+                </svg>
+                Delete
+              </span>
+              <button
+                disabled={importedTodo}
+                onClick={handleImportTodo}
+                className={`text-sm  p-2 rounded hover:bg-gray-200 ${
+                  importTodos ? "cursor-disabled" : "cursor-pointer"
+                }`}
+              >
+                Import Todos{" "}
+              </button>
             </span>
           </Header>
         </div>
@@ -87,9 +116,9 @@ function TaskManagement({ lists, sortCards, board, deleteBoard }) {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              class="bg-white h-screen mt-5 overflow-x-scroll rounded-lg  "
+              className="bg-white h-screen mt-5 overflow-x-scroll rounded-lg  "
             >
-              <div class="px-4 py-5 sm:p-6 flex  flex-row ">
+              <div className="px-4 py-5 sm:p-6 flex  flex-row ">
                 <div className="flex-1 flex flex-row">
                   {lists &&
                     lists.map((list, index) => (
@@ -118,6 +147,9 @@ TaskManagement.defaultProps = {
 const mapStateToProps = (state) => ({
   lists: state.tasks.tasks,
 });
-export default connect(mapStateToProps, { sortCards, deleteBoard })(
-  TaskManagement
-);
+export default connect(mapStateToProps, {
+  sortCards,
+  deleteBoard,
+  getLists,
+  importTodos,
+})(TaskManagement);

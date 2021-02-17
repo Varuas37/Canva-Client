@@ -11,9 +11,11 @@ function Sidebar({data}) {
            
     {data && data.length > 0 ? (
           data.map((item) =>
-            item.type !== "StudentEnrollment" ? (
+            // item.type !== "StudentEnrollment" ? 
+            (
               <SidebarItem key  ={item.id} data ={item.assignment.name} ></SidebarItem>
-            ) : null
+            ) 
+            // : null
           )
         ) : (
           <h2>No Todo Found</h2>

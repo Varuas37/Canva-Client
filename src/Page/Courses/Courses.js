@@ -48,7 +48,8 @@ const Courses = ({ auth, getCourses, courses: { courses } }) => {
 								<option value="student" selected>
 									Student
 								</option>
-								<option value="ta">Teaching Assistant</option>
+								<option value="teacher">Teaching</option>
+								<option value="ta">TA</option>
 							</select>
 						</div>
 					) : (
@@ -82,9 +83,9 @@ const Courses = ({ auth, getCourses, courses: { courses } }) => {
 											{/* Span cannot appear as a child of Tbody error . Need to fix this. */}
 											{courses && courses.length > 0 ? (
 												courses.map((course) =>
-													!course.access_restricted_by_date &&
+													// course.access_restricted_by_date &&
 													!course.concluded &&
-													course.term.name == '2021-SPRING' &&
+													// course.term.name == '2021-SPRING' &&
 													course.enrollments[0].type == filter.toString() ? (
 														<TableRow key={course.id} data={course} />
 													) : null

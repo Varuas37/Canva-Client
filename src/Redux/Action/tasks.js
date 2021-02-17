@@ -14,6 +14,8 @@ import {
   DELETE_BOARD,
   GET_LISTS,
   GET_CARDS,
+  IMPORT_TODO_TO_BOARD,
+  IMPORT_TODO_ERR,
 } from "./types";
 
 export const addBoard = (title) => async (dispatch) => {
@@ -121,6 +123,40 @@ export const deleteBoard = (id) => async (dispatch) => {
     dispatch({
       type: BOARD_ERR,
     });
+  }
+};
+
+export const importTodos = (id) => async (dispatch) => {
+  try {
+    const header = {
+      "Content-Type": "application/json",
+      boardId: id,
+    };
+    await axios.post(
+      `http://localhost:3300/api/canvas/todo/fillTasks`,
+      {},
+      { headers: header }
+    );
+    dispatch({
+      type: IMPORT_TODO_TO_BOARD,
+    });
+    dispatch(
+      setAlert(
+        "Import",
+        `Todo Imported Successfully`,
+        "success",
+        "fas fa-check"
+      )
+    );
+  } catch (err) {
+    console.log(
+      "This is errror in fetching todo into boards line 158 tasks.js action" +
+        err
+    );
+    dispatch({
+      type: IMPORT_TODO_ERR,
+    });
+    dispatch(setAlert("Error", `${err}`, "error", "fas fa-exclamation-circle"));
   }
 };
 

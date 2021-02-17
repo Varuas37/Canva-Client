@@ -1,14 +1,16 @@
 .card-column {
-    float: left;
-    width: fit-content;
-    min-width: 25%;
-    max-width: 35%;
-    padding: 0 10px;
-   
-  }
+  float: left;
+  width: fit-content;
+  min-width: 25%;
+  max-width: 35%;
+  padding: 0 10px;
+}
 
 /* Remove extra left and right margins, due to padding in columns */
-.card-row {margin-top: 20px; margin-left: -5px;}
+.card-row {
+  margin-top: 20px;
+  margin-left: -5px;
+}
 
 /* Clear floats after the columns */
 .card-row:after {
@@ -17,42 +19,41 @@
   clear: both;
 }
 .cards {
-   /* this adds the "card" effect */
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-    padding: 16px;
-    margin: 10px;
-    text-align: center;
-    background-color: #f1f1f1;
-  }
-  .cards:hover{
-      cursor: pointer;
-      box-shadow: 0 4px 8px 0 gray; 
-      transform: scale3d(1.006, 1.006, 1);
-
-  }
-.card-title{
-    display: block;
+  /* this adds the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin: 10px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+.cards:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 gray;
+  transform: scale3d(1.006, 1.006, 1);
+}
+.card-title {
+  display: block;
   width: 250px;
   /* min-width: fit-content; */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
- /* Hide scrollbar for Chrome, Safari and Opera */
- .hidescrollbar::-webkit-scrollbar {
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescrollbar::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hidescrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-} 
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 800px) {
-    .card-column {
-      width: 90%;
-      display: block;
-      margin: 10px;
-    }
+  .card-column {
+    width: 90%;
+    display: block;
+    margin: 10px;
   }
+}

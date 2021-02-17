@@ -1,36 +1,36 @@
-import React, { Fragment,useState } from "react";
+import React, { Fragment, useState } from "react";
 
+function SidebarWrapper({ toggle, children, setToggle, setHeader, current }) {
+  const [selectedclassName] = useState(
+    "border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700"
+  );
+  const [teaching] = useState(
+    "whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
+  );
+  const [student] = useState(
+    "whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
+  );
 
-function SidebarWrapper({toggle,children,setToggle,setHeader,current} ) {
-
-   const [selectedClass] = useState("border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700")
-   const [teaching] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
-   const [student] = useState("whitespace-no-wrap pb-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300");
-  
-  
-
-
-   return toggle? (
+  return toggle ? (
     <Fragment>
-      <div class="fixed inset-0 overflow-hidden" style={{zIndex:"100"}}>
-        <div class="absolute inset-0 overflow-hidden">
-          <section class="absolute inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16">
-
-            <div class="w-screen max-w-md">
-              <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
-                <header class="p-6">
-                  <div class="flex items-start justify-between space-x-3">
-                    <h2 class="text-lg leading-7 font-medium text-gray-900">
+      <div className="fixed inset-0 overflow-hidden" style={{ zIndex: "100" }}>
+        <div className="absolute inset-0 overflow-hidden">
+          <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16">
+            <div className="w-screen max-w-md">
+              <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+                <header className="p-6">
+                  <div className="flex items-start justify-between space-x-3">
+                    <h2 className="text-lg leading-7 font-medium text-gray-900">
                       Notifications
                     </h2>
-                    <div class="h-7 flex items-center">
+                    <div className="h-7 flex items-center">
                       <button
                         aria-label="Close panel"
-                        class="text-gray-400 hover:text-gray-500 transition ease-in-out duration-150"
-                        onClick={()=>setToggle(false)}
+                        className="text-gray-400 hover:text-gray-500 transition ease-in-out duration-150"
+                        onClick={() => setToggle(false)}
                       >
                         <svg
-                          class="h-6 w-6"
+                          className="h-6 w-6"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -47,29 +47,30 @@ function SidebarWrapper({toggle,children,setToggle,setHeader,current} ) {
                     </div>
                   </div>
                 </header>
-                <div class="border-b border-gray-200">
-                  <div class="px-6">
-                    <nav class="-mb-px flex space-x-6">
-                      <a
-                        href="#"
-                        class={current=="submitting"?selectedClass:student}
+                <div className="border-b border-gray-200">
+                  <div className="px-6">
+                    <nav className="-mb-px flex space-x-6">
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className={
+                          current == "submitting" ? selectedclassName : student
+                        }
                         aria-current="page"
-                        onClick={()=>setHeader("submitting")}
+                        onClick={() => setHeader("submitting")}
                       >
                         Student
-                      </a>
+                      </div>
 
-                      <a
-                        href="#"
-                        class={current=="grading"?selectedClass:teaching}
-                        onClick={()=>setHeader("grading")}
-                     >
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className={
+                          current == "grading" ? selectedclassName : teaching
+                        }
+                        onClick={() => setHeader("grading")}
+                      >
                         Teaching
-                      </a>
-                    
+                      </div>
                     </nav>
-
-
                   </div>
                 </div>
                 {children}
@@ -79,16 +80,13 @@ function SidebarWrapper({toggle,children,setToggle,setHeader,current} ) {
         </div>
       </div>
     </Fragment>
-  ):null;
+  ) : null;
 }
 
+export default SidebarWrapper;
 
-
-export default SidebarWrapper;         
-
-
-
-{/* <!--
+{
+  /* <!--
   Slide-over panel, show/hide based on slide-over state.
 
   Entering: "transform transition ease-in-out duration-500 sm:duration-700"
@@ -97,4 +95,5 @@ export default SidebarWrapper;
   Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
     From: "translate-x-0"
     To: "translate-x-full"
---> */}
+--> */
+}
