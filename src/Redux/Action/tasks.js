@@ -16,6 +16,7 @@ import {
   GET_CARDS,
   IMPORT_TODO_TO_BOARD,
   IMPORT_TODO_ERR,
+  SERVER_DOMAIN
 } from "./types";
 
 export const addBoard = (title) => async (dispatch) => {
@@ -23,7 +24,7 @@ export const addBoard = (title) => async (dispatch) => {
     const body = {
       title: title,
     };
-    const res = await axios.post("http://localhost:3300/api/boards", body);
+    const res = await axios.post(`${SERVER_DOMAIN}/api/boards`, body);
 
     dispatch({
       type: ADD_BOARD,
@@ -46,7 +47,7 @@ export const addBoard = (title) => async (dispatch) => {
 
 export const getBoards = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:3300/api/boards");
+    const res = await axios.get(`${SERVER_DOMAIN}/api/boards`);
     dispatch({
       type: GET_BOARDS,
       payload: res.data,
@@ -72,7 +73,7 @@ export const getBoard = (id) => async (dispatch) => {
       boardId: id,
     };
     const res = await axios.get(
-      `http://localhost:3300/api/boards/${id}`,
+      `${SERVER_DOMAIN}/api/boards/${id}`,
       header
     );
     dispatch({
@@ -101,7 +102,7 @@ export const deleteBoard = (id) => async (dispatch) => {
       boardId: id,
     };
     const res = await axios.delete(
-      `http://localhost:3300/api/boards/${id}`,
+      `${SERVER_DOMAIN}/api/boards/${id}`,
       header
     );
 
@@ -133,7 +134,7 @@ export const importTodos = (id) => async (dispatch) => {
       boardId: id,
     };
     await axios.post(
-      `http://localhost:3300/api/canvas/todo/fillTasks`,
+      `${SERVER_DOMAIN}/api/canvas/todo/fillTasks`,
       {},
       { headers: header }
     );
@@ -168,7 +169,7 @@ export const addList = (id, title) => async (dispatch) => {
     const body = {
       title: title,
     };
-    const res = await axios.post(`http://localhost:3300/api/lists`, body, {
+    const res = await axios.post(`${SERVER_DOMAIN}/api/lists`, body, {
       headers: header,
     });
     dispatch({
@@ -196,7 +197,7 @@ export const getLists = (id) => async (dispatch) => {
       boardId: id,
     };
     const res = await axios.get(
-      `http://localhost:3300/api/lists/boardLists/${id}`,
+      `${SERVER_DOMAIN}/api/lists/boardLists/${id}`,
       header
     );
     dispatch({
@@ -228,7 +229,7 @@ export const addCards = (boardID, listID, title) => async (dispatch) => {
       listID: listID,
     };
 
-    const res = await axios.post(`http://localhost:3300/api/cards`, body, {
+    const res = await axios.post(`${SERVER_DOMAIN}/api/cards`, body, {
       headers: header,
     });
     dispatch({
@@ -256,7 +257,7 @@ export const getCards = (listID, boardID) => async (dispatch) => {
       boardId: boardID,
     };
     const res = await axios.get(
-      `http://localhost:3300/api/cards/listCards/${listID}`,
+      `${SERVER_DOMAIN}/api/cards/listCards/${listID}`,
       header
     );
     dispatch({
@@ -277,7 +278,7 @@ export const archiveCards = (boardID, id, condition) => async (dispatch) => {
       boardId: boardID,
     };
     const res = await axios.patch(
-      `http://localhost:3300/api/archive/${condition}/${id}`,
+      `${SERVER_DOMAIN}/api/archive/${condition}/${id}`,
       header
     );
 
@@ -334,7 +335,7 @@ export const sortCards = (
       toIndex: droppableIndexEnd,
     };
     await axios.patch(
-      `http://localhost:3300/api/lists/move/${draggableID}`,
+      `${SERVER_DOMAIN}/api/lists/move/${draggableID}`,
       body,
       { headers: header }
     );
@@ -348,7 +349,7 @@ export const sortCards = (
       toIndex: droppableIndexEnd,
     };
     await axios.patch(
-      `http://localhost:3300/api/cards/move/${draggableID}`,
+      `${SERVER_DOMAIN}/api/cards/move/${draggableID}`,
       body,
       { headers: header }
     );

@@ -10,12 +10,11 @@ import {
   LOGOUT,
   CLEAR_PROFILE,
   RESET_PASSWORD,
-  RESET_PASSWORD_FAILED
+  RESET_PASSWORD_FAILED,
+  SERVER_DOMAIN,
 } from "./types";
 
-
 import setAuthToken from "../../utils/setAuthToken";
-
 
 //LOAD USER
 
@@ -24,13 +23,13 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get("http://localhost:3300/api/auth");
+    const res = await axios.get(`${SERVER_DOMAIN}/api/auth`);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     dispatch({
       type: AUTH_ERR,
     });
@@ -48,21 +47,37 @@ export const registerUser = ({ name, lastname, email, password }) => async (
   };
   const body = JSON.stringify({ name, lastname, email, password });
   try {
-    const res = await axios.post("http://localhost:3300/api/users/register", body, config);
+    const res = await axios.post(
+      `${SERVER_DOMAIN}/api/users/register`,
+      body,
+      config
+    );
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-    
-    dispatch(setAlert("User Registered",`Please confirm your email to login`,"error","fas fa-check"));
-    
+
+    dispatch(
+      setAlert(
+        "User Registered",
+        `Please confirm your email to login`,
+        "error",
+        "fas fa-check"
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
 
     if (errors) {
-
-       dispatch(setAlert("Registration Error",`${err.response.data.errors[0].msg}`,"error","fas fa-exclamation-circle"));
+      dispatch(
+        setAlert(
+          "Registration Error",
+          `${err.response.data.errors[0].msg}`,
+          "error",
+          "fas fa-exclamation-circle"
+        )
+      );
     }
 
     dispatch({
@@ -74,7 +89,6 @@ export const registerUser = ({ name, lastname, email, password }) => async (
 // LOGIN USER
 
 export const login = (email, password) => async (dispatch) => {
-  
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -83,91 +97,103 @@ export const login = (email, password) => async (dispatch) => {
   };
   const body = JSON.stringify({ email, password });
   try {
-    const res = await axios.post("http://localhost:3300/api/auth/login", body, config);
-    
+    const res = await axios.post(
+      `${SERVER_DOMAIN}/api/auth/login`,
+      body,
+      config
+    );
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
     dispatch(loadUser());
   } catch (err) {
-  
     if (err) {
-      console.log(err.response)
-       dispatch(setAlert("Login Error",`${err.response.data.errors[0].msg}`,"error","fas fa-exclamation-circle"));
+      console.log(err.response);
+      dispatch(
+        setAlert(
+          "Login Error",
+          `${err.response.data.errors[0].msg}`,
+          "error",
+          "fas fa-exclamation-circle"
+        )
+      );
     }
-   
+
     dispatch({
       type: LOGIN_FAILED,
     });
   }
 };
 
-export const resetpassword = (email) => async (dispatch)=>{
-  const config={
-    headers:{
-      "Content-Type":"application/json"
-    },
-  }
-  const body = JSON.stringify({email})
-  try{
-    const res = await axios.post("/api/auth/reset-password",body,config);
-    
-    dispatch({
-      type:RESET_PASSWORD,
-      payload:res.data,
-    })
-    console.log(res.data)
-   
-    dispatch(setAlert(`${res.data.msg}`,"green"));
-
-  }
-  catch(err){
-    const errors = err.response.data;
-   
-    if (errors) {
-      console.log(errors)
-      dispatch(setAlert(`${errors.error}`, "red"));
-    }
-    dispatch({
-      type: RESET_PASSWORD_FAILED,
-    });
-    
-  }
-}
-
-export const newPassword = (password,token) =>async (dispatch)=>{
+export const resetpassword = (email) => async (dispatch) => {
   const config = {
-    headers:{
-      "Content-Type":"application/json"
+    headers: {
+      "Content-Type": "application/json",
     },
-  }
-  const body = JSON.stringify({password,token})
-  
-  try{
-    const res = await axios.post("/api/auth/newpassword",body,config);
+  };
+  const body = JSON.stringify({ email });
+  try {
+    const res = await axios.post(
+      `${SERVER_DOMAIN}/api/auth/reset-password`,
+      body,
+      config
+    );
+
     dispatch({
-      type:RESET_PASSWORD,
-      payload:res.data,
-    })
-    console.log(res.data)
-   
-    dispatch(setAlert(`${res.data.msg}`,"green"));
-  }
-  catch(err){
+      type: RESET_PASSWORD,
+      payload: res.data,
+    });
+    console.log(res.data);
+
+    dispatch(setAlert(`${res.data.msg}`, "green"));
+  } catch (err) {
     const errors = err.response.data;
-   
+
     if (errors) {
-      console.log(errors)
+      console.log(errors);
       dispatch(setAlert(`${errors.error}`, "red"));
     }
     dispatch({
       type: RESET_PASSWORD_FAILED,
     });
   }
+};
 
+export const newPassword = (password, token) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ password, token });
 
-}
+  try {
+    const res = await axios.post(
+      `${SERVER_DOMAIN}/api/auth/newpassword`,
+      body,
+      config
+    );
+    dispatch({
+      type: RESET_PASSWORD,
+      payload: res.data,
+    });
+    console.log(res.data);
+
+    dispatch(setAlert(`${res.data.msg}`, "green"));
+  } catch (err) {
+    const errors = err.response.data;
+
+    if (errors) {
+      console.log(errors);
+      dispatch(setAlert(`${errors.error}`, "red"));
+    }
+    dispatch({
+      type: RESET_PASSWORD_FAILED,
+    });
+  }
+};
 
 // LOGOUT USESR /CLEAR PROFILE
 

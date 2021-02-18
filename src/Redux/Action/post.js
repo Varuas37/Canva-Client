@@ -15,12 +15,13 @@ import {
   GET_COMMENTS,
   COMMENT_ERR,
   UPDATE_LIKES_ERROR,
+  SERVER_DOMAIN,
 } from "./types";
 
 // Get posts by group id
 export const getPosts = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:3300/api/post/feed/${id}`);
+    const res = await axios.get(`${SERVER_DOMAIN}/api/post/feed/${id}`);
     dispatch({
       type: GET_POSTS,
       payload: res.data,
@@ -43,7 +44,7 @@ export const addPost = (post, id, tags, groupID) => async (dispatch) => {
       privacy: false,
       status: "student",
     };
-    const res = await axios.post(`http://localhost:3300/api/post/`, body);
+    const res = await axios.post(`${SERVER_DOMAIN}/api/post/`, body);
 
     dispatch({
       type: ADD_POST,
@@ -60,7 +61,7 @@ export const addPost = (post, id, tags, groupID) => async (dispatch) => {
 
 export const deletePost = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3300/api/post/${id}`);
+    await axios.delete(`${SERVER_DOMAIN}/api/post/${id}`);
     dispatch({
       type: DELETE_POST,
     });
@@ -76,7 +77,7 @@ export const likePost = (id) => async (dispatch) => {
       parentType: "post",
     };
     const res = await axios.put(
-      `http://localhost:3300/api/post/like/${id}`,
+      `${SERVER_DOMAIN}/api/post/like/${id}`,
       params
     );
     dispatch({
@@ -99,10 +100,10 @@ export const savePost = (id, groupID) => async (dispatch) => {
       groupID: groupID,
     };
     const res = await axios.put(
-      `http://localhost:3300/api/post/categorize/${id}`,
+      `${SERVER_DOMAIN}/api/post/categorize/${id}`,
       params
     );
-    console.log("🧛🏼‍♀️ I am inside Save Post");
+    
     dispatch({
       type: SAVE_POST,
       payload: res.data,
@@ -123,7 +124,7 @@ export const reportPost = (id, groupID) => async (dispatch) => {
       groupID: groupID,
     };
     const res = await axios.put(
-      `http://localhost:3300/api/post/categorize/${id}`,
+      `${SERVER_DOMAIN}/api/post/categorize/${id}`,
       params
     );
     dispatch({
@@ -141,8 +142,7 @@ export const reportPost = (id, groupID) => async (dispatch) => {
 //Get comments for a specific post
 export const getComments = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:3300/api/post/comment/${id}`);
-
+    const res = await axios.get(`${SERVER_DOMAIN}/api/post/comment/${id}`);
     dispatch({
       type: GET_COMMENTS,
       payload: res.data,
@@ -165,7 +165,7 @@ export const addComment = (id, text) => async (dispatch) => {
     };
 
     const res = await axios.post(
-      `http://localhost:3300/api/post/comment/${id}`,
+      `${SERVER_DOMAIN}/api/post/comment/${id}`,
       params
     );
 
@@ -187,7 +187,7 @@ export const addComment = (id, text) => async (dispatch) => {
 export const deleteComment = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:3300/api/post/comment/${id}`
+      `${SERVER_DOMAIN}/api/post/comment/${id}`
     );
     dispatch({
       type: REMOVE_COMMENT,
@@ -210,7 +210,7 @@ export const likeComment = (id) => async (dispatch) => {
       parentType: "comment",
     };
     const res = await axios.put(
-      `http://localhost:3300/api/post/like/${id}`,
+      `${SERVER_DOMAIN}/api/post/like/${id}`,
       params
     );
     return res.data;

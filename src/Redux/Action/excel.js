@@ -10,12 +10,13 @@ import {
 	LIST_ALL_FILES,
 	LIST_ALL_FILES_ERR,
 	POST_FILES,
+	SERVER_DOMAIN,
 } from './types';
 
 export const uploadFile = (formData) => async (dispatch) => {
 	try {
 	
-		const res = await axios.post('http://localhost:3300/api/files/upload', formData);
+		const res = await axios.post(`${SERVER_DOMAIN}/api/files/upload`, formData);
 		dispatch({
 			type: UPLOAD_FILE,
 			payload: res.data,
@@ -31,7 +32,7 @@ export const uploadFile = (formData) => async (dispatch) => {
 };
 export const getFiles = () => async (dispatch) => {
 	try {
-		const res = await axios.get('http://localhost:3300/api/files/getFiles');
+		const res = await axios.get(`${SERVER_DOMAIN}/api/files/getFiles`);
 		dispatch({
 			type: LIST_ALL_FILES,
 			payload: res.data,
@@ -60,7 +61,7 @@ export const downloadFile = (formData) => async (dispatch) => {
 			fileName: `${formData}`,
 		};
 
-		const res = await axios.post(`http://localhost:3300/api/files/download`, params, config);
+		const res = await axios.post(`${SERVER_DOMAIN}/api/files/download`, params, config);
 		dispatch({
 			type: DOWNLOAD_FILE,
 			payload: res.data,
@@ -88,7 +89,7 @@ export const assignExcelFile = (formData, password, courseID,assignmentID) => as
 			assignmentID: `${assignmentID}`,
 		};
 
-		const res = await axios.post(`http://localhost:3300/api/excel/`, params, config);
+		const res = await axios.post(`${SERVER_DOMAIN}/api/excel/`, params, config);
 		dispatch({
 			type: POST_FILES,
 			payload: res.data,

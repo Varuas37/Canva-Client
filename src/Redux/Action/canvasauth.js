@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CONNECTION_SUCCESS, CONNECTION_ERROR,CANVAS_USER_LOADED,END_CONNECTION, CANVAS_AUTH_ERR} from "./types";
+import {CONNECTION_SUCCESS, CONNECTION_ERROR,CANVAS_USER_LOADED,END_CONNECTION, CANVAS_AUTH_ERR,SERVER_DOMAIN} from "./types";
 import {setAlert} from "./alert";
 import setCanvasAuth from "../../utils/setCanvasToken";
 
@@ -17,7 +17,7 @@ export const loadCanvasUser = ()=> async dispatch=>{
             
             },
           };
-        const res = await axios.get('http://localhost:3300/api/canvas/auth',config);
+        const res = await axios.get(`${SERVER_DOMAIN}/api/canvas/auth`,config);
         dispatch({
             type:CANVAS_USER_LOADED,
             payload:res.data,
@@ -44,16 +44,16 @@ export const connectToCanvas=  (domain,token) => async dispatch =>{
     const body = JSON.stringify({ domain,token});
     try {
         console.log(body)
-        const res = await axios.post("http://localhost:3300/api/canvas/auth",body,config);
+        const res = await axios.post(`${SERVER_DOMAIN}/api/canvas/auth`,body,config);
         dispatch({
             type: CONNECTION_SUCCESS, 
             payload:res.data
         })
-        console.log(res.data)
+        
         dispatch(setAlert("Authentication Successful","green"))
 
     } catch (err) {
-        console.log("❌❌❌❌"+err)
+        
         dispatch(setAlert("Canvas Authentication Error",`Couldn't Connect to canvas`,"error","fas fa-exclamation-circle"));
         dispatch({
             type: CONNECTION_ERROR,
