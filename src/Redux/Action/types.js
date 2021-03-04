@@ -1,4 +1,5 @@
-export const SERVER_DOMAIN = "https://canvasapi.spanthee.com"
+// export const SERVER_DOMAIN = "https://canvasapi.spanthee.com"
+export const SERVER_DOMAIN = "http://localhost:3300"
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 
@@ -99,6 +100,8 @@ export const GET_BOARDS = "GET_BOARDS";
 export const GET_BOARD = "GET_BOARD";
 export const BOARD_ERR = "BOARD_ERR";
 export const ADD_LIST = "ADD_LIST";
+export const ARCHIVE_LIST = "ARCHIVE_LIST";
+export const ARCHIVE_ERR = "ARCHIVE_ERR";
 export const GET_LISTS = "GET_LISTS";
 export const REMOVE_LIST = "REMOVE_LIST";
 export const ADD_CARDS = "ADD_CARDS";

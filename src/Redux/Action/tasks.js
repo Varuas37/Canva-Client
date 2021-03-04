@@ -3,6 +3,8 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import {
   ADD_LIST,
+  ARCHIVE_LIST,
+  ARCHIVE_ERR,
   ADD_CARDS,
   ARCHIVE_CARDS,
   TASK_ERR,
@@ -16,7 +18,7 @@ import {
   GET_CARDS,
   IMPORT_TODO_TO_BOARD,
   IMPORT_TODO_ERR,
-  SERVER_DOMAIN
+  SERVER_DOMAIN,
 } from "./types";
 
 export const addBoard = (title) => async (dispatch) => {
@@ -72,10 +74,7 @@ export const getBoard = (id) => async (dispatch) => {
       "Content-Type": "application/json",
       boardId: id,
     };
-    const res = await axios.get(
-      `${SERVER_DOMAIN}/api/boards/${id}`,
-      header
-    );
+    const res = await axios.get(`${SERVER_DOMAIN}/api/boards/${id}`, header);
     dispatch({
       type: GET_BOARD,
       payload: res.data,
@@ -101,17 +100,13 @@ export const deleteBoard = (id) => async (dispatch) => {
       "Content-Type": "application/json",
       boardId: id,
     };
-    const res = await axios.delete(
-      `${SERVER_DOMAIN}/api/boards/${id}`,
-      header
-    );
+    const res = await axios.delete(`${SERVER_DOMAIN}/api/boards/${id}`, header);
 
     dispatch({
       type: DELETE_BOARD,
       payload: res.data,
     });
     dispatch(setAlert("Delete", `Board Deleted`, "success", "fas fa-trash"));
-    //TODO: Push to boards
   } catch (err) {
     dispatch(
       setAlert(
@@ -218,6 +213,34 @@ export const getLists = (id) => async (dispatch) => {
     });
   }
 };
+export const archiveList = (boardID, id) => async (dispatch) => {
+  try {
+    const header = {
+      boardId: boardID,
+    };
+    const res = await axios.patch(
+      `${SERVER_DOMAIN}/api/lists/archive/true/${id}`,
+      header
+    );
+
+    dispatch({
+      type: ARCHIVE_LIST,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch(
+      setAlert(
+        "Error",
+        `Error archiving Lists`,
+        "error",
+        "fas fa-exclamation-circle"
+      )
+    );
+    dispatch({
+      type: ARCHIVE_ERR,
+    });
+  }
+};
 
 export const addCards = (boardID, listID, title) => async (dispatch) => {
   try {
@@ -278,7 +301,7 @@ export const archiveCards = (boardID, id, condition) => async (dispatch) => {
       boardId: boardID,
     };
     const res = await axios.patch(
-      `${SERVER_DOMAIN}/api/archive/${condition}/${id}`,
+      `${SERVER_DOMAIN}/api/cards/archive/${condition}/${id}`,
       header
     );
 
@@ -334,11 +357,9 @@ export const sortCards = (
     const body = {
       toIndex: droppableIndexEnd,
     };
-    await axios.patch(
-      `${SERVER_DOMAIN}/api/lists/move/${draggableID}`,
-      body,
-      { headers: header }
-    );
+    await axios.patch(`${SERVER_DOMAIN}/api/lists/move/${draggableID}`, body, {
+      headers: header,
+    });
   } else {
     const header = {
       boardId: boardID,
@@ -348,10 +369,8 @@ export const sortCards = (
       toId: droppableIdEnd,
       toIndex: droppableIndexEnd,
     };
-    await axios.patch(
-      `${SERVER_DOMAIN}/api/cards/move/${draggableID}`,
-      body,
-      { headers: header }
-    );
+    await axios.patch(`${SERVER_DOMAIN}/api/cards/move/${draggableID}`, body, {
+      headers: header,
+    });
   }
 };
