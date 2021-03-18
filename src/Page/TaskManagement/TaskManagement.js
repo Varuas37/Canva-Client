@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Header from "../../Components/Header/Header";
 import TaskList from "../../Components/TaskList/TaskList";
 import { connect } from "react-redux";
@@ -21,11 +21,17 @@ function TaskManagement({
   deleteBoard,
   importTodos,
   getLists,
+  task
 }) {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [importedTodo, setImportedTodo] = useState(false);
   let history = useHistory();
+
+  useEffect(() => {
+    console.log("Tasks changed")
+  },[task])
+
   const handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
@@ -42,6 +48,7 @@ function TaskManagement({
       type
     );
   };
+
   const handleDelete = () => {
     deleteBoard(board._id);
     history.push("/boards");
@@ -120,9 +127,10 @@ function TaskManagement({
             >
               <div className="px-4 py-5 sm:p-6 flex  flex-row ">
                 <div className="flex-1 flex flex-row">
+                  {console.log(lists)}
                   {lists &&
-                    lists.map((list, index) => (
-                      <TaskList
+                    lists.map((list, index) => !list.archived &&(
+                     <TaskList
                         key={list.id}
                         list={list}
                         index={index}

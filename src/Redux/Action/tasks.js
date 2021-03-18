@@ -214,13 +214,17 @@ export const getLists = (id) => async (dispatch) => {
   }
 };
 export const archiveList = (boardID, id) => async (dispatch) => {
+ 
   try {
     const header = {
       boardId: boardID,
     };
     const res = await axios.patch(
       `${SERVER_DOMAIN}/api/lists/archive/true/${id}`,
-      header
+      {},
+      {
+        headers: header,
+      }
     );
 
     dispatch({

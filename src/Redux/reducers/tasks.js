@@ -10,6 +10,7 @@ import {
   DELETE_BOARD,
   GET_LISTS,
   GET_CARDS,
+  ARCHIVE_LIST,
 } from "../Action/types";
 // import { v4 as uuidv4 } from "uuid";
 
@@ -44,6 +45,7 @@ const initialState = {
   cards: [{}],
   card: null,
   err: null,
+  archived:[]
   // tasks_loading: true,
 };
 
@@ -89,6 +91,7 @@ export default function (state = initialState, action) {
       const newList = {
         title: payload.title,
         id: payload._id,
+        archived:payload.archived,
         cards: [],
       };
 
@@ -103,6 +106,7 @@ export default function (state = initialState, action) {
         const lists = {
           title: task.title,
           id: task._id,
+          archived:task.archived,
           cards: task.cards ? task.cards : [],
         };
         newTask = newTask.concat(lists);
@@ -112,6 +116,13 @@ export default function (state = initialState, action) {
         ...state,
         tasks: newTask,
       };
+    }
+    case ARCHIVE_LIST:{
+      return{
+        ...state,
+        tasks: state.tasks.filter((list)=>list._id==payload._id),
+        archived: state.archived.concat(payload)
+      }
     }
     case ADD_CARDS: {
       const newCard = {

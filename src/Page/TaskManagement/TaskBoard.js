@@ -4,20 +4,21 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBoard, getLists } from "../../Redux/Action/tasks";
-const TaskBoard = ({ board, getBoard, task,getLists }) => {
+const TaskBoard = ({ board, getBoard, task, getLists }) => {
   const { id } = useParams();
   useEffect(async () => {
-    
-   await getBoard(id);
+    await getBoard(id);
   }, [id]);
- 
+  useEffect(async () => {
+    console.log("Board Changed")
+  }, [board]);
   useEffect(async () => {
     await getLists(id);
   }, [id]);
 
   return (
     <div>
-      <TaskManagement board={board} task ={task}/>
+      <TaskManagement board={board} task={task} />
     </div>
   );
 };
@@ -28,6 +29,5 @@ TaskBoard.propTypes = {
 const mapStateToProps = (state) => ({
   board: state.tasks.board,
   task: state.tasks,
-  
 });
 export default connect(mapStateToProps, { getBoard, getLists })(TaskBoard);

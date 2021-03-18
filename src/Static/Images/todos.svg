@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="768px" height="440px" viewBox="0 0 768 440" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Card</title>
+    <g id="Image" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-4" transform="translate(-13.000000, 0.000000)">
+            <g id="Card" transform="translate(13.000000, 0.000000)">
+                <rect id="Rectangle" fill="#5850EC" x="105" y="0" width="624" height="440" rx="40"></rect>
+                <g id="Status" transform="translate(0.000000, 282.000000)">
+                    <rect id="Rectangle" fill="#6875F5" x="0" y="0" width="551" height="115.211463" rx="8"></rect>
+                    <g id="inside" transform="translate(20.000000, 16.998413)">
+                        <g id="Group-4">
+                            <ellipse id="Oval" fill="#34B27C" cx="43" cy="40.6073188" rx="43" ry="40.6073188"></ellipse>
+                            <g id="noun_Folder_3740993" transform="translate(23.000000, 24.001587)" fill="#FFFFFF">
+                                <path d="M37.1105386,34 L2.88946142,34 C2.0939762,34 1.37062937,33.6727109 0.847994111,33.1456864 C0.324868114,32.6186619 0,31.8904189 0,31.0890055 L0,1.94148696 C0,1.4312719 0.199239357,0.964563551 0.523616734,0.616015472 L0.565329407,0.569542394 C0.913752914,0.219016737 1.39663845,0 1.92663477,0 L12.5329407,0 C12.6939026,0.00197757776 12.8558459,0.0603161216 12.9834376,0.178970787 L17.0732425,3.9655378 L37.1105386,3.9655378 C37.9055331,3.9655378 38.6293706,4.29332131 39.1520059,4.81985139 C39.6751319,5.34687586 40,6.07561327 40,6.87653226 L40,31.0890055 C40,31.8904189 39.6751319,32.6186619 39.1520059,33.1456864 C38.6293706,33.6727109 37.9055331,34 37.1105386,34 Z M17.7671451,2.98614241 C17.3990921,2.98614241 17.1002331,2.6850562 17.1002331,2.31426037 C17.1002331,1.94346454 17.3990921,1.64237833 17.7671451,1.64237833 L37.4471844,1.64237833 C37.8152374,1.64237833 38.1140964,1.94346454 38.1140964,2.31426037 C38.1140964,2.6850562 37.8152374,2.98614241 37.4471844,2.98614241 L17.7671451,2.98614241 Z" id="Shape"></path>
+                            </g>
+                        </g>
+                        <g id="placeholder" transform="translate(105.000000, 11.332275)" fill="#E5EDFF">
+                            <rect id="Rectangle" x="0" y="0" width="228" height="20.7758375" rx="9"></rect>
+                            <rect id="Rectangle-Copy" x="0" y="29.2750438" width="112" height="20.7758375" rx="9"></rect>
+                        </g>
+                        <g id="button" transform="translate(415.000000, 11.332275)">
+                            <rect id="Rectangle" fill="#2B59F7" x="0" y="0" width="95" height="50.0508813" rx="13"></rect>
+                            <rect id="Rectangle" fill="#689EFF" x="18" y="17.9427688" width="60" height="13.2209875" rx="4"></rect>
+                        </g>
+                    </g>
+                </g>
+                <g id="Status" transform="translate(58.000000, 99.000000)">
+                    <rect id="Rectangle" fill="#6875F5" x="0" y="0" width="710" height="95" rx="8"></rect>
+                    <text id="Todos" opacity="0.712114607" font-family="ArialRoundedMTBold, Arial Rounded MT Bold" font-size="35" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="103" y="61">Todos</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

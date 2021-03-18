@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {useParams} from "react-router-dom";
+import React, { useState ,useRef} from "react";
+import { useParams } from "react-router-dom";
 import TaskActionButton from "./TaskActionButton";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
@@ -7,10 +7,21 @@ import TaskCard from "./TaskCard";
 import OutsideAlerter from "../../hooks/OutsideAlerter";
 import { archiveList } from "../../Redux/Action/tasks";
 
-
 function TaskList({ list, index, boardID, archiveList }) {
+  const refBtnAddCard = useRef();
+  
   const [showOptions, setShowOptions] = useState(false);
-  let {id}=useParams();
+  const [editTitle, setEditTitle] = useState(false);
+  const [titleValue, setTitleValue] = useState(list.title);
+  let { id } = useParams();
+
+  const handleEdit = (e) => {
+    setTitleValue(e.target.value);
+  };
+  const handleAddCard = () => {
+    refBtnAddCard.current.click();
+    console.log("Handled");
+  };
   return (
     <Draggable draggableId={String(list.id)} index={index}>
       {(provided) => (
@@ -32,7 +43,20 @@ function TaskList({ list, index, boardID, archiveList }) {
                   {...provide.dragHandleProps}
                 >
                   <div className="px-2 py-5 sm:px-6 sm:text-xl flex justify-between flex-row font-medium">
-                    <div> {list.title}</div>
+                    {editTitle ? (
+                      <input
+                      autoFocus={true}
+                        value={titleValue}
+                        onBlur={() => setEditTitle(!editTitle)}
+                        onChange={(e) => handleEdit(e)}
+                      />
+                    ) : (
+                      <div>
+                        {" "}
+                        {console.log(list.id)} {titleValue}
+                      </div>
+                    )}
+
                     <div className="relative">
                       <svg
                         onClick={() => setShowOptions(!showOptions)}
@@ -49,7 +73,7 @@ function TaskList({ list, index, boardID, archiveList }) {
                           d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
                         ></path>
                       </svg>
-                      
+
                       {/* Menu Options for List Cards */}
                       {showOptions ? (
                         <OutsideAlerter
@@ -61,6 +85,26 @@ function TaskList({ list, index, boardID, archiveList }) {
                           >
                             <div className="bg-white  -space-y-px">
                               <div className="relative hover:bg-gray-200 cursor-pointer border p-3 flex">
+                                <div
+                                  className="flex space-x-4 items-center justify-center text-sm font-medium"
+                                  onClick={() => setEditTitle(!editTitle)}
+                                >
+                                  {" "}
+                                  <svg
+                                    class="w-4 h-4"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                  </svg>
+                                  Edit Title{" "}
+                                </div>
+                              </div>
+                              <div
+                                className="relative hover:bg-gray-200 cursor-pointer border p-3 flex"
+                                onClick={handleAddCard}
+                              >
                                 <div className="flex space-x-4 items-center justify-center text-sm font-medium">
                                   {" "}
                                   <svg
@@ -80,13 +124,12 @@ function TaskList({ list, index, boardID, archiveList }) {
                                   Add Card{" "}
                                 </div>
                               </div>
-                              
+
                               <div className="relative hover:bg-gray-200 cursor-pointer border p-3 flex">
                                 <div
                                   className="flex space-x-4 items-center justify-center text-sm font-medium"
-                                  onClick={archiveList(id, list.id)}
+                                  onClick={() => archiveList(id,list.id)}
                                 >
-                                
                                   <svg
                                     class="w-4 h-4"
                                     fill="none"
@@ -129,7 +172,7 @@ function TaskList({ list, index, boardID, archiveList }) {
                     {provide.placeholder}
                   </div>
 
-                  <TaskActionButton listID={list.id} boardID={boardID} />
+                  <TaskActionButton listID={list.id} boardID={boardID} refBtnAddCard={refBtnAddCard} />
                 </div>
               )}
             </Droppable>
@@ -142,4 +185,4 @@ function TaskList({ list, index, boardID, archiveList }) {
 const mapStateToProps = (state) => ({
   lists: state.tasks.tasks,
 });
-export default connect(mapStateToProps, {archiveList})(TaskList);
+export default connect(mapStateToProps, { archiveList })(TaskList);

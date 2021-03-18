@@ -3,8 +3,14 @@ import TextArea from "react-textarea-autosize";
 import { connect } from "react-redux";
 import { addList, addCards } from "../../Redux/Action/tasks";
 
-function TaskActionButton({ list, addList, addCards, listID, boardID }) {
-
+function TaskActionButton({
+  list,
+  addList,
+  addCards,
+  listID,
+  boardID,
+  refBtnAddCard,
+}) {
   const buttonText = list ? "Add another list" : "Add another card";
   const [formOpen, setFormOpen] = useState(false);
   const [formData, setFormData] = useState("");
@@ -16,7 +22,7 @@ function TaskActionButton({ list, addList, addCards, listID, boardID }) {
   const handleSubmit = () => {
     if (formData.length <= 0) {
       return;
-    } 
+    }
     list ? addList(boardID, formData) : addCards(boardID, listID, formData);
     setFormData("");
     setFormOpen(false);
@@ -66,6 +72,7 @@ function TaskActionButton({ list, addList, addCards, listID, boardID }) {
     </div>
   ) : (
     <div
+      ref={refBtnAddCard}
       onClick={handleFormOpen}
       className="flex flex-row items-center overflow-y-scroll rounded cursor-pointer hover:bg-indigo-400 sm:p-2 mt-2 bg-gray-50"
       style={{
