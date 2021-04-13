@@ -33,13 +33,14 @@ import CanvasComment from "./Page/CanvasComment/CanvasComment";
 // import TaskManagement from './Page/TaskManagement/TaskManagement';
 import TaskBoard from "./Page/TaskManagement/TaskBoard";
 import CreateBoard from "./Page/TaskManagement/CreateBoard";
+import ExcelSheetHome from "./Page/ExcelCheck/ExcelSheetHome";
+import CheckPlagarism from "./Page/ExcelCheck/CheckPlagarism";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 const App = () => {
   useEffect(() => {
-  
     LogRocket.init("oi4xgz/automatedcanvas", {
       dom: {
         textSanitizer: true,
@@ -77,6 +78,17 @@ const App = () => {
               <PrivateRoute exact path="/boards" component={CreateBoard} />
               <PrivateRoute exact path="/tools" component={Tools} />
               <PrivateRoute exact path="/excelCheck" component={ExcelCheck} />
+              <PrivateRoute
+                exact
+                path="/checkPlagarism"
+                component={CheckPlagarism}
+              />
+
+              <PrivateRoute
+                exact
+                path="/excelHome"
+                component={ExcelSheetHome}
+              />
               <PrivateRoute
                 exact
                 path="/canvas-comment"
