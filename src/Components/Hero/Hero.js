@@ -17,19 +17,7 @@ export default function Hero() {
             >
               <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
-
-<HeroNav></HeroNav>
-
-            {/* <!--
-        Mobile menu, show/hide based on menu open state.
-
-        Entering: "duration-150 ease-out"
-          From: "opacity-0 scale-95"
-          To: "opacity-100 scale-100"
-        Leaving: "duration-100 ease-in"
-          From: "opacity-100 scale-100"
-          To: "opacity-0 scale-95"
-      --> */}
+            <HeroNav></HeroNav>
             <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
               <div className="rounded-lg shadow-md">
                 <div
@@ -64,44 +52,8 @@ export default function Hero() {
                       </button>
                     </div>
                   </div>
-                  <div className="px-2 pt-2 pb-3">
-                    {/* <a
-                      href="#"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                      role="menuitem"
-                    >
-                      Product
-                    </a>
-                    <a
-                      href="#"
-                      className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                      role="menuitem"
-                    >
-                      Features
-                    </a>
-                    <a
-                      href="#"
-                      className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                      role="menuitem"
-                    >
-                      Marketplace
-                    </a>
-                    <a
-                      href="#"
-                      className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                      role="menuitem"
-                    >
-                      Company
-                    </a>
-                  </div>
-                  <div>
-                    <a
-                      href="#"
-                      className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
-                      role="menuitem"
-                    >
-                      Log in
-                    </a> */}
+                  <div className="px-2 pt-2 pb-3 ">
+                    
                   </div>
                 </div>
               </div>

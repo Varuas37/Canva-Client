@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { setAlert } from './alert';
-import { JOIN_GROUP, GET_GROUP_ERR } from './types';
+import { JOIN_GROUP, GET_GROUP_ERR,SERVER_DOMAIN } from './types';
 
 export const joinGroup = (name, id, status) => async (dispatch) => {
 	try {
@@ -14,7 +14,7 @@ export const joinGroup = (name, id, status) => async (dispatch) => {
 			
 		};
 
-		const res = await axios.post('http://localhost:3300/api/groups/join', params);
+		const res = await axios.post(`${SERVER_DOMAIN}/api/groups/join`, params);
 		console.log('I am in join group 🧑🏼‍🎄  ');
 	
 		dispatch({
@@ -27,7 +27,7 @@ export const joinGroup = (name, id, status) => async (dispatch) => {
 			type: GET_GROUP_ERR,
 			payload: { msg: err, status: err.response.status },
 		});
-		dispatch(setAlert('Error Joining Group'));
+		dispatch(setAlert(err.err));
 	}
 };
 
@@ -39,7 +39,7 @@ export const getGroup = (id) => async (dispatch) => {
 			},
 		};
 
-		const res = await axios.get(`http://localhost:3300/api/groups/${id}`, config);
+		const res = await axios.get(`${SERVER_DOMAIN}/api/groups/${id}`, config);
 
 		dispatch({
 			type: JOIN_GROUP,

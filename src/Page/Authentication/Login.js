@@ -10,8 +10,8 @@ const Login = ({ login, isAuthenticated }) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     const { email, password } = data;
-    
-    login(email,password);
+    console.log(email, password);
+    login("student@gmail.com", "aaaaaa");
   };
   if (isAuthenticated) {
     return <Redirect to="/canvasAuth" />;
@@ -52,6 +52,7 @@ const Login = ({ login, isAuthenticated }) => {
                     id="email"
                     name="email"
                     type="email"
+                    value="student@gmail.com"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     ref={register({
                       required: "Enter your e-mail",
@@ -67,9 +68,7 @@ const Login = ({ login, isAuthenticated }) => {
                     </p>
                   )}
                   {errors.email && errors.email.type === "minLength" && (
-                    <p className="text-red-500 text-xs ">
-                      Email is required
-                    </p>
+                    <p className="text-red-500 text-xs ">Email is required</p>
                   )}
                 </div>
               </div>
@@ -85,6 +84,7 @@ const Login = ({ login, isAuthenticated }) => {
                   <input
                     id="password"
                     type="password"
+                    value="randomvalue"
                     name="password"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     ref={register({ required: true, minLength: 6 })}
@@ -103,32 +103,33 @@ const Login = ({ login, isAuthenticated }) => {
               </div>
 
               <div class="flex items-center justify-between">
-                <div class="flex items-center">
-              
-                  <Link to="/register"
+                {/* <div class="flex items-center">
+                  <Link
+                    to="/register"
                     for="remember_me"
                     class="ml-2 block text-sm text-indigo-900"
                   >
                     Sign up instead?
                   </Link>
-                </div>
+                </div> */}
+
 
                 <div class="text-sm">
                   <a
                     href="#"
                     class="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    <Link to="/reset-password"> Forgot your Password?</Link>
+                    {/* <Link to="/reset-password"> Forgot your Password?</Link> */}
+                    For demonstration, we have forced this login.
                   </a>
                 </div>
               </div>
-
               <div>
                 <button
                   type="submit"
                   class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                 Login
+                  Login
                 </button>
               </div>
             </form>

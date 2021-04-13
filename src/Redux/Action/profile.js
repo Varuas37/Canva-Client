@@ -1,13 +1,13 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_PROFILE, PROFILE_ERROR } from "./types";
+import { GET_PROFILE, PROFILE_ERROR,SERVER_DOMAIN } from "./types";
 
 // GET Current User's Profile
 
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get(`${SERVER_DOMAIN}/api/profile/me`);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -31,7 +31,7 @@ export const createProfile = (formData, history, edit = false) => async (
         "Content-Type": "application/json",
       },
     };
-    const res = await axios.post("/api/profile", formData, config);
+    const res = await axios.post(`${SERVER_DOMAIN}/api/profile`, formData, config);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -50,7 +50,7 @@ export const createProfile = (formData, history, edit = false) => async (
 // Get Profile by ID
 export const getProfileById = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/profile/user/${userId}`);
+    const res = await axios.get(`${SERVER_DOMAIN}/api/profile/user/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
