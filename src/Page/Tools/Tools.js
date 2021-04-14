@@ -30,7 +30,7 @@ function Tools() {
 		<>
 			<div className="py-16 container m-auto px-6">
 				<h1 className="text-4xl font-bold leading-tight mb-5"> Tools</h1>
-				<ToolRow title={'Excel Sheet Generator'} link={'/ExcelHome'} />
+				<ToolRow title={'Excel'} link={'/ExcelHome'} />
 				<ToolRow title={'Grading and Comments'} link={'/canvas-comment'} />
 			</div>
 		</>

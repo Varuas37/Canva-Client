@@ -33,7 +33,7 @@ const CheckPlagarism = ({ uploadSubmissions, excel }) => {
       history.push(
         `/excel-results?fileName=${uploadedFile.name}&assignmentID=${data.assignmentID}`
       );
-    }, 6000);
+    }, 3000);
   };
 
   return (
