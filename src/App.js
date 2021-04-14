@@ -35,6 +35,7 @@ import TaskBoard from "./Page/TaskManagement/TaskBoard";
 import CreateBoard from "./Page/TaskManagement/CreateBoard";
 import ExcelSheetHome from "./Page/ExcelCheck/ExcelSheetHome";
 import CheckPlagarism from "./Page/ExcelCheck/CheckPlagarism";
+import DisplayStudents  from "./Page/ExcelCheck/DisplayStudents";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -93,6 +94,11 @@ const App = () => {
                 exact
                 path="/canvas-comment"
                 component={CanvasComment}
+              />
+              <PrivateRoute
+                exact
+                path="/excel-results"
+                component={DisplayStudents}
               />
               <Route component={NotFound} />
             </Switch>
