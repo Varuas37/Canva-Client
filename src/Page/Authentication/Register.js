@@ -184,7 +184,7 @@ const Register = ({ registerUser, isAuthenticated }) => {
                     href="#"
                     class="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    <Link to="/reset-password"> Forgot your Password?</Link>
+                    {/* <Link to="/reset-password"> Forgot your Password?</Link> */}
                   </a>
                 </div>
               </div>

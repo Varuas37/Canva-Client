@@ -11,7 +11,7 @@ const Login = ({ login, isAuthenticated }) => {
   const onSubmit = (data) => {
     const { email, password } = data;
     console.log(email, password);
-    login("student@gmail.com", "aaaaaa");
+    login(email, password);
   };
   if (isAuthenticated) {
     return <Redirect to="/canvasAuth" />;
@@ -52,7 +52,7 @@ const Login = ({ login, isAuthenticated }) => {
                     id="email"
                     name="email"
                     type="email"
-                    value="student@gmail.com"
+                    // value="student@gmail.com"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     ref={register({
                       required: "Enter your e-mail",
@@ -84,7 +84,7 @@ const Login = ({ login, isAuthenticated }) => {
                   <input
                     id="password"
                     type="password"
-                    value="randomvalue"
+                    // value="randomvalue"
                     name="password"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     ref={register({ required: true, minLength: 6 })}
@@ -103,7 +103,7 @@ const Login = ({ login, isAuthenticated }) => {
               </div>
 
               <div class="flex items-center justify-between">
-                {/* <div class="flex items-center">
+                <div class="flex items-center">
                   <Link
                     to="/register"
                     for="remember_me"
@@ -111,8 +111,7 @@ const Login = ({ login, isAuthenticated }) => {
                   >
                     Sign up instead?
                   </Link>
-                </div> */}
-
+                </div>
 
                 <div class="text-sm">
                   <a
@@ -120,7 +119,6 @@ const Login = ({ login, isAuthenticated }) => {
                     class="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     {/* <Link to="/reset-password"> Forgot your Password?</Link> */}
-                    For demonstration, we have forced this login.
                   </a>
                 </div>
               </div>
